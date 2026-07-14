@@ -1,326 +1,373 @@
 [
- {
-  "game": "mad-bunnies",
-  "title": "Mad Bunnies vs Cute Cats",
-  "cover": "games/mad-bunnies/cover.png",
-  "sprites": [
-   {
-    "name": "Bosses",
-    "src": "games/mad-bunnies/assets/sprites/bosses_0_0.png"
-   },
-   {
-    "name": "Bruiser",
-    "src": "games/mad-bunnies/assets/sprites/bruiser_0_0.png"
-   },
-   {
-    "name": "Kitten",
-    "src": "games/mad-bunnies/assets/sprites/kitten_0_0.png"
-   },
-   {
-    "name": "Nettle",
-    "src": "games/mad-bunnies/assets/sprites/nettle_0_0.png"
-   },
-   {
-    "name": "Sage",
-    "src": "games/mad-bunnies/assets/sprites/sage_0_0.png"
-   },
-   {
-    "name": "Shadowcat",
-    "src": "games/mad-bunnies/assets/sprites/shadowcat_0_0.png"
-   },
-   {
-    "name": "Shieldtom",
-    "src": "games/mad-bunnies/assets/sprites/shieldtom_0_0.png"
-   },
-   {
-    "name": "Siamese",
-    "src": "games/mad-bunnies/assets/sprites/siamese_0_0.png"
-   },
-   {
-    "name": "Slingcat",
-    "src": "games/mad-bunnies/assets/sprites/slingcat_0_0.png"
-   },
-   {
-    "name": "Thumper",
-    "src": "games/mad-bunnies/assets/sprites/thumper_0_0.png"
-   }
-  ]
- },
- {
-  "game": "bananas-avocados",
-  "title": "Mad Bananas vs Angry Avocados",
-  "cover": "games/bananas-avocados/cover.png",
-  "sprites": [
-   {
-    "name": "Blade",
-    "src": "games/bananas-avocados/assets/sprites/blade_0_0.png"
-   },
-   {
-    "name": "Bosses",
-    "src": "games/bananas-avocados/assets/sprites/bosses_0_0.png"
-   },
-   {
-    "name": "Bruiser",
-    "src": "games/bananas-avocados/assets/sprites/bruiser_0_0.png"
-   },
-   {
-    "name": "Grunt",
-    "src": "games/bananas-avocados/assets/sprites/grunt_0_0.png"
-   },
-   {
-    "name": "Ninja",
-    "src": "games/bananas-avocados/assets/sprites/ninja_0_0.png"
-   },
-   {
-    "name": "Pitflinger",
-    "src": "games/bananas-avocados/assets/sprites/pitflinger_0_0.png"
-   },
-   {
-    "name": "Slugger",
-    "src": "games/bananas-avocados/assets/sprites/slugger_0_0.png"
-   },
-   {
-    "name": "Zap",
-    "src": "games/bananas-avocados/assets/sprites/zap_0_0.png"
-   }
-  ]
- },
- {
-  "game": "sushi-ninjas",
-  "title": "Sushi Ninjas vs Ramen Demons",
-  "cover": "games/sushi-ninjas/cover.png",
-  "sprites": [
-   {
-    "name": "Bosses",
-    "src": "games/sushi-ninjas/assets/sprites/bosses_0_0.png"
-   },
-   {
-    "name": "Brothbrute",
-    "src": "games/sushi-ninjas/assets/sprites/brothbrute_0_0.png"
-   },
-   {
-    "name": "Brothspitter",
-    "src": "games/sushi-ninjas/assets/sprites/brothspitter_0_0.png"
-   },
-   {
-    "name": "Choproni",
-    "src": "games/sushi-ninjas/assets/sprites/choproni_0_0.png"
-   },
-   {
-    "name": "Maki",
-    "src": "games/sushi-ninjas/assets/sprites/maki_0_0.png"
-   },
-   {
-    "name": "Nigiri",
-    "src": "games/sushi-ninjas/assets/sprites/nigiri_0_0.png"
-   },
-   {
-    "name": "Noodleimp",
-    "src": "games/sushi-ninjas/assets/sprites/noodleimp_0_0.png"
-   },
-   {
-    "name": "Wasabi",
-    "src": "games/sushi-ninjas/assets/sprites/wasabi_0_0.png"
-   }
-  ]
- },
- {
-  "game": "beast-knights",
-  "title": "Beast Knights",
-  "cover": "games/beast-knights/cover.png",
-  "sprites": [
-   {
-    "name": "Char",
-    "src": "games/beast-knights/assets/sprites/char_0_0.png"
-   },
-   {
-    "name": "Enemy",
-    "src": "games/beast-knights/assets/sprites/enemy_0_0.png"
-   }
-  ]
- },
- {
-  "game": "kids-vs-tvs",
-  "title": "Kids vs The Screens",
-  "cover": "games/kids-vs-tvs/cover.png",
-  "sprites": [
-   {
-    "name": "Aline",
-    "src": "games/kids-vs-tvs/assets/sprites/aline_0_0.png"
-   },
-   {
-    "name": "Bosses",
-    "src": "games/kids-vs-tvs/assets/sprites/bosses_0_0.png"
-   },
-   {
-    "name": "Crt",
-    "src": "games/kids-vs-tvs/assets/sprites/crt_0_0.png"
-   },
-   {
-    "name": "Flatscreen",
-    "src": "games/kids-vs-tvs/assets/sprites/flatscreen_0_0.png"
-   },
-   {
-    "name": "Lasertab",
-    "src": "games/kids-vs-tvs/assets/sprites/lasertab_0_0.png"
-   },
-   {
-    "name": "Liri",
-    "src": "games/kids-vs-tvs/assets/sprites/liri_0_0.png"
-   },
-   {
-    "name": "Ofek",
-    "src": "games/kids-vs-tvs/assets/sprites/ofek_0_0.png"
-   },
-   {
-    "name": "Ofekhair",
-    "src": "games/kids-vs-tvs/assets/sprites/ofekhair_0_0.png"
-   },
-   {
-    "name": "Tablet",
-    "src": "games/kids-vs-tvs/assets/sprites/tablet_0_0.png"
-   }
-  ]
- },
- {
-  "game": "hoops-vs-cleats",
-  "title": "Hoops vs Cleats",
-  "cover": "games/hoops-vs-cleats/cover.png",
-  "sprites": [
-   {
-    "name": "Cross",
-    "src": "games/hoops-vs-cleats/assets/sprites/cross_0_0.png"
-   },
-   {
-    "name": "Defender",
-    "src": "games/hoops-vs-cleats/assets/sprites/defender_0_0.png"
-   },
-   {
-    "name": "Goldentrophy",
-    "src": "games/hoops-vs-cleats/assets/sprites/goldentrophy_0_0.png"
-   },
-   {
-    "name": "Keeper",
-    "src": "games/hoops-vs-cleats/assets/sprites/keeper_0_0.png"
-   },
-   {
-    "name": "Maestro",
-    "src": "games/hoops-vs-cleats/assets/sprites/maestro_0_0.png"
-   },
-   {
-    "name": "Messi",
-    "src": "games/hoops-vs-cleats/assets/sprites/messi_0_0.png"
-   },
-   {
-    "name": "Slam",
-    "src": "games/hoops-vs-cleats/assets/sprites/slam_0_0.png"
-   },
-   {
-    "name": "Sniper",
-    "src": "games/hoops-vs-cleats/assets/sprites/sniper_0_0.png"
-   },
-   {
-    "name": "Starstriker",
-    "src": "games/hoops-vs-cleats/assets/sprites/starstriker_0_0.png"
-   },
-   {
-    "name": "Striker",
-    "src": "games/hoops-vs-cleats/assets/sprites/striker_0_0.png"
-   },
-   {
-    "name": "Themanager",
-    "src": "games/hoops-vs-cleats/assets/sprites/themanager_0_0.png"
-   },
-   {
-    "name": "Thewall",
-    "src": "games/hoops-vs-cleats/assets/sprites/thewall_0_0.png"
-   },
-   {
-    "name": "Winger",
-    "src": "games/hoops-vs-cleats/assets/sprites/winger_0_0.png"
-   }
-  ]
- },
- {
-  "game": "ball-race",
-  "title": "Ball Race",
-  "cover": "games/ball-race/cover.png",
-  "sprites": [
-   {
-    "name": "L1 Blue",
-    "src": "games/ball-race/assets/balls/l1_blue.png"
-   },
-   {
-    "name": "L1 Green",
-    "src": "games/ball-race/assets/balls/l1_green.png"
-   },
-   {
-    "name": "L1 Red",
-    "src": "games/ball-race/assets/balls/l1_red.png"
-   },
-   {
-    "name": "L1 Yellow",
-    "src": "games/ball-race/assets/balls/l1_yellow.png"
-   },
-   {
-    "name": "L2 Blue",
-    "src": "games/ball-race/assets/balls/l2_blue.png"
-   },
-   {
-    "name": "L2 Green",
-    "src": "games/ball-race/assets/balls/l2_green.png"
-   },
-   {
-    "name": "L2 Red",
-    "src": "games/ball-race/assets/balls/l2_red.png"
-   },
-   {
-    "name": "L2 Yellow",
-    "src": "games/ball-race/assets/balls/l2_yellow.png"
-   },
-   {
-    "name": "L3 Blue",
-    "src": "games/ball-race/assets/balls/l3_blue.png"
-   },
-   {
-    "name": "L3 Green",
-    "src": "games/ball-race/assets/balls/l3_green.png"
-   },
-   {
-    "name": "L3 Red",
-    "src": "games/ball-race/assets/balls/l3_red.png"
-   },
-   {
-    "name": "L3 Yellow",
-    "src": "games/ball-race/assets/balls/l3_yellow.png"
-   }
-  ]
- },
- {
-  "game": "nebula-strike",
-  "title": "Nebula Strike",
-  "cover": "games/nebula-strike/cover.png",
-  "sprites": [
-   {
-    "name": "Asteroid",
-    "src": "games/nebula-strike/assets/asteroid.png"
-   },
-   {
-    "name": "Boss",
-    "src": "games/nebula-strike/assets/boss.png"
-   },
-   {
-    "name": "Enemy A",
-    "src": "games/nebula-strike/assets/enemy_a.png"
-   },
-   {
-    "name": "Enemy B",
-    "src": "games/nebula-strike/assets/enemy_b.png"
-   },
-   {
-    "name": "Player",
-    "src": "games/nebula-strike/assets/player.png"
-   }
-  ]
- }
+  {
+    "game": "mad-bunnies",
+    "title": "Mad Bunnies vs Cute Cats",
+    "cover": "games/mad-bunnies/cover.png",
+    "sprites": [
+      {
+        "name": "Bosses",
+        "src": "games/mad-bunnies/assets/sprites/bosses_0_0.png"
+      },
+      {
+        "name": "Bruiser",
+        "src": "games/mad-bunnies/assets/sprites/bruiser_0_0.png"
+      },
+      {
+        "name": "Kitten",
+        "src": "games/mad-bunnies/assets/sprites/kitten_0_0.png"
+      },
+      {
+        "name": "Nettle",
+        "src": "games/mad-bunnies/assets/sprites/nettle_0_0.png"
+      },
+      {
+        "name": "Sage",
+        "src": "games/mad-bunnies/assets/sprites/sage_0_0.png"
+      },
+      {
+        "name": "Shadowcat",
+        "src": "games/mad-bunnies/assets/sprites/shadowcat_0_0.png"
+      },
+      {
+        "name": "Shieldtom",
+        "src": "games/mad-bunnies/assets/sprites/shieldtom_0_0.png"
+      },
+      {
+        "name": "Siamese",
+        "src": "games/mad-bunnies/assets/sprites/siamese_0_0.png"
+      },
+      {
+        "name": "Slingcat",
+        "src": "games/mad-bunnies/assets/sprites/slingcat_0_0.png"
+      },
+      {
+        "name": "Thumper",
+        "src": "games/mad-bunnies/assets/sprites/thumper_0_0.png"
+      }
+    ]
+  },
+  {
+    "game": "bananas-avocados",
+    "title": "Mad Bananas vs Angry Avocados",
+    "cover": "games/bananas-avocados/cover.png",
+    "sprites": [
+      {
+        "name": "Blade",
+        "src": "games/bananas-avocados/assets/sprites/blade_0_0.png"
+      },
+      {
+        "name": "Bosses",
+        "src": "games/bananas-avocados/assets/sprites/bosses_0_0.png"
+      },
+      {
+        "name": "Bruiser",
+        "src": "games/bananas-avocados/assets/sprites/bruiser_0_0.png"
+      },
+      {
+        "name": "Grunt",
+        "src": "games/bananas-avocados/assets/sprites/grunt_0_0.png"
+      },
+      {
+        "name": "Ninja",
+        "src": "games/bananas-avocados/assets/sprites/ninja_0_0.png"
+      },
+      {
+        "name": "Pitflinger",
+        "src": "games/bananas-avocados/assets/sprites/pitflinger_0_0.png"
+      },
+      {
+        "name": "Slugger",
+        "src": "games/bananas-avocados/assets/sprites/slugger_0_0.png"
+      },
+      {
+        "name": "Zap",
+        "src": "games/bananas-avocados/assets/sprites/zap_0_0.png"
+      }
+    ]
+  },
+  {
+    "game": "sushi-ninjas",
+    "title": "Sushi Ninjas vs Ramen Demons",
+    "cover": "games/sushi-ninjas/cover.png",
+    "sprites": [
+      {
+        "name": "Bosses",
+        "src": "games/sushi-ninjas/assets/sprites/bosses_0_0.png"
+      },
+      {
+        "name": "Brothbrute",
+        "src": "games/sushi-ninjas/assets/sprites/brothbrute_0_0.png"
+      },
+      {
+        "name": "Brothspitter",
+        "src": "games/sushi-ninjas/assets/sprites/brothspitter_0_0.png"
+      },
+      {
+        "name": "Choproni",
+        "src": "games/sushi-ninjas/assets/sprites/choproni_0_0.png"
+      },
+      {
+        "name": "Maki",
+        "src": "games/sushi-ninjas/assets/sprites/maki_0_0.png"
+      },
+      {
+        "name": "Nigiri",
+        "src": "games/sushi-ninjas/assets/sprites/nigiri_0_0.png"
+      },
+      {
+        "name": "Noodleimp",
+        "src": "games/sushi-ninjas/assets/sprites/noodleimp_0_0.png"
+      },
+      {
+        "name": "Wasabi",
+        "src": "games/sushi-ninjas/assets/sprites/wasabi_0_0.png"
+      }
+    ]
+  },
+  {
+    "game": "beast-knights",
+    "title": "Beast Knights",
+    "cover": "games/beast-knights/cover.png",
+    "sprites": [
+      {
+        "name": "Char",
+        "src": "games/beast-knights/assets/sprites/char_0_0.png"
+      },
+      {
+        "name": "Enemy",
+        "src": "games/beast-knights/assets/sprites/enemy_0_0.png"
+      }
+    ]
+  },
+  {
+    "game": "kids-vs-tvs",
+    "title": "Kids vs The Screens",
+    "cover": "games/kids-vs-tvs/cover.png",
+    "sprites": [
+      {
+        "name": "Aline",
+        "src": "games/kids-vs-tvs/assets/sprites/aline_0_0.png"
+      },
+      {
+        "name": "Bosses",
+        "src": "games/kids-vs-tvs/assets/sprites/bosses_0_0.png"
+      },
+      {
+        "name": "Crt",
+        "src": "games/kids-vs-tvs/assets/sprites/crt_0_0.png"
+      },
+      {
+        "name": "Flatscreen",
+        "src": "games/kids-vs-tvs/assets/sprites/flatscreen_0_0.png"
+      },
+      {
+        "name": "Lasertab",
+        "src": "games/kids-vs-tvs/assets/sprites/lasertab_0_0.png"
+      },
+      {
+        "name": "Liri",
+        "src": "games/kids-vs-tvs/assets/sprites/liri_0_0.png"
+      },
+      {
+        "name": "Ofek",
+        "src": "games/kids-vs-tvs/assets/sprites/ofek_0_0.png"
+      },
+      {
+        "name": "Ofekhair",
+        "src": "games/kids-vs-tvs/assets/sprites/ofekhair_0_0.png"
+      },
+      {
+        "name": "Tablet",
+        "src": "games/kids-vs-tvs/assets/sprites/tablet_0_0.png"
+      }
+    ]
+  },
+  {
+    "game": "hoops-vs-cleats",
+    "title": "Hoops vs Cleats",
+    "cover": "games/hoops-vs-cleats/cover.png",
+    "sprites": [
+      {
+        "name": "Cross",
+        "src": "games/hoops-vs-cleats/assets/sprites/cross_0_0.png"
+      },
+      {
+        "name": "Defender",
+        "src": "games/hoops-vs-cleats/assets/sprites/defender_0_0.png"
+      },
+      {
+        "name": "Goldentrophy",
+        "src": "games/hoops-vs-cleats/assets/sprites/goldentrophy_0_0.png"
+      },
+      {
+        "name": "Keeper",
+        "src": "games/hoops-vs-cleats/assets/sprites/keeper_0_0.png"
+      },
+      {
+        "name": "Maestro",
+        "src": "games/hoops-vs-cleats/assets/sprites/maestro_0_0.png"
+      },
+      {
+        "name": "Messi",
+        "src": "games/hoops-vs-cleats/assets/sprites/messi_0_0.png"
+      },
+      {
+        "name": "Slam",
+        "src": "games/hoops-vs-cleats/assets/sprites/slam_0_0.png"
+      },
+      {
+        "name": "Sniper",
+        "src": "games/hoops-vs-cleats/assets/sprites/sniper_0_0.png"
+      },
+      {
+        "name": "Starstriker",
+        "src": "games/hoops-vs-cleats/assets/sprites/starstriker_0_0.png"
+      },
+      {
+        "name": "Striker",
+        "src": "games/hoops-vs-cleats/assets/sprites/striker_0_0.png"
+      },
+      {
+        "name": "Themanager",
+        "src": "games/hoops-vs-cleats/assets/sprites/themanager_0_0.png"
+      },
+      {
+        "name": "Thewall",
+        "src": "games/hoops-vs-cleats/assets/sprites/thewall_0_0.png"
+      },
+      {
+        "name": "Winger",
+        "src": "games/hoops-vs-cleats/assets/sprites/winger_0_0.png"
+      }
+    ]
+  },
+  {
+    "game": "ball-race",
+    "title": "Ball Race",
+    "cover": "games/ball-race/cover.png",
+    "sprites": [
+      {
+        "name": "L1 Blue",
+        "src": "games/ball-race/assets/balls/l1_blue.png"
+      },
+      {
+        "name": "L1 Green",
+        "src": "games/ball-race/assets/balls/l1_green.png"
+      },
+      {
+        "name": "L1 Red",
+        "src": "games/ball-race/assets/balls/l1_red.png"
+      },
+      {
+        "name": "L1 Yellow",
+        "src": "games/ball-race/assets/balls/l1_yellow.png"
+      },
+      {
+        "name": "L2 Blue",
+        "src": "games/ball-race/assets/balls/l2_blue.png"
+      },
+      {
+        "name": "L2 Green",
+        "src": "games/ball-race/assets/balls/l2_green.png"
+      },
+      {
+        "name": "L2 Red",
+        "src": "games/ball-race/assets/balls/l2_red.png"
+      },
+      {
+        "name": "L2 Yellow",
+        "src": "games/ball-race/assets/balls/l2_yellow.png"
+      },
+      {
+        "name": "L3 Blue",
+        "src": "games/ball-race/assets/balls/l3_blue.png"
+      },
+      {
+        "name": "L3 Green",
+        "src": "games/ball-race/assets/balls/l3_green.png"
+      },
+      {
+        "name": "L3 Red",
+        "src": "games/ball-race/assets/balls/l3_red.png"
+      },
+      {
+        "name": "L3 Yellow",
+        "src": "games/ball-race/assets/balls/l3_yellow.png"
+      }
+    ]
+  },
+  {
+    "game": "nebula-strike",
+    "title": "Nebula Strike",
+    "cover": "games/nebula-strike/cover.png",
+    "sprites": [
+      {
+        "name": "Asteroid",
+        "src": "games/nebula-strike/assets/asteroid.png"
+      },
+      {
+        "name": "Boss",
+        "src": "games/nebula-strike/assets/boss.png"
+      },
+      {
+        "name": "Enemy A",
+        "src": "games/nebula-strike/assets/enemy_a.png"
+      },
+      {
+        "name": "Enemy B",
+        "src": "games/nebula-strike/assets/enemy_b.png"
+      },
+      {
+        "name": "Player",
+        "src": "games/nebula-strike/assets/player.png"
+      }
+    ]
+  },
+  {
+    "game": "animal-warriors",
+    "title": "Animal Warriors — Sprite Pack",
+    "cover": "games/animal-warriors/cover.png",
+    "sprites": [
+      {
+        "name": "Lion",
+        "src": "games/animal-warriors/assets/sprites/lion_0_0.png"
+      },
+      {
+        "name": "Wolf",
+        "src": "games/animal-warriors/assets/sprites/wolf_0_0.png"
+      },
+      {
+        "name": "Bear",
+        "src": "games/animal-warriors/assets/sprites/bear_0_0.png"
+      },
+      {
+        "name": "Fox",
+        "src": "games/animal-warriors/assets/sprites/fox_0_0.png"
+      },
+      {
+        "name": "Panda",
+        "src": "games/animal-warriors/assets/sprites/panda_0_0.png"
+      },
+      {
+        "name": "Raccoon",
+        "src": "games/animal-warriors/assets/sprites/raccoon_0_0.png"
+      },
+      {
+        "name": "Penguin",
+        "src": "games/animal-warriors/assets/sprites/penguin_0_0.png"
+      },
+      {
+        "name": "Squirrel",
+        "src": "games/animal-warriors/assets/sprites/squirrel_0_0.png"
+      },
+      {
+        "name": "Bunny",
+        "src": "games/animal-warriors/assets/sprites/bunny_0_0.png"
+      },
+      {
+        "name": "Elephant",
+        "src": "games/animal-warriors/assets/sprites/elephant_0_0.png"
+      }
+    ]
+  }
 ]

@@ -1,0 +1,178 @@
+{
+ "atlas": {
+  "characters": {
+   "elephant": {
+    "n": 12,
+    "frames": [
+     "assets/sprites/elephant_0_0.png",
+     "assets/sprites/elephant_0_1.png",
+     "assets/sprites/elephant_0_2.png",
+     "assets/sprites/elephant_0_3.png",
+     "assets/sprites/elephant_1_0.png",
+     "assets/sprites/elephant_1_1.png",
+     "assets/sprites/elephant_1_2.png",
+     "assets/sprites/elephant_1_3.png",
+     "assets/sprites/elephant_2_0.png",
+     "assets/sprites/elephant_2_1.png",
+     "assets/sprites/elephant_2_2.png",
+     "assets/sprites/elephant_2_3.png"
+    ]
+   },
+   "penguin": {
+    "n": 12,
+    "frames": [
+     "assets/sprites/penguin_0_0.png",
+     "assets/sprites/penguin_0_1.png",
+     "assets/sprites/penguin_0_2.png",
+     "assets/sprites/penguin_0_3.png",
+     "assets/sprites/penguin_1_0.png",
+     "assets/sprites/penguin_1_1.png",
+     "assets/sprites/penguin_1_2.png",
+     "assets/sprites/penguin_1_3.png",
+     "assets/sprites/penguin_2_0.png",
+     "assets/sprites/penguin_2_1.png",
+     "assets/sprites/penguin_2_2.png",
+     "assets/sprites/penguin_2_3.png"
+    ]
+   },
+   "raccoon": {
+    "n": 12,
+    "frames": [
+     "assets/sprites/raccoon_0_0.png",
+     "assets/sprites/raccoon_0_1.png",
+     "assets/sprites/raccoon_0_2.png",
+     "assets/sprites/raccoon_0_3.png",
+     "assets/sprites/raccoon_1_0.png",
+     "assets/sprites/raccoon_1_1.png",
+     "assets/sprites/raccoon_1_2.png",
+     "assets/sprites/raccoon_1_3.png",
+     "assets/sprites/raccoon_2_0.png",
+     "assets/sprites/raccoon_2_1.png",
+     "assets/sprites/raccoon_2_2.png",
+     "assets/sprites/raccoon_2_3.png"
+    ]
+   },
+   "lion": {
+    "n": 12,
+    "frames": [
+     "assets/sprites/lion_0_0.png",
+     "assets/sprites/lion_0_1.png",
+     "assets/sprites/lion_0_2.png",
+     "assets/sprites/lion_0_3.png",
+     "assets/sprites/lion_1_0.png",
+     "assets/sprites/lion_1_1.png",
+     "assets/sprites/lion_1_2.png",
+     "assets/sprites/lion_1_3.png",
+     "assets/sprites/lion_2_0.png",
+     "assets/sprites/lion_2_1.png",
+     "assets/sprites/lion_2_2.png",
+     "assets/sprites/lion_2_3.png"
+    ]
+   },
+   "panda": {
+    "n": 12,
+    "frames": [
+     "assets/sprites/panda_0_0.png",
+     "assets/sprites/panda_0_1.png",
+     "assets/sprites/panda_0_2.png",
+     "assets/sprites/panda_0_3.png",
+     "assets/sprites/panda_1_0.png",
+     "assets/sprites/panda_1_1.png",
+     "assets/sprites/panda_1_2.png",
+     "assets/sprites/panda_1_3.png",
+     "assets/sprites/panda_2_0.png",
+     "assets/sprites/panda_2_1.png",
+     "assets/sprites/panda_2_2.png",
+     "assets/sprites/panda_2_3.png"
+    ]
+   },
+   "fox": {
+    "n": 12,
+    "frames": [
+     "assets/sprites/fox_0_0.png",
+     "assets/sprites/fox_0_1.png",
+     "assets/sprites/fox_0_2.png",
+     "assets/sprites/fox_0_3.png",
+     "assets/sprites/fox_1_0.png",
+     "assets/sprites/fox_1_1.png",
+     "assets/sprites/fox_1_2.png",
+     "assets/sprites/fox_1_3.png",
+     "assets/sprites/fox_2_0.png",
+     "assets/sprites/fox_2_1.png",
+     "assets/sprites/fox_2_2.png",
+     "assets/sprites/fox_2_3.png"
+    ]
+   },
+   "bear": {
+    "n": 12,
+    "frames": [
+     "assets/sprites/bear_0_0.png",
+     "assets/sprites/bear_0_1.png",
+     "assets/sprites/bear_0_2.png",
+     "assets/sprites/bear_0_3.png",
+     "assets/sprites/bear_1_0.png",
+     "assets/sprites/bear_1_1.png",
+     "assets/sprites/bear_1_2.png",
+     "assets/sprites/bear_1_3.png",
+     "assets/sprites/bear_2_0.png",
+     "assets/sprites/bear_2_1.png",
+     "assets/sprites/bear_2_2.png",
+     "assets/sprites/bear_2_3.png"
+    ]
+   },
+   "squirrel": {
+    "n": 12,
+    "frames": [
+     "assets/sprites/squirrel_0_0.png",
+     "assets/sprites/squirrel_0_1.png",
+     "assets/sprites/squirrel_0_2.png",
+     "assets/sprites/squirrel_0_3.png",
+     "assets/sprites/squirrel_1_0.png",
+     "assets/sprites/squirrel_1_1.png",
+     "assets/sprites/squirrel_1_2.png",
+     "assets/sprites/squirrel_1_3.png",
+     "assets/sprites/squirrel_2_0.png",
+     "assets/sprites/squirrel_2_1.png",
+     "assets/sprites/squirrel_2_2.png",
+     "assets/sprites/squirrel_2_3.png"
+    ]
+   },
+   "wolf": {
+    "n": 12,
+    "frames": [
+     "assets/sprites/wolf_0_0.png",
+     "assets/sprites/wolf_0_1.png",
+     "assets/sprites/wolf_0_2.png",
+     "assets/sprites/wolf_0_3.png",
+     "assets/sprites/wolf_1_0.png",
+     "assets/sprites/wolf_1_1.png",
+     "assets/sprites/wolf_1_2.png",
+     "assets/sprites/wolf_1_3.png",
+     "assets/sprites/wolf_2_0.png",
+     "assets/sprites/wolf_2_1.png",
+     "assets/sprites/wolf_2_2.png",
+     "assets/sprites/wolf_2_3.png"
+    ]
+   },
+   "bunny": {
+    "n": 12,
+    "frames": [
+     "assets/sprites/bunny_0_0.png",
+     "assets/sprites/bunny_0_1.png",
+     "assets/sprites/bunny_0_2.png",
+     "assets/sprites/bunny_0_3.png",
+     "assets/sprites/bunny_1_0.png",
+     "assets/sprites/bunny_1_1.png",
+     "assets/sprites/bunny_1_2.png",
+     "assets/sprites/bunny_1_3.png",
+     "assets/sprites/bunny_2_0.png",
+     "assets/sprites/bunny_2_1.png",
+     "assets/sprites/bunny_2_2.png",
+     "assets/sprites/bunny_2_3.png"
+    ]
+   }
+  }
+ },
+ "backgrounds": [],
+ "style": "Animal Warriors — cute chibi pixel-art beasts. 10 creatures (elephant, penguin, raccoon, lion, panda, fox, bear, squirrel, wolf, bunny), each a 3x4 sheet: row0 WALK (4), row1 ATTACK (4, with hit VFX), row2 HURT/KO (4). Sliced on flat #FF00FF, chroma-keyed to transparent, bleed-cleaned, size-stable."
+}

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Summer Tech · גלריית המשחקים · בנק הפועלים</title>
+<meta name="description" content="גלריית משחקי הקיץ הטכנולוגי — מחנה Summer Tech של בנק הפועלים. כל המשחקים, מסודרים לפי אזורים." />
+<meta name="theme-color" content="#E4002B" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --red:#E4002B; --red-dark:#B00020; --red-deep:#7A0018;
+  --coral:#FF5A3C; --sun:#FFC400; --teal:#00B7C4;
+  --ink:#1b1420; --muted:#6b6474; --paper:#fff; --wash:#fff5f6;
+  --radius:22px; --shadow:0 16px 40px rgba(180,0,32,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Heebo",system-ui,sans-serif;color:var(--ink);background:var(--wash);min-height:100vh;overflow-x:hidden}
+
+/* ===== brand bar ===== */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px clamp(16px,4vw,44px);
+  background:#fff;border-bottom:3px solid var(--red);position:sticky;top:0;z-index:40;box-shadow:0 4px 18px rgba(0,0,0,.05)}
+.logo{display:flex;align-items:center;gap:11px;font-weight:900;font-size:19px}
+.logo .mark{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--red);color:#fff;
+  font-family:"Baloo 2";font-weight:800;font-size:22px;box-shadow:0 6px 14px rgba(228,0,43,.4)}
+.logo b{color:var(--red)}
+.logo small{display:block;font-weight:500;font-size:12px;color:var(--muted);letter-spacing:.5px}
+.topnav{display:flex;gap:6px;align-items:center}
+.topnav a{color:var(--ink);text-decoration:none;font-weight:600;padding:9px 15px;border-radius:11px;transition:.2s;font-size:15px}
+.topnav a:hover{background:var(--wash);color:var(--red)}
+.topnav .cta{background:var(--red);color:#fff}
+.topnav .cta:hover{background:var(--red-dark);color:#fff}
+
+/* ===== GIANT SUMMER TECH BANNER ===== */
+.banner{position:relative;overflow:hidden;color:#fff;text-align:center;padding:clamp(52px,9vw,104px) 20px clamp(60px,10vw,116px);
+  background:radial-gradient(1200px 600px at 82% -20%, rgba(255,196,0,.55), transparent 60%),
+    radial-gradient(900px 500px at 10% 120%, rgba(0,183,196,.5), transparent 55%),
+    linear-gradient(135deg,#FF5A3C 0%, var(--red) 46%, var(--red-deep) 100%)}
+.sun{position:absolute;top:-90px;left:-90px;width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle,#FFE27A 0%,#FFC400 55%,rgba(255,196,0,0) 72%);animation:spin 26s linear infinite;z-index:0}
+.sun::before{content:"";position:absolute;inset:-40px;border-radius:50%;
+  background:conic-gradient(from 0deg,rgba(255,214,64,.6) 0 6deg,transparent 6deg 30deg);
+  -webkit-mask:radial-gradient(circle,transparent 58%,#000 60%);mask:radial-gradient(circle,transparent 58%,#000 60%);animation:spin 40s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.floaties{position:absolute;inset:0;z-index:0;pointer-events:none}
+.floaties span{position:absolute;font-size:34px;opacity:.9;animation:bobf 7s ease-in-out infinite;filter:drop-shadow(0 6px 8px rgba(0,0,0,.2))}
+@keyframes bobf{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-22px) rotate(8deg)}}
+.banner-inner{position:relative;z-index:2;max-width:960px;margin:0 auto}
+.kicker{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.55);
+  backdrop-filter:blur(6px);color:#fff;font-weight:700;padding:9px 20px;border-radius:999px;font-size:15px;letter-spacing:.6px;margin-bottom:22px}
+.banner h1{font-family:"Baloo 2",cursive;font-weight:800;line-height:.94;letter-spacing:-1px;font-size:clamp(50px,12vw,128px);
+  text-shadow:0 6px 0 rgba(122,0,24,.45),0 20px 44px rgba(0,0,0,.3)}
+.banner h1 .tech{color:var(--sun);display:inline-block;animation:pop2 .8s cubic-bezier(.34,1.7,.5,1)}
+.banner h1 .wave{display:inline-block;animation:wave 2.4s ease-in-out infinite;transform-origin:70% 70%}
+@keyframes wave{0%,60%,100%{transform:rotate(0)}10%{transform:rotate(16deg)}20%{transform:rotate(-8deg)}30%{transform:rotate(16deg)}40%{transform:rotate(-4deg)}50%{transform:rotate(10deg)}}
+@keyframes pop2{from{transform:scale(.6) rotate(-8deg);opacity:0}to{transform:none;opacity:1}}
+.banner .lead{font-size:clamp(17px,2.6vw,23px);font-weight:500;max-width:660px;margin:18px auto 0;opacity:.97}
+.banner-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.btn{cursor:pointer;border:none;font-family:inherit;font-weight:800;font-size:17px;padding:15px 30px;border-radius:16px;
+  text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .15s,box-shadow .2s}
+.btn:active{transform:scale(.96)}
+.btn-sun{background:var(--sun);color:#5a3d00;box-shadow:0 10px 0 #c99a00}
+.btn-sun:hover{transform:translateY(-3px);box-shadow:0 13px 0 #c99a00}
+.btn-white{background:#fff;color:var(--red);box-shadow:0 10px 26px rgba(0,0,0,.2)}
+.btn-white:hover{transform:translateY(-3px)}
+.wavesep{position:absolute;bottom:-1px;left:0;width:100%;z-index:1;display:block}
+
+/* ===== stats ===== */
+.stats{max-width:1100px;margin:-42px auto 0;position:relative;z-index:5;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:0 clamp(16px,4vw,24px)}
+.stat{background:#fff;border-radius:var(--radius);padding:20px 12px;text-align:center;box-shadow:var(--shadow);border:1px solid #ffe3e8}
+.stat-num{font-family:"Baloo 2";font-size:clamp(26px,4vw,42px);font-weight:800;color:var(--red)}
+.stat-label{color:var(--muted);font-weight:600;margin-top:4px;font-size:13.5px}
+.live{margin-top:7px;font-size:12px;color:#0a9d55;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700}
+.live span{width:8px;height:8px;border-radius:50%;background:#12b866;animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(18,184,102,.6)}70%{box-shadow:0 0 0 11px rgba(18,184,102,0)}100%{box-shadow:0 0 0 0 rgba(18,184,102,0)}}
+
+/* ===== filters ===== */
+.filterbar{position:sticky;top:66px;z-index:30;background:rgba(255,245,246,.9);backdrop-filter:blur(8px);
+  padding:16px clamp(16px,4vw,28px);margin-top:40px}
+.filters{max-width:1180px;margin:0 auto;display:flex;gap:9px;flex-wrap:wrap;justify-content:center}
+.chip{cursor:pointer;font-family:inherit;font-weight:700;font-size:15px;color:var(--ink);background:#fff;
+  border:2px solid #ffd9e0;padding:9px 17px;border-radius:999px;transition:.18s}
+.chip:hover{border-color:var(--red)}
+.chip.on{color:#fff;background:var(--red);border-color:var(--red);box-shadow:0 6px 14px rgba(228,0,43,.3)}
+
+/* ===== zones ===== */
+.wrap{max-width:1180px;margin:0 auto;padding:8px clamp(16px,4vw,28px) 40px}
+.zone{margin:34px 0}
+.zone-head{display:flex;align-items:center;gap:13px;margin:0 2px 20px;padding-bottom:14px;border-bottom:3px dashed #ffcdd6}
+.zone-emoji{font-size:38px;filter:drop-shadow(0 4px 6px rgba(180,0,32,.25))}
+.zone-title{font-family:"Baloo 2";font-weight:800;font-size:clamp(23px,3.6vw,34px)}
+.zone-sub{color:var(--muted);font-size:14px;font-weight:500;margin-top:2px}
+.zone-count{margin-right:auto;background:var(--red);color:#fff;font-weight:800;border-radius:999px;padding:6px 15px;font-size:14px;box-shadow:0 6px 14px rgba(228,0,43,.28)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:24px}
+
+/* cover cards */
+.card{position:relative;background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 12px 30px rgba(120,0,24,.12);
+  border:1px solid #ffe3e8;opacity:0;transform:translateY(22px);animation:rise .5s forwards;
+  transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s}
+.card:hover{transform:translateY(-9px) rotate(-.5deg);box-shadow:0 26px 50px rgba(180,0,32,.26)}
+@keyframes rise{to{opacity:1;transform:none}}
+.thumb{position:relative;aspect-ratio:16/10;overflow:hidden;display:block;background:linear-gradient(135deg,#ffe1e6,#fff0d6)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.card:hover .thumb img{transform:scale(1.08)}
+.thumb .tag{position:absolute;top:12px;right:12px;background:rgba(27,20,32,.82);color:#fff;font-weight:700;font-size:12px;
+  padding:5px 12px;border-radius:999px;backdrop-filter:blur(3px)}
+.card-shine{position:absolute;top:0;bottom:0;width:38%;left:-60%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);transition:.6s;z-index:2}
+.card:hover .card-shine{left:130%}
+.body{padding:16px 17px 18px}
+.body h3{font-family:"Baloo 2";font-weight:700;font-size:21px;line-height:1.12}
+.body .en{color:var(--muted);font-size:13px;margin-top:4px}
+.body p{font-size:14px;color:#4a4353;line-height:1.45;margin-top:9px;min-height:40px}
+.actions{display:flex;align-items:center;gap:9px;margin-top:14px}
+.play{flex:1;text-align:center;background:var(--red);color:#fff;font-weight:800;padding:12px;border-radius:13px;
+  text-decoration:none;font-size:16px;transition:.18s;box-shadow:0 6px 0 var(--red-dark)}
+.play:hover{transform:translateY(-2px)}
+.play:active{transform:translateY(4px);box-shadow:0 2px 0 var(--red-dark)}
+.ibtn{height:44px;min-width:44px;padding:0 12px;border-radius:13px;border:2px solid #ffd9e0;background:#fff;color:var(--ink);
+  cursor:pointer;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:5px;transition:.18s;font-family:inherit}
+.ibtn:hover{border-color:var(--red)}
+.like.on{background:var(--red);border-color:var(--red);color:#fff}
+.like .h{transition:.2s}.like.on .h{transform:scale(1.2)}
+
+/* build-it family cards */
+.fam{position:relative;background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 12px 30px rgba(120,0,24,.12);
+  border:1px solid #ffe3e8;opacity:0;transform:translateY(22px);animation:rise .5s forwards;display:flex;flex-direction:column}
+.fam-cover{aspect-ratio:16/9;display:grid;place-items:center;position:relative;transition:.3s}
+.fam-cover .big{font-size:70px;filter:drop-shadow(0 6px 8px rgba(0,0,0,.25));transition:transform .3s}
+.fam:hover .fam-cover .big{transform:scale(1.12) rotate(-5deg)}
+.fam-cover .vcount{position:absolute;top:10px;right:10px;background:rgba(27,20,32,.8);color:#fff;font-weight:700;font-size:12px;padding:5px 11px;border-radius:999px}
+.fam-body{padding:15px 16px 18px;display:flex;flex-direction:column;flex:1}
+.fam-body h3{font-family:"Baloo 2";font-weight:700;font-size:20px}
+.fam-body .en{color:var(--muted);font-size:13px;margin-top:3px;min-height:34px}
+.vlist{display:grid;gap:8px;margin-top:12px}
+.vbtn{display:flex;align-items:center;gap:9px;background:var(--wash);border:2px solid #ffe0e6;border-radius:13px;
+  padding:10px 13px;text-decoration:none;color:var(--ink);font-weight:700;transition:.16s}
+.vbtn:hover{border-color:var(--red);background:#fff;transform:translateX(-3px)}
+.vbtn .vem{font-size:20px}
+.vbtn .vlabel{font-family:"Baloo 2"}
+.vbtn .vgo{margin-right:auto;color:var(--red);font-weight:800}
+
+/* footer / toast / share */
+.footer{background:var(--red-deep);color:#ffd9df;text-align:center;padding:40px 20px 46px;margin-top:30px}
+.footer .fl{font-family:"Baloo 2";font-weight:800;color:#fff;font-size:20px;margin-bottom:6px}
+.footer small{opacity:.8}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--ink);color:#fff;
+  padding:14px 24px;border-radius:14px;font-weight:700;box-shadow:0 16px 40px rgba(0,0,0,.3);z-index:70;
+  transition:transform .35s cubic-bezier(.2,1.4,.4,1);pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.share-menu{position:absolute;z-index:60;background:#fff;border:2px solid #ffd9e0;border-radius:14px;padding:7px;display:grid;gap:3px;
+  box-shadow:0 16px 40px rgba(120,0,24,.25);animation:pop .18s}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:none;opacity:1}}
+.share-menu button{background:none;border:none;color:var(--ink);font-family:inherit;font-weight:700;font-size:14px;padding:9px 14px;
+  border-radius:9px;cursor:pointer;text-align:right;display:flex;gap:8px;align-items:center;white-space:nowrap}
+.share-menu button:hover{background:var(--wash)}
+
+@media(max-width:720px){ .stats{grid-template-columns:1fr 1fr} .topnav a:not(.cta){display:none} }
+
+/* ===== prompt guide ===== */
+.guide{position:relative;overflow:hidden;margin-top:36px;
+  background:linear-gradient(135deg,#fff,#fff5f6);border-top:3px solid var(--red)}
+.guide-inner{max-width:1180px;margin:0 auto;padding:56px clamp(16px,4vw,28px) 60px}
+.guide-head{text-align:center;margin-bottom:36px}
+.guide-head .gk{display:inline-block;background:var(--red);color:#fff;font-weight:800;font-size:14px;
+  padding:7px 18px;border-radius:999px;letter-spacing:.5px;margin-bottom:14px}
+.guide-head h2{font-family:"Baloo 2";font-weight:800;font-size:clamp(28px,4.5vw,46px)}
+.guide-head p{color:var(--muted);font-size:clamp(15px,2vw,19px);max-width:640px;margin:12px auto 0;line-height:1.6}
+.steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.step{background:#fff;border:2px solid #ffe0e6;border-radius:18px;padding:20px 18px;position:relative;
+  transition:.18s;box-shadow:0 8px 20px rgba(180,0,32,.07)}
+.step:hover{transform:translateY(-5px);border-color:var(--red);box-shadow:0 16px 34px rgba(180,0,32,.16)}
+.step .n{position:absolute;top:-16px;right:16px;width:38px;height:38px;border-radius:50%;background:var(--red);
+  color:#fff;font-family:"Baloo 2";font-weight:800;font-size:19px;display:grid;place-items:center;box-shadow:0 6px 14px rgba(228,0,43,.4)}
+.step .se{font-size:30px}
+.step h4{font-family:"Baloo 2";font-weight:700;font-size:19px;margin:8px 0 6px}
+.step p{color:#4a4353;font-size:14.5px;line-height:1.5}
+.step .ex{margin-top:9px;background:var(--wash);border-radius:10px;padding:8px 11px;font-size:13px;color:var(--red-dark);font-weight:600}
+
+.guide-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:22px;margin-top:34px}
+.example{background:#1b1420;color:#fff;border-radius:20px;padding:22px 22px 20px;box-shadow:var(--shadow)}
+.example .lab{color:var(--sun);font-weight:800;font-family:"Baloo 2";font-size:18px;margin-bottom:12px}
+.example .txt{background:rgba(255,255,255,.06);border:2px dashed rgba(255,255,255,.22);border-radius:14px;
+  padding:16px;line-height:1.7;font-size:15px;color:#ffe9ec}
+.example .txt b{color:var(--sun)}
+.example .cbtn{margin-top:14px;border:none;background:var(--red);color:#fff;font-family:inherit;font-weight:800;
+  font-size:15px;padding:12px 22px;border-radius:12px;cursor:pointer;transition:.16s}
+.example .cbtn:hover{background:#ff1741}.example .cbtn:active{transform:scale(.96)}
+.tips{display:grid;gap:14px}
+.tipbox{border-radius:18px;padding:18px 18px;border:2px solid}
+.tipbox h4{font-family:"Baloo 2";font-weight:800;font-size:18px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.tipbox ul{list-style:none;display:grid;gap:8px}
+.tipbox li{font-size:14.5px;line-height:1.45;padding-right:24px;position:relative}
+.tipbox li::before{position:absolute;right:0;top:0}
+.do{background:#f0fff6;border-color:#b9f0cf}.do h4{color:#0a9d55}.do li::before{content:"✅"}
+.dont{background:#fff5f6;border-color:#ffd0d8}.dont h4{color:var(--red)}.dont li::before{content:"⛔"}
+@media(max-width:760px){.guide-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">
+    <span class="mark">℗</span>
+    <div><b>בנק הפועלים</b><small>Summer Tech · מחנה קיץ טכנולוגי</small></div>
+  </div>
+  <nav class="topnav">
+    <a href="#gallery">המשחקים</a>
+    <a href="#guide">איך בונים משחק?</a>
+    <a href="gallery.html">גלריית הספרייטים</a>
+    <a href="#gallery" class="cta">▶ שחקו עכשיו</a>
+  </nav>
+</header>
+
+<section class="banner">
+  <div class="sun" aria-hidden="true"></div>
+  <div class="floaties" aria-hidden="true">
+    <span style="top:14%;right:8%">☀️</span>
+    <span style="top:22%;left:10%;animation-delay:-2s">🎮</span>
+    <span style="top:60%;right:14%;animation-delay:-4s">🕹️</span>
+    <span style="top:68%;left:8%;animation-delay:-1s">🍦</span>
+    <span style="top:40%;left:4%;animation-delay:-3s">🚀</span>
+    <span style="top:12%;left:42%;animation-delay:-5s">⭐</span>
+  </div>
+  <div class="banner-inner">
+    <span class="kicker">☀️ מחנה הקיץ הטכנולוגי · 2026</span>
+    <h1><span dir="ltr" style="display:inline-block">SUMMER <span class="tech">TECH</span></span><br />משחקים <span class="wave">🎮</span></h1>
+    <p class="lead">כל המשחקים של המחנה במקום אחד — מסודרים יפה לפי אזורים. בחרו אזור, קפצו למשחק, ותהנו!</p>
+    <div class="banner-cta">
+      <a href="#gallery" class="btn btn-sun">▶ לגלריית המשחקים</a>
+      <a href="gallery.html" class="btn btn-white">✨ גלריית הספרייטים</a>
+    </div>
+  </div>
+  <svg class="wavesep" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+    <path fill="#fff5f6" d="M0,48 C240,90 480,90 720,58 C960,26 1200,26 1440,54 L1440,90 L0,90 Z"></path>
+  </svg>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num" id="visitorCount">0</div><div class="stat-label">👀 נכנסו למשחקים</div><div class="live"><span></span> חי עכשיו</div></div>
+  <div class="stat"><div class="stat-num" id="gamesCount">0</div><div class="stat-label">🎮 משחקים סה"כ</div></div>
+  <div class="stat"><div class="stat-num" id="zonesCount">4</div><div class="stat-label">🗂️ אזורים</div></div>
+  <div class="stat"><div class="stat-num" id="likesCount">0</div><div class="stat-label">❤️ לייקים סה"כ</div></div>
+</div>
+
+<div class="filterbar">
+  <div class="filters" id="filters">
+    <button class="chip on" data-f="all">🌈 הכל</button>
+    <button class="chip" data-f="hot">🔥 הכי אהובים</button>
+    <button class="chip" data-f="beatemup">⚔️ קרבות</button>
+    <button class="chip" data-f="sports">🏆 ספורט</button>
+    <button class="chip" data-f="arcade">🚀 ארקייד</button>
+    <button class="chip" data-f="build">🛠️ מעבדת הבנייה</button>
+  </div>
+</div>
+
+<main class="wrap" id="gallery"><!-- zones injected --></main>
+
+<!-- ===== HOW TO BUILD A GAME PROMPT ===== -->
+<section class="guide" id="guide">
+  <div class="guide-inner">
+    <div class="guide-head">
+      <span class="gk">🛠️ מדריך למחנה</span>
+      <h2>איך כותבים פְּרוֹמְפְּט למשחק? 🎮</h2>
+      <p>פְּרוֹמְפְּט הוא ההוראה שאתם נותנים למחשב (ל-AI) כדי שיבנה לכם משחק. ככל שההוראה ברורה ומפורטת יותר — המשחק יוצא טוב יותר! הנה 6 השלבים לפרומפט מנצח:</p>
+    </div>
+
+    <div class="steps">
+      <div class="step"><span class="n">1</span><div class="se">🎯</div>
+        <h4>סוג המשחק</h4>
+        <p>ספרו איזה סוג משחק אתם רוצים: קפיצות, מירוץ, יריות, פאזל או קרב.</p>
+        <div class="ex">"תבנה משחק קפיצות…"</div></div>
+
+      <div class="step"><span class="n">2</span><div class="se">🦸</div>
+        <h4>הדמות הראשית</h4>
+        <p>מי הגיבור/ה? איך הוא נראה? חתול, חללית, ילד או ארנב אמיץ?</p>
+        <div class="ex">"…עם ארנב חמוד שרץ…"</div></div>
+
+      <div class="step"><span class="n">3</span><div class="se">🏆</div>
+        <h4>המטרה של המשחק</h4>
+        <p>מה צריך לעשות כדי לנצח? לאסוף מטבעות? להגיע לסוף? להביס בוס?</p>
+        <div class="ex">"…והמטרה לאסוף כוכבים."</div></div>
+
+      <div class="step"><span class="n">4</span><div class="se">🕹️</div>
+        <h4>איך שולטים</h4>
+        <p>איזה כפתורים מזיזים את הדמות? רווח לקפיצה? חיצים? נגיעה במסך?</p>
+        <div class="ex">"…קופץ בלחיצה על רווח."</div></div>
+
+      <div class="step"><span class="n">5</span><div class="se">👾</div>
+        <h4>אויבים ומכשולים</h4>
+        <p>ממה צריך להיזהר? מפלצות, בורות, פצצות או צינורות בדרך?</p>
+        <div class="ex">"…נזהר ממפלצות וצינורות."</div></div>
+
+      <div class="step"><span class="n">6</span><div class="se">🎨</div>
+        <h4>סגנון וצבעים</h4>
+        <p>איך המשחק ייראה? צבעוני ושמח? חלל כהה? רקע של ג'ונגל? מוזיקה?</p>
+        <div class="ex">"…בסגנון צבעוני עם צלילים."</div></div>
+    </div>
+
+    <div class="guide-grid">
+      <div class="example">
+        <div class="lab">✨ פרומפט לדוגמה — מוכן להעתקה</div>
+        <div class="txt" id="exampleText"><b>תבנה לי משחק קפיצות</b> שבו דמות ארנב חמוד רצה קדימה, <b>ובלחיצה על מקש הרווח</b> הוא קופץ מעל צינורות ומפלצות. <b>כל מכשול שעוברים מוסיף נקודה אחת</b>, ואם נפגעים המשחק נגמר. תעשה את זה <b>צבעוני ושמח, עם רקע של ג'ונגל, אפקטים קטנים בקפיצה וצליל כשאוספים נקודה</b>, ותשמור את השיא הכי גבוה.</div>
+        <button class="cbtn" id="copyExample">📋 העתיקו את הפרומפט</button>
+      </div>
+
+      <div class="tips">
+        <div class="tipbox do">
+          <h4>👍 כדאי לעשות</h4>
+          <ul>
+            <li>לכתוב משפטים קצרים וברורים</li>
+            <li>לתת דוגמה קונקרטית ("כמו מריו")</li>
+            <li>להוסיף פרט אחד בכל פעם ולבדוק</li>
+            <li>לבקש צבעים, צלילים ואפקטים</li>
+          </ul>
+        </div>
+        <div class="tipbox dont">
+          <h4>👎 עדיף להימנע</h4>
+          <ul>
+            <li>הוראה מעורפלת ("תעשה משחק כיף")</li>
+            <li>לבקש 20 דברים בבת אחת</li>
+            <li>לשכוח להסביר איך שולטים</li>
+            <li>לוותר אחרי ניסיון אחד — משפרים ומנסים שוב!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="fl">☀️ Summer Tech · בנק הפועלים</div>
+  <small>נבנה באהבה 💜 במחנה הקיץ הטכנולוגי · מופעל על ידי פיקסל־ארט ודמיון</small>
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<script>
+/* ===== כל המשחקים, מסודרים לפי אזורים ===== */
+const ZONES = [
+  { cat:"beatemup", emoji:"⚔️", title:"זירת הקרבות", sub:"Beat 'em Up — משחקי אקשן והרפתקה" },
+  { cat:"sports",   emoji:"🏆", title:"אזור הספורט", sub:"מירוצים ותחרויות" },
+  { cat:"arcade",   emoji:"🚀", title:"ארקייד החלל", sub:"יריות ואקשן קלאסי" },
+];
+const GAMES = [
+  {id:"mad-bunnies",     cat:"beatemup", he:"ארנבים משוגעים נגד חתולים חמודים", en:"Mad Bunnies vs Cute Cats", tag:"⚔️ קרב", desc:"שלושה לוחמי ארנב פושטים על ממלכת החתולים החמודים!", base:52},
+  {id:"bananas-avocados",cat:"beatemup", he:"בננות נגד אבוקדו",                 en:"Bananas vs Avocados",      tag:"⚔️ קרב אוכל", desc:"גיבורי בננה פושטים על אימפריית האבוקדו — עד כס הגוואקמולה!", base:38},
+  {id:"sushi-ninjas",    cat:"beatemup", he:"נינג׳ות סושי נגד שדי ראמן",        en:"Sushi Ninjas vs Ramen Demons", tag:"⚔️ מטבח", desc:"נינג׳ות סושי פושטות על מטבח־הלילה של השדים בשלושה שלבים.", base:47},
+  {id:"kids-vs-tvs",     cat:"beatemup", he:"ילדים נגד המסכים",                 en:"Kids vs The Screens",      tag:"⚔️ ארקייד", desc:"הילדים נלחמים לצאת מעולם המסכים בחזרה למשחק האמיתי!", base:33},
+  {id:"hoops-vs-cleats", cat:"sports",   he:"כדורסל נגד כדורגל",                en:"Hoops vs Cleats",          tag:"🏆 ספורט", desc:"כוכבי הכדורסל מול אגדות הכדורגל. מי ינצח?", base:41},
+  {id:"ball-race",       cat:"sports",   he:"מירוץ הכדורים",                    en:"Ball Race",                tag:"🏆 מירוץ", desc:"הריצו כדורים צבעוניים לקו הסיום ועלו רמות!", base:36},
+  {id:"nebula-strike",   cat:"arcade",   he:"מכת הערפילית",                     en:"Nebula Strike",            tag:"🚀 חלל", desc:"פלסו דרך גלי רחפני חייזרים והתמודדו עם בוס הערפילית.", base:44},
+];
+/* Build-It Lab — משפחות עם גרסאות (אמוג'י + גרדיאנט) */
+const FAMILIES = [
+  {key:"mario", he:"מריו קפיצות", en:"Mario Jump", emoji:"🍄", grad:["#5c94fc","#43b047"], versions:[
+    {id:"mario-jump",   label:"גרסה 1", em:"🍄"},
+    {id:"mario-maki",   label:"🍣 מאקי", em:"🍣"},
+    {id:"mario-jump-v2",label:"גרסה 2 ✨", em:"🍄"},
+  ]},
+  {key:"bird", he:"הציפור המצייצת", en:"Squeaky Bird", emoji:"🐤", grad:["#71c5cf","#f5a623"], versions:[
+    {id:"squeaky-bird",   label:"גרסה 1", em:"🐤"},
+    {id:"squeaky-bird-v2",label:"גרסה 2 ✨", em:"🐤"},
+  ]},
+  {key:"hero", he:"גיבור־על מעופף", en:"Super Hero Fly", emoji:"🦸", grad:["#2b5adc","#7fb0ff"], versions:[
+    {id:"hero-fly",   label:"גרסה 1", em:"🦸"},
+    {id:"hero-fly-v2",label:"גרסה 2 ✨", em:"🦸"},
+  ]},
+  {key:"fly", he:"סימולטור טיסה", en:"Fly Simulator", emoji:"✈️", grad:["#4fb8ff","#cdeeff"], versions:[
+    {id:"fly-sim",   label:"גרסה 1", em:"✈️"},
+    {id:"fly-sim-v2",label:"גרסה 2 ✨", em:"✈️"},
+  ]},
+  {key:"star", he:"תופס הכוכבים", en:"Star Catcher", emoji:"🧺", grad:["#7a4bd6","#3a2a6d"], versions:[
+    {id:"star-catch",   label:"גרסה 1", em:"🧺"},
+    {id:"star-catch-v2",label:"גרסה 2 ✨", em:"🧺"},
+  ]},
+];
+const TOTAL_GAMES = GAMES.length + FAMILIES.reduce((s,f)=>s+f.versions.length,0);
+
+const LS={likes:'poalim_likes_v2',counts:'poalim_counts_v2',visits:'poalim_visits_v2',visited:'poalim_visited_sess'};
+const load=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d;}catch{return d;}};
+const save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+let myLikes=load(LS.likes,{}); let counts=load(LS.counts,null);
+if(!counts){counts={};GAMES.forEach(g=>counts[g.id]=g.base);save(LS.counts,counts);}
+let filter='all';
+const esc=s=>(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ===== visitors ===== */
+function initVisitors(){
+  let v=load(LS.visits,null); if(v===null)v=3120+Math.floor(Math.random()*400);
+  if(!sessionStorage.getItem(LS.visited)){v+=1;sessionStorage.setItem(LS.visited,'1');}
+  save(LS.visits,v); countUp(document.getElementById('visitorCount'),v);
+  setInterval(()=>{if(Math.random()>.5){v+=1;save(LS.visits,v);countUp(document.getElementById('visitorCount'),v,600);}},8000);
+}
+function countUp(el,target,dur=1200){if(!el)return;const s=parseInt(el.dataset.val||'0',10);const t0=performance.now();
+  (function step(now){const p=Math.min(1,(now-t0)/dur);const e=1-Math.pow(1-p,3);
+    el.textContent=Math.round(s+(target-s)*e).toLocaleString('he-IL');
+    if(p<1)requestAnimationFrame(step);else el.dataset.val=target;})(performance.now());}
+
+/* ===== card builders ===== */
+function coverCard(g,i){
+  const liked=!!myLikes[g.id];
+  return `<div class="card" style="animation-delay:${i*45}ms">
+    <a class="thumb" href="games/${g.id}/index.html">
+      <img loading="lazy" src="games/${g.id}/cover.png" alt="${esc(g.he)}"
+        onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<div style=\\'position:absolute;inset:0;display:grid;place-items:center;font-size:64px\\'>🎮</div>')">
+      <span class="tag">${g.tag}</span><span class="card-shine"></span>
+    </a>
+    <div class="body">
+      <h3>${esc(g.he)}</h3><div class="en">${esc(g.en)}</div><p>${esc(g.desc)}</p>
+      <div class="actions">
+        <a class="play" href="games/${g.id}/index.html">▶ שחקו</a>
+        <button class="ibtn like ${liked?'on':''}" data-like="${g.id}"><span class="h">${liked?'❤️':'🤍'}</span><span class="lc">${counts[g.id]}</span></button>
+        <button class="ibtn" data-share="${g.id}" title="שיתוף">🔗</button>
+      </div>
+    </div></div>`;
+}
+function famCard(f,i){
+  const vls=f.versions.map(v=>`<a class="vbtn" href="games/${v.id}/index.html">
+      <span class="vem">${v.em}</span><span class="vlabel">${v.label}</span><span class="vgo">▶ שחקו</span></a>`).join("");
+  return `<div class="fam" style="animation-delay:${i*45}ms">
+    <div class="fam-cover" style="background:linear-gradient(135deg,${f.grad[0]},${f.grad[1]})">
+      <span class="big">${f.emoji}</span><span class="vcount">${f.versions.length} גרסאות</span></div>
+    <div class="fam-body">
+      <h3>${esc(f.he)}</h3><div class="en">${esc(f.en)}</div>
+      <div class="vlist">${vls}</div>
+    </div></div>`;
+}
+function zoneHTML(z){
+  const games=GAMES.filter(g=>g.cat===z.cat); if(!games.length)return"";
+  return `<section class="zone">
+    <div class="zone-head"><span class="zone-emoji">${z.emoji}</span>
+      <div><div class="zone-title">${z.title}</div><div class="zone-sub">${z.sub}</div></div>
+      <span class="zone-count">${games.length} משחקים</span></div>
+    <div class="grid">${games.map(coverCard).join("")}</div></section>`;
+}
+function buildZoneHTML(){
+  return `<section class="zone">
+    <div class="zone-head"><span class="zone-emoji">🛠️</span>
+      <div><div class="zone-title">מעבדת הבנייה</div><div class="zone-sub">Build-It Lab — משחקים שבונים בעצמכם, עם כל הגרסאות</div></div>
+      <span class="zone-count">${FAMILIES.reduce((s,f)=>s+f.versions.length,0)} משחקים</span></div>
+    <div class="grid">${FAMILIES.map(famCard).join("")}</div></section>`;
+}
+function hotZoneHTML(){
+  const sorted=GAMES.slice().sort((a,b)=>counts[b.id]-counts[a.id]);
+  return `<section class="zone">
+    <div class="zone-head"><span class="zone-emoji">🔥</span>
+      <div><div class="zone-title">הכי אהובים</div><div class="zone-sub">המשחקים עם הכי הרבה לייקים</div></div>
+      <span class="zone-count">${sorted.length} משחקים</span></div>
+    <div class="grid">${sorted.map(coverCard).join("")}</div></section>`;
+}
+
+function render(){
+  const main=document.getElementById('gallery');
+  let html="";
+  if(filter==='all'){ html=ZONES.map(zoneHTML).join("")+buildZoneHTML(); }
+  else if(filter==='hot'){ html=hotZoneHTML(); }
+  else if(filter==='build'){ html=buildZoneHTML(); }
+  else { const z=ZONES.find(z=>z.cat===filter); html=z?zoneHTML(z):""; }
+  main.innerHTML=html;
+  countUp(document.getElementById('gamesCount'),TOTAL_GAMES,700);
+  countUp(document.getElementById('likesCount'),Object.values(counts).reduce((s,n)=>s+n,0),700);
+}
+
+/* ===== like / share ===== */
+function toggleLike(id){
+  if(myLikes[id]){counts[id]=Math.max(0,counts[id]-1);delete myLikes[id];}
+  else{counts[id]+=1;myLikes[id]=true;burst();}
+  save(LS.counts,counts);save(LS.likes,myLikes);render();
+}
+function shareGame(id,anchor){
+  document.querySelectorAll('.share-menu').forEach(m=>m.remove());
+  const g=GAMES.find(x=>x.id===id);
+  const url=location.origin+location.pathname.replace(/[^/]*$/,'')+`games/${id}/index.html`;
+  const text=`בואו לשחק ב"${g?g.he:''}" 🎮 ב-Summer Tech של בנק הפועלים!`;
+  const m=document.createElement('div');m.className='share-menu';
+  m.innerHTML=`<button data-w>💬 וואטסאפ</button><button data-f>📘 פייסבוק</button><button data-c>📋 העתקת קישור</button>`;
+  document.body.appendChild(m);const r=anchor.getBoundingClientRect();
+  m.style.top=(scrollY+r.bottom+8)+'px';m.style.left=(r.left)+'px';
+  m.querySelector('[data-w]').onclick=()=>{open(`https://wa.me/?text=${encodeURIComponent(text+' '+url)}`,'_blank');m.remove();};
+  m.querySelector('[data-f]').onclick=()=>{open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,'_blank');m.remove();};
+  m.querySelector('[data-c]').onclick=async()=>{try{await navigator.clipboard.writeText(url);toast('הקישור הועתק! 📋');}catch{toast('לא ניתן להעתיק');}m.remove();};
+  setTimeout(()=>document.addEventListener('click',function h(e){if(!m.contains(e.target)){m.remove();document.removeEventListener('click',h);}}),0);
+}
+document.getElementById('gallery').addEventListener('click',e=>{
+  const l=e.target.closest('[data-like]');const s=e.target.closest('[data-share]');
+  if(l){e.preventDefault();toggleLike(l.dataset.like);}else if(s){e.preventDefault();shareGame(s.dataset.share,s);}
+});
+document.getElementById('filters').addEventListener('click',e=>{
+  const b=e.target.closest('.chip');if(!b)return;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  b.classList.add('on');filter=b.dataset.f;render();
+});
+
+let tt;function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2500);}
+function burst(){for(let i=0;i<8;i++){const h=document.createElement('div');h.textContent=['❤️','⭐','✨','💥'][i%4];
+  h.style.cssText=`position:fixed;left:50%;top:50%;font-size:${16+Math.random()*14}px;pointer-events:none;z-index:80;transition:transform 1s ease,opacity 1s`;
+  document.body.appendChild(h);requestAnimationFrame(()=>{const x=(Math.random()-.5)*300,y=-120-Math.random()*150;
+  h.style.transform=`translate(${x}px,${y}px) rotate(${(Math.random()-.5)*90}deg)`;h.style.opacity='0';});setTimeout(()=>h.remove(),1000);}}
+
+/* copy example prompt */
+document.getElementById('copyExample').addEventListener('click',async()=>{
+  const txt=document.getElementById('exampleText').innerText.trim();
+  try{await navigator.clipboard.writeText(txt);toast('הפרומפט הועתק! ✨ עכשיו הדביקו אותו ב-AI');}catch{toast('לא ניתן להעתיק');}
+});
+
+initVisitors();
+render();
+</script>
+</body>
+</html>

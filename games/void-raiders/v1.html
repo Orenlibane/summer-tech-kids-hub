@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Void Raiders — Version 1 (Simple)</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:#000;overflow:hidden;font-family:system-ui,sans-serif}
+  #c{display:block;margin:0 auto;background:#05060d;touch-action:none}
+  #hud{position:fixed;top:8px;left:0;right:0;text-align:center;color:#cfe;font-weight:700;font-size:15px;letter-spacing:1px}
+  #msg{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#cfe;text-align:center;gap:14px}
+  #msg h1{font-size:28px}#msg p{opacity:.8;font-size:14px;max-width:320px}
+  #msg button{cursor:pointer;border:2px solid #4af;background:#123;color:#cfe;font-weight:800;font-size:16px;padding:10px 26px;border-radius:8px}
+  .hide{display:none!important}
+</style>
+</head>
+<body>
+<div id="hud"></div>
+<canvas id="c"></canvas>
+<div id="msg"><h1>VOID RAIDERS · V1</h1><p>חצים / WASD לתנועה · רווח לירי<br>הפל את חלליות האויב לפני שהן מפילות אותך.</p><button onclick="start()">▶ שחק</button></div>
+<script>
+const cv=document.getElementById('c'),ctx=cv.getContext('2d');
+let W,H;function fit(){W=cv.width=Math.min(innerWidth,760);H=cv.height=Math.min(innerHeight,560);}fit();addEventListener('resize',fit);
+const keys={};addEventListener('keydown',e=>{keys[e.key.toLowerCase()]=1;if([' ','arrowup','arrowdown','arrowleft','arrowright'].includes(e.key.toLowerCase()))e.preventDefault();});
+addEventListener('keyup',e=>keys[e.key.toLowerCase()]=0);
+let player,enemies,bullets,ebullets,running,score,lives;
+function reset(){
+  player={x:W/2,y:H-70,a:-Math.PI/2,r:12,cd:0};
+  enemies=[];bullets=[];ebullets=[];score=0;lives=3;
+  spawn();
+}
+function spawn(){
+  const n=1+Math.min(1,Math.floor(score/300)); // 1 enemy, then 2 after 300 pts
+  for(let i=enemies.length;i<n;i++)
+    enemies.push({x:80+Math.random()*(W-160),y:60+Math.random()*80,r:12,cd:60+Math.random()*60,hp:2});
+}
+function start(){document.getElementById('msg').classList.add('hide');reset();running=true;loop();}
+function shipPath(x,y,a,r,col){ctx.save();ctx.translate(x,y);ctx.rotate(a);ctx.fillStyle=col;
+  ctx.beginPath();ctx.moveTo(r,0);ctx.lineTo(-r*0.8,r*0.8);ctx.lineTo(-r*0.4,0);ctx.lineTo(-r*0.8,-r*0.8);ctx.closePath();ctx.fill();ctx.restore();}
+function loop(){
+  if(!running)return;
+  // input
+  if(keys['arrowleft']||keys['a'])player.x-=4;
+  if(keys['arrowright']||keys['d'])player.x+=4;
+  if(keys['arrowup']||keys['w'])player.y-=4;
+  if(keys['arrowdown']||keys['s'])player.y+=4;
+  player.x=Math.max(14,Math.min(W-14,player.x));player.y=Math.max(14,Math.min(H-14,player.y));
+  if(player.cd>0)player.cd--;
+  if(keys[' ']&&player.cd<=0){bullets.push({x:player.x,y:player.y-14,vy:-8});player.cd=14;}
+  // enemies
+  for(const e of enemies){
+    e.x+=Math.sin((Date.now()/600)+e.y)*1.2;
+    if(e.x<player.x)e.x+=0.6;else e.x-=0.6;
+    e.cd--;if(e.cd<=0){ebullets.push({x:e.x,y:e.y+14,vy:4});e.cd=80+Math.random()*50;}
+  }
+  bullets.forEach(b=>b.y+=b.vy);ebullets.forEach(b=>b.y+=b.vy);
+  bullets=bullets.filter(b=>b.y>-10);ebullets=ebullets.filter(b=>b.y<H+10);
+  // collisions: player bullets -> enemies
+  for(const b of bullets)for(const e of enemies){
+    if(Math.hypot(b.x-e.x,b.y-e.y)<e.r+3){b.dead=1;e.hp--;if(e.hp<=0){e.dead=1;score+=100;}}
+  }
+  // enemy bullets -> player
+  for(const b of ebullets)if(Math.hypot(b.x-player.x,b.y-player.y)<player.r+3){b.dead=1;lives--;if(lives<=0)return gameover();}
+  bullets=bullets.filter(b=>!b.dead);ebullets=ebullets.filter(b=>!b.dead);
+  enemies=enemies.filter(e=>!e.dead);
+  if(enemies.length===0){score+=50;spawn();}else if(enemies.length<2&&score>300)spawn();
+  // draw
+  ctx.fillStyle='#05060d';ctx.fillRect(0,0,W,H);
+  ctx.fillStyle='#1a2b4a';for(let i=0;i<40;i++){const sx=(i*97)%W,sy=((i*53)+Date.now()/40)%H;ctx.fillRect(sx,sy,2,2);}
+  bullets.forEach(b=>{ctx.fillStyle='#6ff';ctx.fillRect(b.x-1.5,b.y-6,3,10);});
+  ebullets.forEach(b=>{ctx.fillStyle='#f66';ctx.fillRect(b.x-1.5,b.y-4,3,8);});
+  enemies.forEach(e=>shipPath(e.x,e.y,Math.PI/2,e.r,'#e55'));
+  shipPath(player.x,player.y,-Math.PI/2,player.r,'#5cf');
+  document.getElementById('hud').textContent='ניקוד '+score+'   ·   חיים '+'❤'.repeat(lives);
+  requestAnimationFrame(loop);
+}
+function gameover(){running=false;const m=document.getElementById('msg');m.classList.remove('hide');
+  m.innerHTML='<h1>💥 הופלת</h1><p>ניקוד סופי: '+score+'</p><button onclick="start()">↻ שוב</button>';}
+</script>
+</body>
+</html>

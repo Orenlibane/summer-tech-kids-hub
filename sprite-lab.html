@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>🎬 Sprite Lab · Summer Tech Kids Hub</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Watch the game sprites come alive — animated frame-by-frame, sliced from real sprite sheets.">
+<meta name="theme-color" content="#ff2fb0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#25123f}
+  *{box-sizing:border-box}html,body{margin:0}
+  body{font-family:'Fredoka',system-ui,sans-serif;color:var(--ink);min-height:100vh;
+    background:linear-gradient(135deg,#ff2fb0,#8a3ffc 55%,#22d3ee 100%);background-attachment:fixed}
+  header{text-align:center;padding:44px 20px 6px;color:#fff}
+  .back{display:inline-block;text-decoration:none;color:#fff;font-weight:600;background:rgba(0,0,0,.22);
+    border:2px solid rgba(255,255,255,.5);padding:9px 18px;border-radius:999px;margin-bottom:20px}
+  .back:hover{background:rgba(0,0,0,.34)}
+  h1{font-family:'Baloo 2',cursive;font-weight:800;font-size:clamp(32px,6vw,58px);margin:0;
+    text-shadow:0 5px 0 rgba(37,18,63,.4),0 12px 24px rgba(0,0,0,.25)}
+  .sub{max-width:620px;margin:14px auto 0;font-size:clamp(15px,2.2vw,19px);opacity:.96;font-weight:500}
+  .count{display:inline-block;margin-top:16px;background:rgba(255,255,255,.92);color:var(--ink);
+    font-weight:700;padding:7px 18px;border-radius:999px}
+
+  main{max-width:1180px;margin:0 auto;padding:28px 18px 80px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px}
+  .card{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 12px 26px rgba(40,10,60,.28);
+    transition:transform .18s cubic-bezier(.34,1.56,.64,1);cursor:pointer}
+  .card:hover{transform:translateY(-8px) rotate(-1deg)}
+  .stage{height:180px;display:grid;place-items:center;position:relative;
+    background-image:linear-gradient(45deg,#eee 25%,transparent 25%),linear-gradient(-45deg,#eee 25%,transparent 25%),
+      linear-gradient(45deg,transparent 75%,#eee 75%),linear-gradient(-45deg,transparent 75%,#eee 75%);
+    background-size:16px 16px;background-position:0 0,0 8px,8px -8px,-8px 0}
+  .stage canvas{image-rendering:pixelated;filter:drop-shadow(0 5px 6px rgba(0,0,0,.28))}
+  .live{position:absolute;top:8px;right:8px;background:#ff2fb0;color:#fff;font-size:10px;font-weight:700;
+    padding:3px 8px;border-radius:999px;letter-spacing:.5px}
+  .live::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#fff;
+    margin-right:5px;vertical-align:middle;animation:blink 1s infinite}
+  @keyframes blink{50%{opacity:.3}}
+  .name{font-family:'Baloo 2',cursive;font-weight:700;font-size:17px;padding:12px 14px 4px}
+  .meta{font-size:12px;color:#8a76ad;padding:0 14px 14px}
+
+  footer{text-align:center;color:#fff;padding:0 20px 50px;font-weight:500;opacity:.9}
+  .loading{color:#fff;text-align:center;font-size:20px;padding:40px}
+
+  /* popup */
+  #lb{position:fixed;inset:0;z-index:60;background:rgba(20,6,35,.85);backdrop-filter:blur(4px);
+    display:none;place-items:center;padding:18px}
+  #lb.on{display:grid}
+  #lb .inner{background:#fff;border-radius:24px;padding:22px;max-width:520px;width:100%;text-align:center;
+    box-shadow:0 30px 60px rgba(0,0,0,.5);animation:pop .22s cubic-bezier(.34,1.56,.64,1)}
+  @keyframes pop{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+  #lb h3{font-family:'Baloo 2',cursive;margin:0 0 10px;font-size:24px}
+  #lb .bigstage{height:230px;display:grid;place-items:center;border-radius:14px;margin-bottom:12px;
+    background-image:linear-gradient(45deg,#f0f0f0 25%,transparent 25%),linear-gradient(-45deg,#f0f0f0 25%,transparent 25%),
+      linear-gradient(45deg,transparent 75%,#f0f0f0 75%),linear-gradient(-45deg,transparent 75%,#f0f0f0 75%);
+    background-size:22px 22px;background-position:0 0,0 11px,11px -11px,-11px 0}
+  #lb .bigstage canvas{image-rendering:pixelated;filter:drop-shadow(0 8px 10px rgba(0,0,0,.3))}
+  .animbtns{display:flex;gap:8px;justify-content:center;margin-bottom:14px;flex-wrap:wrap}
+  .animbtns button{border:none;font-family:'Fredoka';font-weight:600;font-size:14px;padding:8px 18px;
+    border-radius:999px;background:#efeaf9;color:#6a5a86;cursor:pointer}
+  .animbtns button.on{background:#8a3ffc;color:#fff}
+  .strip{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+  .strip .fr{aspect-ratio:1;border-radius:10px;display:grid;place-items:center;cursor:pointer;
+    background-image:linear-gradient(45deg,#eee 25%,transparent 25%),linear-gradient(-45deg,#eee 25%,transparent 25%),
+      linear-gradient(45deg,transparent 75%,#eee 75%),linear-gradient(-45deg,transparent 75%,#eee 75%);
+    background-size:10px 10px;background-position:0 0,0 5px,5px -5px,-5px 0;box-shadow:inset 0 0 0 2px #efeaf9}
+  .strip .fr:hover{box-shadow:inset 0 0 0 2px #8a3ffc}
+  .strip .fr img{max-width:84%;max-height:84%;image-rendering:pixelated}
+  #lb .x{margin-top:14px;border:none;background:#8a3ffc;color:#fff;font-family:'Fredoka';font-weight:600;
+    font-size:16px;padding:10px 28px;border-radius:999px;cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+  <a class="back" href="index.html">← Back to Games</a>
+  <h1>🎬 Sprite Lab</h1>
+  <p class="sub">Real sprite sheets, sliced frame-by-frame and brought to life! Each character animates live — tap one to see every frame and switch animations.</p>
+  <div class="count" id="count">Loading sprites…</div>
+</header>
+<main id="app"><div class="loading">🎨 Slicing frames…</div></main>
+<footer>Made with 💜 at <b>Summer Tech Camp</b> · Sprites sliced from magenta sheets → transparent frames</footer>
+
+<div id="lb"><div class="inner">
+  <h3 id="lb-name"></h3>
+  <div class="bigstage"><canvas id="lb-canvas"></canvas></div>
+  <div class="animbtns" id="lb-anims"></div>
+  <div class="strip" id="lb-strip"></div>
+  <button class="x" onclick="closeLB()">Close ✨</button>
+</div></div>
+
+<script>
+const app=document.getElementById('app');
+const IMGS={};               // key -> [Image,...]
+let DATA=[], tick=0;
+
+function preload(list){
+  return Promise.all(list.flatMap(ch=>{
+    IMGS[ch.key]=[];
+    return ch.frames.map((src,i)=>new Promise(res=>{
+      const im=new Image(); im.onload=im.onerror=()=>res(); im.src=src; IMGS[ch.key][i]=im;
+    }));
+  }));
+}
+// draw a frame index to a canvas fitted to box
+function drawFrame(cv, ch, fi, box){
+  const im=IMGS[ch.key][fi]; if(!im||!im.width) return;
+  const scale=Math.min(box/ch.frameW, box/ch.frameH);
+  const w=Math.round(ch.frameW*scale), h=Math.round(ch.frameH*scale);
+  cv.width=w; cv.height=h;
+  const x=cv.getContext('2d'); x.imageSmoothingEnabled=false;
+  x.clearRect(0,0,w,h); x.drawImage(im,0,0,w,h);
+}
+function render(){
+  app.innerHTML='<div class="grid">'+DATA.map((ch,i)=>
+    `<div class="card" onclick="openLB(${i})">
+      <div class="stage"><span class="live">LIVE</span><canvas data-key="${ch.key}"></canvas></div>
+      <div class="name">${ch.title}</div>
+      <div class="meta">🎞️ ${ch.frames.length} frames · idle · action · hurt</div>
+    </div>`).join('')+'</div>';
+  document.getElementById('count').textContent=`🎬 ${DATA.length} animated characters · ${DATA.reduce((a,c)=>a+c.frames.length,0)} frames`;
+}
+// global animation loop — cards cycle their idle anim
+let last=0, fps=7;
+function loop(t){
+  requestAnimationFrame(loop);
+  if(t-last < 1000/fps) return; last=t; tick++;
+  DATA.forEach(ch=>{
+    const cv=document.querySelector('canvas[data-key="'+ch.key+'"]'); if(!cv) return;
+    const seq=ch.anims.idle; drawFrame(cv,ch,seq[tick%seq.length],150);
+  });
+  // popup animation
+  if(lbOpen){const ch=DATA[lbIdx],seq=ch.anims[lbAnim];drawFrame(document.getElementById('lb-canvas'),ch,seq[tick%seq.length],200);}
+}
+// ---- popup ----
+let lbOpen=false, lbIdx=0, lbAnim='idle';
+const lb=document.getElementById('lb');
+function openLB(i){
+  lbIdx=i; lbAnim='idle'; lbOpen=true;
+  const ch=DATA[i];
+  document.getElementById('lb-name').textContent=ch.title;
+  document.getElementById('lb-anims').innerHTML=Object.keys(ch.anims).map(a=>
+    `<button class="${a==='idle'?'on':''}" onclick="setAnim('${a}',this)">${a[0].toUpperCase()+a.slice(1)}</button>`).join('');
+  document.getElementById('lb-strip').innerHTML=ch.frames.map((src,fi)=>
+    `<div class="fr" title="frame ${fi}"><img src="${src}" alt=""></div>`).join('');
+  lb.classList.add('on');
+}
+function setAnim(a,btn){lbAnim=a;document.querySelectorAll('#lb-anims button').forEach(b=>b.classList.toggle('on',b===btn));}
+function closeLB(){lbOpen=false;lb.classList.remove('on');}
+lb.addEventListener('click',e=>{if(e.target.id==='lb')closeLB();});
+addEventListener('keydown',e=>{if(e.key==='Escape')closeLB();});
+
+fetch('sprite-lab/manifest.json').then(r=>r.json()).then(async data=>{
+  DATA=data; await preload(data); render(); requestAnimationFrame(loop);
+}).catch(e=>{app.innerHTML='<div class="loading">Could not load sprites 😢</div>';});
+</script>
+</body>
+</html>

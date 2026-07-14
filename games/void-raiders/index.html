@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🚀 Void Raiders — Space Dogfight</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:radial-gradient(circle at 50% -10%,#1a1040,#02030a 62%);color:#cfe6ff;font-family:'Rubik',system-ui,sans-serif;min-height:100vh}
+  .wrap{max-width:920px;margin:0 auto;padding:26px 16px 70px}
+  header{text-align:center;padding:16px 8px 10px}
+  h1{font-size:clamp(30px,7vw,52px);font-weight:900;letter-spacing:2px;
+    background:linear-gradient(90deg,#7ff5ff,#ff6ec7,#ffd76a);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 50px rgba(120,200,255,.35)}
+  header p{opacity:.82;margin-top:10px;font-weight:600}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
+  @media(max-width:640px){.cards{grid-template-columns:1fr}}
+  .vc{background:rgba(255,255,255,.045);border:1px solid rgba(120,200,255,.22);border-radius:20px;overflow:hidden;
+    box-shadow:0 14px 44px rgba(0,0,0,.45);display:flex;flex-direction:column}
+  .vc .top{padding:18px 18px 12px}
+  .badge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:2px;padding:4px 12px;border-radius:20px;margin-bottom:10px}
+  .b1{background:rgba(120,200,255,.16);color:#9fdcff;border:1px solid rgba(120,200,255,.4)}
+  .b2{background:linear-gradient(90deg,rgba(255,110,199,.2),rgba(255,215,106,.2));color:#ffd7ec;border:1px solid rgba(255,150,210,.45)}
+  .vc h2{font-size:22px;font-weight:900}
+  .vc .desc{opacity:.78;font-size:13.5px;line-height:1.7;margin-top:8px;min-height:66px}
+  ul.feat{list-style:none;margin:10px 0 4px;font-size:12.5px;opacity:.85}
+  ul.feat li{padding:3px 0;padding-right:18px;position:relative}
+  ul.feat li:before{content:'▸';position:absolute;right:0;color:#7ff5ff}
+  .vc .btns{margin-top:auto;display:flex;gap:8px;padding:14px 18px 18px}
+  .btns a,.btns button{flex:1;cursor:pointer;text-decoration:none;text-align:center;font-family:inherit;font-weight:800;font-size:14px;
+    padding:11px 8px;border-radius:11px;border:1px solid transparent;transition:.15s}
+  .play{background:linear-gradient(180deg,#2a72c8,#1a4e9a);color:#fff;box-shadow:0 6px 20px rgba(40,120,220,.4)}
+  .play:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(60,150,255,.6)}
+  .prompt{background:rgba(255,255,255,.06);color:#cfe6ff;border-color:rgba(255,255,255,.18)}
+  .prompt:hover{background:rgba(255,255,255,.14)}
+  .note{text-align:center;margin-top:22px;font-size:12.5px;opacity:.6}
+  /* modal */
+  .modal{position:fixed;inset:0;background:rgba(2,4,12,.86);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:30;padding:18px}
+  .modal.on{display:flex}
+  .mbox{background:#0a0e1e;border:1px solid rgba(120,200,255,.3);border-radius:16px;max-width:720px;width:100%;max-height:86vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+  .mhead{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.1)}
+  .mhead b{font-size:16px;color:#ffd76a}
+  .mhead .x{cursor:pointer;font-size:22px;opacity:.7;background:none;border:none;color:#fff}
+  .mbody{padding:16px 18px;overflow:auto}
+  .mbody pre{white-space:pre-wrap;font-family:ui-monospace,'SF Mono',monospace;font-size:12.5px;line-height:1.6;color:#bcd}
+  .copy{margin:0 18px 16px;cursor:pointer;border:1px solid rgba(120,200,255,.4);background:rgba(120,200,255,.12);color:#cfe;
+    font-family:inherit;font-weight:800;font-size:13px;padding:9px;border-radius:10px}
+  .copy:hover{background:rgba(120,200,255,.24)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🚀 VOID RAIDERS</h1>
+    <p>קרב חלליות בחלל — טוס, סובב, וירה על צי האויב. שתי גרסאות עצמאיות לגמרי.</p>
+  </header>
+  <div class="cards">
+    <div class="vc">
+      <div class="top">
+        <span class="badge b1">VERSION 1 · SIMPLE</span>
+        <h2>הליבה הפשוטה</h2>
+        <p class="desc">גרסת בסיס נקייה: חללית משולש, תנועה ישירה, ירי כלפי מעלה, ו-1–2 חלליות אויב. כמעט בלי גרפיקה — רק המכניקה.</p>
+        <ul class="feat"><li>שליטה: חצים/WASD + רווח</li><li>1–2 אויבים שיורים</li><li>ניקוד וחיים · ללא אפקטים</li></ul>
+      </div>
+      <div class="btns"><a class="play" href="v1.html">▶ שחק V1</a><button class="prompt" onclick="showP(1)">📋 פרומפט מלא</button></div>
+    </div>
+    <div class="vc">
+      <div class="top">
+        <span class="badge b2">VERSION 2 · DELUXE</span>
+        <h2>הגרסה המשודרגת</h2>
+        <p class="desc">חוויה מלאה: תעופת אינרציה בחלל, סילוני חלקיקים, פיצוצים, רעידת מסך, מגן, גלים מתגברים, בוס ספינת-אם, רדאר ושליטת מגע.</p>
+        <ul class="feat"><li>פיזיקת חלל + כיוון בעכבר</li><li>גלים · שדרוגים · בוס</li><li>Glow · particles · radar · mobile</li></ul>
+      </div>
+      <div class="btns"><a class="play" href="v2.html">▶ שחק V2</a><button class="prompt" onclick="showP(2)">📋 פרומפט מלא</button></div>
+    </div>
+  </div>
+  <p class="note">כל גרסה עומדת בפני עצמה — לכל פרומפט תיאור מלא של כל המשחק מאפס, לא "שדרוג" של הקודם.</p>
+</div>
+
+<div class="modal" id="modal">
+  <div class="mbox">
+    <div class="mhead"><b id="mtitle"></b><button class="x" onclick="hideP()">×</button></div>
+    <div class="mbody"><pre id="ptext"></pre></div>
+    <button class="copy" onclick="copyP()">📋 העתק פרומפט</button>
+  </div>
+</div>
+
+<script>
+const PROMPTS={
+1:`Build "Void Raiders — Version 1", a complete, self-contained single-file HTML5 canvas space-shooter. No build tools, no libraries — one index.html with inline CSS and vanilla JS. Deliberately SIMPLE and low-graphics; the goal is clean core mechanics only.
+
+GAME: Top-down space dogfight. The player pilots one ship near the bottom of the screen and shoots upward at enemy ships that drift near the top and shoot back. Survive and rack up score.
+
+CANVAS & LOOK: Dark near-black canvas (#05060d), max 760×560, centered. Ships are simple flat-colored triangles (player cyan #5cf pointing up, enemies red #e55 pointing down). Bullets are tiny rectangles (player cyan, enemy red). A sparse field of 1–2px dim blue dots scrolling downward is the only background. No gradients, no glow, no particles, no images.
+
+CONTROLS: Arrow keys or WASD move the player ship directly (no inertia) at a fixed speed, clamped inside the canvas. Spacebar fires a straight upward bullet with a short cooldown (~14 frames).
+
+ENEMIES: Start with exactly ONE enemy; once the player passes 300 points a SECOND enemy may appear (cap at 2 on screen). Enemies gently sine-wave horizontally and drift toward the player's x. Each has 2 HP and fires a slow straight-down bullet on a random 80–130 frame timer. When all enemies are cleared, respawn to keep 1–2 alive and award a small bonus.
+
+RULES: A player bullet hitting an enemy removes 1 HP; killing an enemy gives 100 points. An enemy bullet hitting the player costs 1 of 3 lives. At 0 lives → game over screen showing final score with a "play again" button. A start overlay explains the controls.
+
+HUD: A single top-centered line: "score N · lives ❤❤❤".
+
+Keep the whole thing under ~150 lines of JS. Use requestAnimationFrame, circle-distance hit tests, and arrays filtered each frame. RTL Hebrew for the overlay text. No sound. Ship it as one runnable file.`,
+
+2:`Build "Void Raiders — Version 2", a complete, self-contained single-file HTML5 canvas space-shooter with polished UX, animation and juice. No frameworks — vanilla JS, inline CSS, one page. This is a full, premium arcade experience (it does NOT reference or depend on any earlier version — describe and build the entire game from scratch).
+
+GAME: Free-flight top-down space dogfight. The player flies a ship with real momentum through open space, rotating and thrusting, aiming and firing at waves of enemy fighters, collecting power-ups, and fighting a boss capital ship every 4th wave.
+
+FLIGHT MODEL: Asteroids-style inertia. Thrust (W / up / left touch-stick pushed up) accelerates along the ship's facing; velocity has drag (~0.985) so the ship coasts. Turn with A/D or ←/→; ALSO support mouse aim — the nose eases toward the cursor. Screen edges wrap. Firing (space / mouse-down / touch FIRE) emits a cyan bolt with a short cooldown and a tiny recoil kick.
+
+VISUALS (full juice): Full-window responsive canvas, devicePixelRatio-aware. Three-layer parallax starfield that drifts opposite the player's velocity. Ships drawn as glowing triangles via shadowBlur. Every bolt glows. Thruster emits a stream of cyan particles from the tail. Kills burst into 20+ radial particles; hits spark small bursts. Screen shake on hits, kills and boss death. A translucent shield bubble rings the player while shielded. Vignette/dark space mood. Neon HUD with Orbitron-style font.
+
+HUD & SYSTEMS: Top-left HULL and SHIELD bars (shield regenerates slowly; damage depletes shield first, then hull). Top-right WAVE label, big SCORE, and a COMBO ×N multiplier that builds on fast consecutive kills and decays. Bottom-left circular RADAR plotting enemies (red), power-ups (gold), boss (orange) and clamping off-screen blips to the rim. Animated "WAVE N" / "⚠ CAPITAL SHIP" flash banners.
+
+ENEMIES & WAVES: Fighters spawn from screen edges, steer to keep mid-range distance, and fire lead-predicted shots at the player. Wave N spawns 2+N fighters; every 4th wave spawns a BOSS capital ship instead: large, multi-point hull, sweeping movement, fires 3-shot spreads plus occasional 8-way radial bursts, with a top-screen HP bar. Clearing a wave waits ~0.9s then starts the next.
+
+POWER-UPS: Killed enemies sometimes drop a rotating pickup — SHIELD (refills shield) or HEALTH (+30 hull) — that magnetizes toward a nearby player.
+
+MOBILE: On touch devices show a left virtual stick (steer + thrust) and a right FIRE button; pointer events, preventDefault, no page scroll.
+
+FLOW: Cinematic title overlay with gradient wordmark and glow. On death → "SHIP LOST", wave reached, final score, RESPAWN. Everything RTL Hebrew where text shows. One runnable file, 60fps via requestAnimationFrame.`
+};
+function showP(v){document.getElementById('mtitle').textContent=v===1?'Version 1 · Simple — Full Prompt':'Version 2 · Deluxe — Full Prompt';
+  document.getElementById('ptext').textContent=PROMPTS[v];document.getElementById('modal').classList.add('on');}
+function hideP(){document.getElementById('modal').classList.remove('on');}
+function copyP(){navigator.clipboard.writeText(document.getElementById('ptext').textContent);
+  const b=event.target;const t=b.textContent;b.textContent='✓ הועתק';setTimeout(()=>b.textContent=t,1400);}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')hideP();});
+</script>
+</body>
+</html>

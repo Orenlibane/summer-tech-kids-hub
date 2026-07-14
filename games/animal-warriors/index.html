@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐾 Animal Warriors — Sprite Pack</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:radial-gradient(circle at 50% -10%,#2a1650,#0b0618 60%);font-family:'Rubik',system-ui,sans-serif;color:#fff;min-height:100vh}
+  .wrap{max-width:1200px;margin:0 auto;padding:22px 16px 70px}
+  header{text-align:center;padding:20px 12px 8px}
+  h1{font-size:clamp(24px,5vw,40px);font-weight:900;background:linear-gradient(90deg,#ffd54a,#ff6ec7,#7b8cff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  header p{opacity:.82;margin-top:8px;font-weight:600;font-size:clamp(13px,3vw,16px)}
+  .modes{display:flex;gap:8px;justify-content:center;margin:18px 0 6px;flex-wrap:wrap}
+  .mbtn{cursor:pointer;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;font-weight:800;
+    font-size:14px;padding:9px 18px;border-radius:22px;transition:.15s}
+  .mbtn:hover{background:rgba(255,255,255,.14)}
+  .mbtn.on{background:linear-gradient(90deg,#ff6ec7,#7b8cff);border-color:transparent;box-shadow:0 6px 20px rgba(255,110,199,.4)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;margin-top:20px}
+  .card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:14px 10px 12px;
+    text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .15s,box-shadow .15s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(123,140,255,.3)}
+  .stage{height:150px;display:flex;align-items:flex-end;justify-content:center;image-rendering:pixelated}
+  canvas{image-rendering:pixelated}
+  .name{margin-top:10px;font-weight:900;font-size:16px;color:#ffd54a;text-transform:capitalize}
+  .sub{font-size:11px;opacity:.6;margin-top:2px}
+  footer{text-align:center;margin-top:34px;opacity:.6;font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🐾 Animal Warriors</h1>
+    <p>10 לוחמים חמודים · אנימציית WALK · ATTACK · HURT · מוכן למנוע משחק</p>
+  </header>
+  <div class="modes">
+    <button class="mbtn on" data-mode="walk">🚶 הליכה</button>
+    <button class="mbtn" data-mode="attack">💥 מתקפה</button>
+    <button class="mbtn" data-mode="hurt">😵 פגיעה</button>
+  </div>
+  <div class="grid" id="grid"></div>
+  <footer>נחתך מ-10 גיליונות 3×4 · chroma-key + bleed-clean + size-stable · Animated Sprite Pipeline</footer>
+</div>
+<script>
+const ROWS={walk:[0,1,2,3],attack:[4,5,6,7],hurt:[8,9,10,11]};
+let MODE='walk';
+const CREATURES=[];
+async function boot(){
+  const atlas=await (await fetch('assets/sprites/atlas.json',{cache:'no-store'})).json();
+  const chars=atlas.characters;
+  const grid=document.getElementById('grid');
+  for(const key of Object.keys(chars)){
+    const frames=chars[key];
+    const imgs=await Promise.all(frames.map(f=>loadImg('assets/sprites/'+f.file)));
+    const maxH=Math.max(...frames.map(f=>f.h));
+    const maxW=Math.max(...frames.map(f=>f.w));
+    const card=document.createElement('div');card.className='card';
+    const stage=document.createElement('div');stage.className='stage';
+    const cv=document.createElement('canvas');
+    const DISP=118, scale=DISP/maxH;
+    cv.width=Math.ceil(maxW*scale)+8; cv.height=Math.ceil(maxH*scale)+4;
+    stage.appendChild(cv);
+    const nm=document.createElement('div');nm.className='name';nm.textContent=key;
+    const sub=document.createElement('div');sub.className='sub';sub.textContent=frames.length+' frames';
+    card.appendChild(stage);card.appendChild(nm);card.appendChild(sub);
+    grid.appendChild(card);
+    CREATURES.push({key,imgs,frames,maxH,maxW,scale,cv,ctx:cv.getContext('2d'),i:0});
+  }
+  let last=0;
+  function tick(t){
+    if(t-last>150){ last=t;
+      for(const c of CREATURES){
+        const seq=ROWS[MODE];
+        c.i=(c.i+1)%seq.length;
+        drawFrame(c,seq[c.i]);
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+function drawFrame(c,fi){
+  const img=c.imgs[fi],fr=c.frames[fi];
+  const ctx=c.ctx;ctx.clearRect(0,0,c.cv.width,c.cv.height);
+  const w=fr.w*c.scale,h=fr.h*c.scale;
+  // bottom-center anchor so feet stay planted (size-normalized by maxH)
+  const x=(c.cv.width-w)/2, y=c.cv.height-h;
+  ctx.imageSmoothingEnabled=false;
+  ctx.drawImage(img,x,y,w,h);
+}
+function loadImg(src){return new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=src;});}
+document.querySelectorAll('.mbtn').forEach(b=>b.onclick=()=>{
+  MODE=b.dataset.mode;
+  document.querySelectorAll('.mbtn').forEach(x=>x.classList.toggle('on',x===b));
+  CREATURES.forEach(c=>c.i=0);
+});
+boot();
+</script>
+</body>
+</html>

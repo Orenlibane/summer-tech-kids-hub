@@ -1,0 +1,402 @@
+[
+ {
+  "key": "red-bird",
+  "title": "Red Bird",
+  "frameW": 248,
+  "frameH": 226,
+  "frames": [
+   "sprite-lab/red-bird/f0.png",
+   "sprite-lab/red-bird/f1.png",
+   "sprite-lab/red-bird/f2.png",
+   "sprite-lab/red-bird/f3.png",
+   "sprite-lab/red-bird/f4.png",
+   "sprite-lab/red-bird/f5.png",
+   "sprite-lab/red-bird/f6.png",
+   "sprite-lab/red-bird/f7.png",
+   "sprite-lab/red-bird/f8.png",
+   "sprite-lab/red-bird/f9.png",
+   "sprite-lab/red-bird/f10.png",
+   "sprite-lab/red-bird/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "buff-bird",
+  "title": "Buff Bird (Boss)",
+  "frameW": 307,
+  "frameH": 253,
+  "frames": [
+   "sprite-lab/buff-bird/f0.png",
+   "sprite-lab/buff-bird/f1.png",
+   "sprite-lab/buff-bird/f2.png",
+   "sprite-lab/buff-bird/f3.png",
+   "sprite-lab/buff-bird/f4.png",
+   "sprite-lab/buff-bird/f5.png",
+   "sprite-lab/buff-bird/f6.png",
+   "sprite-lab/buff-bird/f7.png",
+   "sprite-lab/buff-bird/f8.png",
+   "sprite-lab/buff-bird/f9.png",
+   "sprite-lab/buff-bird/f10.png",
+   "sprite-lab/buff-bird/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "bomb",
+  "title": "Spiked Bomb",
+  "frameW": 254,
+  "frameH": 306,
+  "frames": [
+   "sprite-lab/bomb/f0.png",
+   "sprite-lab/bomb/f1.png",
+   "sprite-lab/bomb/f2.png",
+   "sprite-lab/bomb/f3.png",
+   "sprite-lab/bomb/f4.png",
+   "sprite-lab/bomb/f5.png",
+   "sprite-lab/bomb/f6.png",
+   "sprite-lab/bomb/f7.png",
+   "sprite-lab/bomb/f8.png",
+   "sprite-lab/bomb/f9.png",
+   "sprite-lab/bomb/f10.png",
+   "sprite-lab/bomb/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "goblin",
+  "title": "Mushroom Goblin",
+  "frameW": 258,
+  "frameH": 223,
+  "frames": [
+   "sprite-lab/goblin/f0.png",
+   "sprite-lab/goblin/f1.png",
+   "sprite-lab/goblin/f2.png",
+   "sprite-lab/goblin/f3.png",
+   "sprite-lab/goblin/f4.png",
+   "sprite-lab/goblin/f5.png",
+   "sprite-lab/goblin/f6.png",
+   "sprite-lab/goblin/f7.png",
+   "sprite-lab/goblin/f8.png",
+   "sprite-lab/goblin/f9.png",
+   "sprite-lab/goblin/f10.png",
+   "sprite-lab/goblin/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "koopa",
+  "title": "Green Koopa",
+  "frameW": 224,
+  "frameH": 238,
+  "frames": [
+   "sprite-lab/koopa/f0.png",
+   "sprite-lab/koopa/f1.png",
+   "sprite-lab/koopa/f2.png",
+   "sprite-lab/koopa/f3.png",
+   "sprite-lab/koopa/f4.png",
+   "sprite-lab/koopa/f5.png",
+   "sprite-lab/koopa/f6.png",
+   "sprite-lab/koopa/f7.png",
+   "sprite-lab/koopa/f8.png",
+   "sprite-lab/koopa/f9.png",
+   "sprite-lab/koopa/f10.png",
+   "sprite-lab/koopa/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "battleship",
+  "title": "Battleship",
+  "frameW": 352,
+  "frameH": 218,
+  "frames": [
+   "sprite-lab/battleship/f0.png",
+   "sprite-lab/battleship/f1.png",
+   "sprite-lab/battleship/f2.png",
+   "sprite-lab/battleship/f3.png",
+   "sprite-lab/battleship/f4.png",
+   "sprite-lab/battleship/f5.png",
+   "sprite-lab/battleship/f6.png",
+   "sprite-lab/battleship/f7.png",
+   "sprite-lab/battleship/f8.png",
+   "sprite-lab/battleship/f9.png",
+   "sprite-lab/battleship/f10.png",
+   "sprite-lab/battleship/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "fighter-jet",
+  "title": "Fighter Jet",
+  "frameW": 350,
+  "frameH": 192,
+  "frames": [
+   "sprite-lab/fighter-jet/f0.png",
+   "sprite-lab/fighter-jet/f1.png",
+   "sprite-lab/fighter-jet/f2.png",
+   "sprite-lab/fighter-jet/f3.png",
+   "sprite-lab/fighter-jet/f4.png",
+   "sprite-lab/fighter-jet/f5.png",
+   "sprite-lab/fighter-jet/f6.png",
+   "sprite-lab/fighter-jet/f7.png",
+   "sprite-lab/fighter-jet/f8.png",
+   "sprite-lab/fighter-jet/f9.png",
+   "sprite-lab/fighter-jet/f10.png",
+   "sprite-lab/fighter-jet/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "ufo",
+  "title": "Purple UFO",
+  "frameW": 342,
+  "frameH": 234,
+  "frames": [
+   "sprite-lab/ufo/f0.png",
+   "sprite-lab/ufo/f1.png",
+   "sprite-lab/ufo/f2.png",
+   "sprite-lab/ufo/f3.png",
+   "sprite-lab/ufo/f4.png",
+   "sprite-lab/ufo/f5.png",
+   "sprite-lab/ufo/f6.png",
+   "sprite-lab/ufo/f7.png",
+   "sprite-lab/ufo/f8.png",
+   "sprite-lab/ufo/f9.png",
+   "sprite-lab/ufo/f10.png",
+   "sprite-lab/ufo/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "spaceship",
+  "title": "Silver Spaceship",
+  "frameW": 283,
+  "frameH": 176,
+  "frames": [
+   "sprite-lab/spaceship/f0.png",
+   "sprite-lab/spaceship/f1.png",
+   "sprite-lab/spaceship/f2.png",
+   "sprite-lab/spaceship/f3.png",
+   "sprite-lab/spaceship/f4.png",
+   "sprite-lab/spaceship/f5.png",
+   "sprite-lab/spaceship/f6.png",
+   "sprite-lab/spaceship/f7.png",
+   "sprite-lab/spaceship/f8.png",
+   "sprite-lab/spaceship/f9.png",
+   "sprite-lab/spaceship/f10.png",
+   "sprite-lab/spaceship/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "blue-plane",
+  "title": "Blue Plane",
+  "frameW": 339,
+  "frameH": 269,
+  "frames": [
+   "sprite-lab/blue-plane/f0.png",
+   "sprite-lab/blue-plane/f1.png",
+   "sprite-lab/blue-plane/f2.png",
+   "sprite-lab/blue-plane/f3.png",
+   "sprite-lab/blue-plane/f4.png",
+   "sprite-lab/blue-plane/f5.png",
+   "sprite-lab/blue-plane/f6.png",
+   "sprite-lab/blue-plane/f7.png",
+   "sprite-lab/blue-plane/f8.png",
+   "sprite-lab/blue-plane/f9.png",
+   "sprite-lab/blue-plane/f10.png",
+   "sprite-lab/blue-plane/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ }
+]
