@@ -97,6 +97,17 @@
   .prompt .copy{margin-top:8px;border:none;background:#6C4CF1;color:#fff;font-family:'Fredoka';font-weight:600;
     font-size:12px;padding:6px 14px;border-radius:999px;cursor:pointer;float:left}
   .prompt .copy:active{transform:scale(.94)}
+  /* version tabs inside a family card */
+  .mcard.fam{padding-top:2px}
+  .fam-title{display:flex;align-items:center;gap:8px;font-family:'Baloo 2',cursive;font-weight:800;
+    font-size:19px;padding:14px 16px 8px;color:#25123f}
+  .fam-count{margin-left:auto;font-family:'Fredoka';font-weight:600;font-size:11px;color:#9a86bd;
+    background:#f1ecfb;padding:3px 9px;border-radius:999px}
+  .vtabs{display:flex;gap:6px;padding:0 14px 10px;flex-wrap:wrap}
+  .vtab{cursor:pointer;border:none;font-family:'Fredoka';font-weight:600;font-size:13px;
+    padding:6px 14px;border-radius:999px;background:#efeaf9;color:#6a5a86;transition:transform .1s}
+  .vtab:active{transform:scale(.94)}
+  .vtab.on{background:#6C4CF1;color:#fff;box-shadow:0 3px 0 #4a2fc0}
 
   footer{position:relative;z-index:2;text-align:center;color:#fff;padding:10px 20px 50px;font-weight:500;opacity:.9}
   footer b{font-weight:700}
@@ -148,38 +159,83 @@ const ZONES = [
   {cat:"sports",   emoji:"🏆", title:"Sports Zone"},
   {cat:"arcade",   emoji:"🚀", title:"Space Arcade"},
 ];
-// Mini games we built from scratch — each shows a simple Hebrew "build prompt" so kids can make it too!
-const MINI = [
-  {id:"mario-jump", emoji:"🍄", title:"Mario Jump", grad:["#5c94fc","#43b047"],
-   en:"Run & jump over pipes and goombas!",
-   he:"תבנה לי משחק שבו דמות חמודה רצה, ובלחיצה על מקש הרווח היא קופצת מעל צינורות ומפלצות — כל מכשול שעוברים מוסיף נקודה."},
-  {id:"squeaky-bird", emoji:"🐤", title:"Squeaky Bird", grad:["#71c5cf","#f5a623"],
-   en:"Tap to flap through the pipe gaps.",
-   he:"תבנה משחק של ציפור קטנה שעפה למעלה כשנוגעים במסך, וצריך לעבור בין הצינורות בלי להתנגש בהם."},
-  {id:"hero-fly", emoji:"🦸", title:"Super Hero Fly", grad:["#2b5adc","#7fb0ff"],
-   en:"Hold to fly, grab stars, dodge clouds.",
-   he:"תבנה משחק של גיבור-על שעף בשמיים כשמחזיקים את האצבע, אוסף כוכבים וזהיר מעננים כהים."},
-  {id:"fly-sim", emoji:"✈️", title:"Fly Simulator", grad:["#4fb8ff","#cdeeff"],
-   en:"Steer a cute plane through golden rings.",
-   he:"תבנה סימולטור טיסה עם מטוס חמוד שעולה ויורד עם החצים, וצריך לעבור דרך טבעות זהב באוויר."},
-  {id:"star-catch", emoji:"🧺", title:"Star Catcher", grad:["#7a4bd6","#3a2a6d"],
-   en:"Move the basket, catch stars, dodge bombs.",
-   he:"תבנה משחק שבו מזיזים סלסלה ימינה ושמאלה כדי לתפוס כוכבים וסוכריות שנופלות, ולהיזהר מהפצצות."},
+// Build-It Lab — each GAME is one card; its versions live behind tabs (v1 / v2 / Maki).
+// Every version shows its own simple Hebrew "build prompt" so kids can recreate it.
+const FAMILIES = [
+  {key:"mario", name:"Mario Jump", emoji:"🍄", versions:[
+    {id:"mario-jump", label:"v1", emoji:"🍄", grad:["#5c94fc","#43b047"],
+     en:"Run & jump over pipes and goombas!",
+     he:"תבנה לי משחק שבו דמות חמודה רצה, ובלחיצה על מקש הרווח היא קופצת מעל צינורות ומפלצות — כל מכשול שעוברים מוסיף נקודה."},
+    {id:"mario-maki", label:"🍣 Maki", emoji:"🍣", grad:["#ffb36b","#d64545"],
+     en:"Same game — now starring Maki the sushi ninja!",
+     he:"קח את משחק הקפיצות ותחליף את הדמות הרצה בספרייט של מאקי מ-Sushi Ninjas, עם אנימציית ריצה אמיתית של כמה תמונות שמתחלפות."},
+    {id:"mario-jump-v2", label:"v2 ✨", emoji:"🍄", grad:["#4aa3ff","#2ec77a"],
+     en:"Parallax, coins, particles, sound & high-scores!",
+     he:"קח את משחק הקפיצות ושדרג אותו שיֵראה ויֵרגיש הרבה יותר טוב: רקע רב-שכבתי (פרלקסה), אפקטי חלקיקים בקפיצה ובנחיתה, מטבעות לאיסוף, קפיצה כפולה, רעידת מסך, צלילים ושמירת שיא."},
+  ]},
+  {key:"bird", name:"Squeaky Bird", emoji:"🐤", versions:[
+    {id:"squeaky-bird", label:"v1", emoji:"🐤", grad:["#71c5cf","#f5a623"],
+     en:"Tap to flap through the pipe gaps.",
+     he:"תבנה משחק של ציפור קטנה שעפה למעלה כשנוגעים במסך, וצריך לעבור בין הצינורות בלי להתנגש בהם."},
+    {id:"squeaky-bird-v2", label:"v2 ✨", emoji:"🐤", grad:["#5ec8d6","#ffb648"],
+     en:"Flapping wings, feathers, medals & city parallax.",
+     he:"שדרג את משחק הציפור: כנפיים שמתנופפות באמת, רקע עיר בפרלקסה, נוצות שמתעופפות בכל נפנוף, פלאש ורעידה בפגיעה, מדליות לפי ניקוד, צלילים ושיא נשמר."},
+  ]},
+  {key:"hero", name:"Super Hero Fly", emoji:"🦸", versions:[
+    {id:"hero-fly", label:"v1", emoji:"🦸", grad:["#2b5adc","#7fb0ff"],
+     en:"Hold to fly, grab stars, dodge clouds.",
+     he:"תבנה משחק של גיבור-על שעף בשמיים כשמחזיקים את האצבע, אוסף כוכבים וזהיר מעננים כהים."},
+    {id:"hero-fly-v2", label:"v2 ✨", emoji:"🦸", grad:["#2f6bff","#8fd0ff"],
+     en:"Flowing cape, sparkle trail, city skyline & storms.",
+     he:"שדרג את גיבור-העל: גלימה מתנופפת עם שובל נצנצים, קו-רקיע של עיר בפרלקסה, כוכבים זוהרים עם קפיצת '+1', עננֵי סערה וברקים מסוכנים, רעידת מסך וצלילים."},
+  ]},
+  {key:"fly", name:"Fly Simulator", emoji:"✈️", versions:[
+    {id:"fly-sim", label:"v1", emoji:"✈️", grad:["#4fb8ff","#cdeeff"],
+     en:"Steer a cute plane through golden rings.",
+     he:"תבנה סימולטור טיסה עם מטוס חמוד שעולה ויורד עם החצים, וצריך לעבור דרך טבעות זהב באוויר."},
+    {id:"fly-sim-v2", label:"v2 ✨", emoji:"✈️", grad:["#4fb8ff","#dff3ff"],
+     en:"Mountains, smoke trail, bursting golden rings.",
+     he:"שדרג את סימולטור הטיסה: הרים ועננים בפרלקסה, שובל עשן מאחורי המטוס, טבעות זהב שמתפוצצות בחלקיקים כשעוברים דרכן, ניקוד '+1' צף וצלילים."},
+  ]},
+  {key:"star", name:"Star Catcher", emoji:"🧺", versions:[
+    {id:"star-catch", label:"v1", emoji:"🧺", grad:["#7a4bd6","#3a2a6d"],
+     en:"Move the basket, catch stars, dodge bombs.",
+     he:"תבנה משחק שבו מזיזים סלסלה ימינה ושמאלה כדי לתפוס כוכבים וסוכריות שנופלות, ולהיזהר מהפצצות."},
+    {id:"star-catch-v2", label:"v2 ✨", emoji:"🧺", grad:["#8a5be0","#241640"],
+     en:"Night sky, combo multiplier, confetti & lives.",
+     he:"שדרג את תופס הכוכבים: שמי לילה עם ירח וכוכבים מנצנצים בכמה עומקים, סלסלה שמתנדנדת לפי התנועה, מערכת קומבו עם מכפיל, קונפטי בכל תפיסה, לבבות וצלילים."},
+  ]},
 ];
 const app = document.getElementById('app');
 
-function miniHTML(m){
-  return `<div class="mcard">
-    <a class="mcover" href="games/${m.id}/index.html"
-       style="background:linear-gradient(135deg,${m.grad[0]},${m.grad[1]})">
-      <span>${m.emoji}</span><span class="go">▶ Play</span></a>
-    <div class="mbody"><h3>${m.emoji} ${m.title}</h3><p class="en">${m.en}</p>
-      <div class="prompt"><div class="lab">🇮🇱 הפרומפט לבנייה:</div>
-        <div class="he">${m.he}</div>
-        <button class="copy" onclick="copyP(this,\`${m.he}\`)">📋 העתק פרומפט</button>
-        <div style="clear:both"></div>
+function familyHTML(fam, fi){
+  const tabs = fam.versions.map((v,vi)=>
+    `<button class="vtab${vi===0?' on':''}" data-f="${fi}" data-v="${vi}" onclick="switchV(${fi},${vi})">${v.label}</button>`
+  ).join("");
+  const panels = fam.versions.map((v,vi)=>
+    `<div class="vpanel${vi===0?'':' hidden'}" data-f="${fi}" data-v="${vi}">
+      <a class="mcover" href="games/${v.id}/index.html"
+         style="background:linear-gradient(135deg,${v.grad[0]},${v.grad[1]})">
+        <span>${v.emoji}</span><span class="go">▶ Play</span></a>
+      <div class="mbody"><p class="en">${v.en}</p>
+        <div class="prompt"><div class="lab">🇮🇱 הפרומפט לבנייה:</div>
+          <div class="he">${v.he}</div>
+          <button class="copy" onclick="copyP(this,\`${v.he}\`)">📋 העתק פרומפט</button>
+          <div style="clear:both"></div>
+        </div>
       </div>
-    </div></div>`;
+    </div>`
+  ).join("");
+  return `<div class="mcard fam">
+    <div class="fam-title">${fam.emoji} ${fam.name}
+      <span class="fam-count">${fam.versions.length} versions</span></div>
+    <div class="vtabs">${tabs}</div>
+    <div class="vwrap">${panels}</div>
+  </div>`;
+}
+function switchV(fi,vi){
+  document.querySelectorAll('.vtab[data-f="'+fi+'"]').forEach(b=>b.classList.toggle('on', +b.dataset.v===vi));
+  document.querySelectorAll('.vpanel[data-f="'+fi+'"]').forEach(p=>p.classList.toggle('hidden', +p.dataset.v!==vi));
 }
 function copyP(btn,text){navigator.clipboard&&navigator.clipboard.writeText(text);
   const o=btn.textContent;btn.textContent='✓ הועתק!';setTimeout(()=>btn.textContent=o,1400);}
@@ -208,8 +264,8 @@ function render(filter="all"){
     html += `<section class="zone">
       <div class="zone-head"><span class="zone-emoji">🛠️</span>
         <h2 class="zone-title">Build-It Lab · בונים משחקים</h2>
-        <span class="zone-count">${MINI.length} games</span></div>
-      <div class="grid">${MINI.map(miniHTML).join("")}</div>
+        <span class="zone-count">${FAMILIES.length} games</span></div>
+      <div class="grid">${FAMILIES.map(familyHTML).join("")}</div>
     </section>`;
   }
   app.innerHTML = html;

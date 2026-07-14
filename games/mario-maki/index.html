@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><title>🍣 Maki Mario v2</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;background:#ff9a4d;font-family:system-ui}
+  #wrap{position:fixed;inset:0;display:grid;place-items:center}
+  canvas{width:100%;height:100%;display:block;touch-action:none}
+  #hud{position:fixed;top:14px;left:0;right:0;text-align:center;color:#fff;font-weight:800;
+    font-size:26px;text-shadow:2px 2px 0 #a33; pointer-events:none;z-index:2}
+  #msg{position:fixed;inset:0;display:grid;place-items:center;z-index:3}
+  #card{background:#fff;border:5px solid #d64545;border-radius:20px;padding:26px 30px;text-align:center;
+    box-shadow:0 12px 30px rgba(0,0,0,.4);max-width:330px}
+  #card h1{margin:0 0 6px;color:#d64545;font-size:28px}
+  #card p{margin:6px 0;color:#333}
+  #card button{margin-top:12px;border:none;background:#3aa655;color:#fff;font-weight:800;font-size:20px;
+    padding:12px 30px;border-radius:999px;cursor:pointer;box-shadow:0 5px 0 #277a3d}
+  #card button:active{transform:translateY(4px);box-shadow:0 1px 0 #277a3d}
+  a.home{position:fixed;top:12px;left:12px;z-index:4;color:#fff;text-decoration:none;font-weight:700;
+    background:rgba(0,0,0,.32);padding:7px 14px;border-radius:999px}
+  .v2{position:fixed;top:12px;right:12px;z-index:4;color:#fff;font-weight:800;
+    background:#d64545;padding:7px 14px;border-radius:999px;font-size:14px}
+</style></head>
+<body>
+<a class="home" href="../../index.html">← Hub</a>
+<div class="v2">🍣 v2 · Maki</div>
+<div id="hud">🍣 0</div>
+<div id="wrap"><canvas id="c"></canvas></div>
+<div id="msg"><div id="card">
+  <h1>🍣 Maki Mario v2</h1>
+  <p>Same jumping fun — now starring <b>Maki</b> the sushi ninja!<br>Press <b>SPACE</b> / <b>TAP</b> to jump.</p>
+  <button id="go">▶ Play</button>
+</div></div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+let W,H,ground;
+function fit(){W=c.width=innerWidth;H=c.height=innerHeight;ground=H*0.82;}
+addEventListener('resize',fit);fit();
+const hud=document.getElementById('hud'),msg=document.getElementById('msg'),card=document.getElementById('card');
+
+// load Maki running frames
+const runFrames=[];let loaded=0;
+['sprites/maki_0_0.png','sprites/maki_0_1.png','sprites/maki_0_2.png','sprites/maki_0_3.png'].forEach(src=>{
+  const im=new Image();im.onload=()=>loaded++;im.src=src;runFrames.push(im);});
+const jumpImg=new Image();jumpImg.src='sprites/maki_jump.png';
+
+let player,obs,clouds,score,speed,alive,gravity,jumpV,animT,spawn,frame;
+function reset(){
+  player={x:W*0.18,y:ground,vy:0,w:64,h:72,onGround:true};
+  obs=[];clouds=[{x:W*.3,y:H*.2},{x:W*.7,y:H*.32},{x:W*1.1,y:H*.15}];
+  score=0;speed=6;alive=true;gravity=0.9;jumpV=-17;animT=0;spawn=90;frame=0;
+  msg.style.display='none';loop();
+}
+function jump(){if(player.onGround){player.vy=jumpV;player.onGround=false;}}
+addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();if(alive)jump();}});
+addEventListener('pointerdown',()=>{if(alive)jump();});
+document.getElementById('go').onclick=reset;
+
+function drawMaki(){
+  const px=player.x, py=player.y; // baseline
+  let img;
+  if(!player.onGround){img=jumpImg.complete?jumpImg:runFrames[0];}
+  else{ if(animT%6===0)frame=(frame+1)%runFrames.length; img=runFrames[frame]; }
+  const bob=player.onGround?Math.sin(animT*0.3)*2:0;
+  if(img&&img.complete&&img.naturalWidth){
+    const w=player.w,h=player.h;
+    x.drawImage(img,px-w/2,py-h+bob,w,h);
+  }else{ x.font='44px serif';x.textAlign='center';x.fillText('🍣',px,py); }
+}
+function loop(){
+  if(!alive)return;requestAnimationFrame(loop);animT++;
+  // sky
+  const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#ffb36b');g.addColorStop(1,'#ffd9a8');
+  x.fillStyle=g;x.fillRect(0,0,W,H);
+  // clouds
+  x.fillStyle='rgba(255,255,255,.9)';
+  clouds.forEach(cl=>{cl.x-=speed*0.3;if(cl.x<-80)cl.x=W+80;
+    x.beginPath();x.arc(cl.x,cl.y,22,0,7);x.arc(cl.x+24,cl.y+4,28,0,7);x.arc(cl.x+52,cl.y,20,0,7);x.fill();});
+  // ground (sushi mat vibe)
+  x.fillStyle='#8a5a2b';x.fillRect(0,ground,W,H-ground);
+  x.fillStyle='#c98a4a';for(let i=0;i<W;i+=26)x.fillRect(i,ground,4,H-ground);
+  x.fillStyle='#3aa655';x.fillRect(0,ground-8,W,10);
+  // physics
+  player.vy+=gravity;player.y+=player.vy;
+  if(player.y>=ground){player.y=ground;player.vy=0;player.onGround=true;}
+  // spawn
+  if(--spawn<=0){spawn=Math.max(48,90-score*0.3+Math.random()*30);
+    const type=Math.random()<0.5?'pipe':'demon';
+    obs.push(type==='pipe'?{x:W+40,y:ground,w:40,h:52,t:'pipe'}:{x:W+40,y:ground,w:38,h:36,t:'demon'});}
+  // obstacles
+  for(let i=obs.length-1;i>=0;i--){const o=obs[i];o.x-=speed;
+    if(o.t==='pipe'){x.fillStyle='#2f8f4a';x.fillRect(o.x,o.y-o.h,o.w,o.h);
+      x.fillStyle='#43b866';x.fillRect(o.x-4,o.y-o.h,o.w+8,12);}
+    else{x.font='34px serif';x.textAlign='center';x.fillText('👹',o.x+o.w/2,o.y-2);}
+    const px=player.x-16,py=player.y-player.h*0.7;
+    if(px<o.x+o.w && px+32>o.x && py<o.y && py+player.h*0.7>o.y-o.h){die();}
+    if(o.x+o.w<0){obs.splice(i,1);score++;hud.textContent='🍣 '+score;if(score%5===0)speed+=0.4;}
+  }
+  drawMaki();
+}
+function die(){if(!alive)return;alive=false;
+  card.innerHTML='<h1>Game Over 🍣</h1><p>Maki scored <b>'+score+'</b> jumps!</p><button id="go">▶ Play again</button>';
+  msg.style.display='grid';document.getElementById('go').onclick=reset;}
+</script>
+</body></html>
