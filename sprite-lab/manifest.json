@@ -398,5 +398,805 @@
     11
    ]
   }
+ },
+ {
+  "key": "fox-adventurer",
+  "title": "Adventurer Fox",
+  "frameW": 301,
+  "frameH": 277,
+  "frames": [
+   "sprite-lab/fox-adventurer/f0.png",
+   "sprite-lab/fox-adventurer/f1.png",
+   "sprite-lab/fox-adventurer/f2.png",
+   "sprite-lab/fox-adventurer/f3.png",
+   "sprite-lab/fox-adventurer/f4.png",
+   "sprite-lab/fox-adventurer/f5.png",
+   "sprite-lab/fox-adventurer/f6.png",
+   "sprite-lab/fox-adventurer/f7.png",
+   "sprite-lab/fox-adventurer/f8.png",
+   "sprite-lab/fox-adventurer/f9.png",
+   "sprite-lab/fox-adventurer/f10.png",
+   "sprite-lab/fox-adventurer/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "mechanic-robot",
+  "title": "Mechanic Robot",
+  "frameW": 311,
+  "frameH": 316,
+  "frames": [
+   "sprite-lab/mechanic-robot/f0.png",
+   "sprite-lab/mechanic-robot/f1.png",
+   "sprite-lab/mechanic-robot/f2.png",
+   "sprite-lab/mechanic-robot/f3.png",
+   "sprite-lab/mechanic-robot/f4.png",
+   "sprite-lab/mechanic-robot/f5.png",
+   "sprite-lab/mechanic-robot/f6.png",
+   "sprite-lab/mechanic-robot/f7.png",
+   "sprite-lab/mechanic-robot/f8.png",
+   "sprite-lab/mechanic-robot/f9.png",
+   "sprite-lab/mechanic-robot/f10.png",
+   "sprite-lab/mechanic-robot/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "pirate-girl",
+  "title": "Pirate Girl",
+  "frameW": 301,
+  "frameH": 304,
+  "frames": [
+   "sprite-lab/pirate-girl/f0.png",
+   "sprite-lab/pirate-girl/f1.png",
+   "sprite-lab/pirate-girl/f2.png",
+   "sprite-lab/pirate-girl/f3.png",
+   "sprite-lab/pirate-girl/f4.png",
+   "sprite-lab/pirate-girl/f5.png",
+   "sprite-lab/pirate-girl/f6.png",
+   "sprite-lab/pirate-girl/f7.png",
+   "sprite-lab/pirate-girl/f8.png",
+   "sprite-lab/pirate-girl/f9.png",
+   "sprite-lab/pirate-girl/f10.png",
+   "sprite-lab/pirate-girl/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "baby-dragon",
+  "title": "Baby Dragon",
+  "frameW": 318,
+  "frameH": 260,
+  "frames": [
+   "sprite-lab/baby-dragon/f0.png",
+   "sprite-lab/baby-dragon/f1.png",
+   "sprite-lab/baby-dragon/f2.png",
+   "sprite-lab/baby-dragon/f3.png",
+   "sprite-lab/baby-dragon/f4.png",
+   "sprite-lab/baby-dragon/f5.png",
+   "sprite-lab/baby-dragon/f6.png",
+   "sprite-lab/baby-dragon/f7.png",
+   "sprite-lab/baby-dragon/f8.png",
+   "sprite-lab/baby-dragon/f9.png",
+   "sprite-lab/baby-dragon/f10.png",
+   "sprite-lab/baby-dragon/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "painter-elephant",
+  "title": "Painter Elephant",
+  "frameW": 327,
+  "frameH": 329,
+  "frames": [
+   "sprite-lab/painter-elephant/f0.png",
+   "sprite-lab/painter-elephant/f1.png",
+   "sprite-lab/painter-elephant/f2.png",
+   "sprite-lab/painter-elephant/f3.png",
+   "sprite-lab/painter-elephant/f4.png",
+   "sprite-lab/painter-elephant/f5.png",
+   "sprite-lab/painter-elephant/f6.png",
+   "sprite-lab/painter-elephant/f7.png",
+   "sprite-lab/painter-elephant/f8.png",
+   "sprite-lab/painter-elephant/f9.png",
+   "sprite-lab/painter-elephant/f10.png",
+   "sprite-lab/painter-elephant/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "raccoon-skater",
+  "title": "Raccoon Skater",
+  "frameW": 340,
+  "frameH": 302,
+  "frames": [
+   "sprite-lab/raccoon-skater/f0.png",
+   "sprite-lab/raccoon-skater/f1.png",
+   "sprite-lab/raccoon-skater/f2.png",
+   "sprite-lab/raccoon-skater/f3.png",
+   "sprite-lab/raccoon-skater/f4.png",
+   "sprite-lab/raccoon-skater/f5.png",
+   "sprite-lab/raccoon-skater/f6.png",
+   "sprite-lab/raccoon-skater/f7.png",
+   "sprite-lab/raccoon-skater/f8.png",
+   "sprite-lab/raccoon-skater/f9.png",
+   "sprite-lab/raccoon-skater/f10.png",
+   "sprite-lab/raccoon-skater/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "wizard-cat",
+  "title": "Wizard Cat",
+  "frameW": 326,
+  "frameH": 305,
+  "frames": [
+   "sprite-lab/wizard-cat/f0.png",
+   "sprite-lab/wizard-cat/f1.png",
+   "sprite-lab/wizard-cat/f2.png",
+   "sprite-lab/wizard-cat/f3.png",
+   "sprite-lab/wizard-cat/f4.png",
+   "sprite-lab/wizard-cat/f5.png",
+   "sprite-lab/wizard-cat/f6.png",
+   "sprite-lab/wizard-cat/f7.png",
+   "sprite-lab/wizard-cat/f8.png",
+   "sprite-lab/wizard-cat/f9.png",
+   "sprite-lab/wizard-cat/f10.png",
+   "sprite-lab/wizard-cat/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "mariachi-monkey",
+  "title": "Mariachi Monkey",
+  "frameW": 329,
+  "frameH": 325,
+  "frames": [
+   "sprite-lab/mariachi-monkey/f0.png",
+   "sprite-lab/mariachi-monkey/f1.png",
+   "sprite-lab/mariachi-monkey/f2.png",
+   "sprite-lab/mariachi-monkey/f3.png",
+   "sprite-lab/mariachi-monkey/f4.png",
+   "sprite-lab/mariachi-monkey/f5.png",
+   "sprite-lab/mariachi-monkey/f6.png",
+   "sprite-lab/mariachi-monkey/f7.png",
+   "sprite-lab/mariachi-monkey/f8.png",
+   "sprite-lab/mariachi-monkey/f9.png",
+   "sprite-lab/mariachi-monkey/f10.png",
+   "sprite-lab/mariachi-monkey/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "astronaut-boy",
+  "title": "Astronaut Boy",
+  "frameW": 323,
+  "frameH": 296,
+  "frames": [
+   "sprite-lab/astronaut-boy/f0.png",
+   "sprite-lab/astronaut-boy/f1.png",
+   "sprite-lab/astronaut-boy/f2.png",
+   "sprite-lab/astronaut-boy/f3.png",
+   "sprite-lab/astronaut-boy/f4.png",
+   "sprite-lab/astronaut-boy/f5.png",
+   "sprite-lab/astronaut-boy/f6.png",
+   "sprite-lab/astronaut-boy/f7.png",
+   "sprite-lab/astronaut-boy/f8.png",
+   "sprite-lab/astronaut-boy/f9.png",
+   "sprite-lab/astronaut-boy/f10.png",
+   "sprite-lab/astronaut-boy/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "baker-bear",
+  "title": "Baker Bear",
+  "frameW": 339,
+  "frameH": 295,
+  "frames": [
+   "sprite-lab/baker-bear/f0.png",
+   "sprite-lab/baker-bear/f1.png",
+   "sprite-lab/baker-bear/f2.png",
+   "sprite-lab/baker-bear/f3.png",
+   "sprite-lab/baker-bear/f4.png",
+   "sprite-lab/baker-bear/f5.png",
+   "sprite-lab/baker-bear/f6.png",
+   "sprite-lab/baker-bear/f7.png",
+   "sprite-lab/baker-bear/f8.png",
+   "sprite-lab/baker-bear/f9.png",
+   "sprite-lab/baker-bear/f10.png",
+   "sprite-lab/baker-bear/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "girl-gunner",
+  "title": "Girl Gunner",
+  "frameW": 299,
+  "frameH": 270,
+  "frames": [
+   "sprite-lab/girl-gunner/f0.png",
+   "sprite-lab/girl-gunner/f1.png",
+   "sprite-lab/girl-gunner/f2.png",
+   "sprite-lab/girl-gunner/f3.png",
+   "sprite-lab/girl-gunner/f4.png",
+   "sprite-lab/girl-gunner/f5.png",
+   "sprite-lab/girl-gunner/f6.png",
+   "sprite-lab/girl-gunner/f7.png",
+   "sprite-lab/girl-gunner/f8.png",
+   "sprite-lab/girl-gunner/f9.png",
+   "sprite-lab/girl-gunner/f10.png",
+   "sprite-lab/girl-gunner/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "gunslinger",
+  "title": "Red Gunslinger",
+  "frameW": 319,
+  "frameH": 272,
+  "frames": [
+   "sprite-lab/gunslinger/f0.png",
+   "sprite-lab/gunslinger/f1.png",
+   "sprite-lab/gunslinger/f2.png",
+   "sprite-lab/gunslinger/f3.png",
+   "sprite-lab/gunslinger/f4.png",
+   "sprite-lab/gunslinger/f5.png",
+   "sprite-lab/gunslinger/f6.png",
+   "sprite-lab/gunslinger/f7.png",
+   "sprite-lab/gunslinger/f8.png",
+   "sprite-lab/gunslinger/f9.png",
+   "sprite-lab/gunslinger/f10.png",
+   "sprite-lab/gunslinger/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "cactus-brawler",
+  "title": "Cactus Brawler",
+  "frameW": 337,
+  "frameH": 249,
+  "frames": [
+   "sprite-lab/cactus-brawler/f0.png",
+   "sprite-lab/cactus-brawler/f1.png",
+   "sprite-lab/cactus-brawler/f2.png",
+   "sprite-lab/cactus-brawler/f3.png",
+   "sprite-lab/cactus-brawler/f4.png",
+   "sprite-lab/cactus-brawler/f5.png",
+   "sprite-lab/cactus-brawler/f6.png",
+   "sprite-lab/cactus-brawler/f7.png",
+   "sprite-lab/cactus-brawler/f8.png",
+   "sprite-lab/cactus-brawler/f9.png",
+   "sprite-lab/cactus-brawler/f10.png",
+   "sprite-lab/cactus-brawler/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "crow-ninja",
+  "title": "Crow Ninja",
+  "frameW": 335,
+  "frameH": 280,
+  "frames": [
+   "sprite-lab/crow-ninja/f0.png",
+   "sprite-lab/crow-ninja/f1.png",
+   "sprite-lab/crow-ninja/f2.png",
+   "sprite-lab/crow-ninja/f3.png",
+   "sprite-lab/crow-ninja/f4.png",
+   "sprite-lab/crow-ninja/f5.png",
+   "sprite-lab/crow-ninja/f6.png",
+   "sprite-lab/crow-ninja/f7.png",
+   "sprite-lab/crow-ninja/f8.png",
+   "sprite-lab/crow-ninja/f9.png",
+   "sprite-lab/crow-ninja/f10.png",
+   "sprite-lab/crow-ninja/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "hood-bear",
+  "title": "Hooded Bear",
+  "frameW": 302,
+  "frameH": 260,
+  "frames": [
+   "sprite-lab/hood-bear/f0.png",
+   "sprite-lab/hood-bear/f1.png",
+   "sprite-lab/hood-bear/f2.png",
+   "sprite-lab/hood-bear/f3.png",
+   "sprite-lab/hood-bear/f4.png",
+   "sprite-lab/hood-bear/f5.png",
+   "sprite-lab/hood-bear/f6.png",
+   "sprite-lab/hood-bear/f7.png",
+   "sprite-lab/hood-bear/f8.png",
+   "sprite-lab/hood-bear/f9.png",
+   "sprite-lab/hood-bear/f10.png",
+   "sprite-lab/hood-bear/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "red-bear",
+  "title": "Red Bear Brawler",
+  "frameW": 319,
+  "frameH": 257,
+  "frames": [
+   "sprite-lab/red-bear/f0.png",
+   "sprite-lab/red-bear/f1.png",
+   "sprite-lab/red-bear/f2.png",
+   "sprite-lab/red-bear/f3.png",
+   "sprite-lab/red-bear/f4.png",
+   "sprite-lab/red-bear/f5.png",
+   "sprite-lab/red-bear/f6.png",
+   "sprite-lab/red-bear/f7.png",
+   "sprite-lab/red-bear/f8.png",
+   "sprite-lab/red-bear/f9.png",
+   "sprite-lab/red-bear/f10.png",
+   "sprite-lab/red-bear/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "mariachi-skeleton",
+  "title": "Mariachi Skeleton",
+  "frameW": 319,
+  "frameH": 258,
+  "frames": [
+   "sprite-lab/mariachi-skeleton/f0.png",
+   "sprite-lab/mariachi-skeleton/f1.png",
+   "sprite-lab/mariachi-skeleton/f2.png",
+   "sprite-lab/mariachi-skeleton/f3.png",
+   "sprite-lab/mariachi-skeleton/f4.png",
+   "sprite-lab/mariachi-skeleton/f5.png",
+   "sprite-lab/mariachi-skeleton/f6.png",
+   "sprite-lab/mariachi-skeleton/f7.png",
+   "sprite-lab/mariachi-skeleton/f8.png",
+   "sprite-lab/mariachi-skeleton/f9.png",
+   "sprite-lab/mariachi-skeleton/f10.png",
+   "sprite-lab/mariachi-skeleton/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "engineer-girl",
+  "title": "Engineer Girl",
+  "frameW": 309,
+  "frameH": 263,
+  "frames": [
+   "sprite-lab/engineer-girl/f0.png",
+   "sprite-lab/engineer-girl/f1.png",
+   "sprite-lab/engineer-girl/f2.png",
+   "sprite-lab/engineer-girl/f3.png",
+   "sprite-lab/engineer-girl/f4.png",
+   "sprite-lab/engineer-girl/f5.png",
+   "sprite-lab/engineer-girl/f6.png",
+   "sprite-lab/engineer-girl/f7.png",
+   "sprite-lab/engineer-girl/f8.png",
+   "sprite-lab/engineer-girl/f9.png",
+   "sprite-lab/engineer-girl/f10.png",
+   "sprite-lab/engineer-girl/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "rocket-gunner",
+  "title": "Rocket Gunner",
+  "frameW": 308,
+  "frameH": 240,
+  "frames": [
+   "sprite-lab/rocket-gunner/f0.png",
+   "sprite-lab/rocket-gunner/f1.png",
+   "sprite-lab/rocket-gunner/f2.png",
+   "sprite-lab/rocket-gunner/f3.png",
+   "sprite-lab/rocket-gunner/f4.png",
+   "sprite-lab/rocket-gunner/f5.png",
+   "sprite-lab/rocket-gunner/f6.png",
+   "sprite-lab/rocket-gunner/f7.png",
+   "sprite-lab/rocket-gunner/f8.png",
+   "sprite-lab/rocket-gunner/f9.png",
+   "sprite-lab/rocket-gunner/f10.png",
+   "sprite-lab/rocket-gunner/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
+ },
+ {
+  "key": "luchador",
+  "title": "Luchador",
+  "frameW": 306,
+  "frameH": 269,
+  "frames": [
+   "sprite-lab/luchador/f0.png",
+   "sprite-lab/luchador/f1.png",
+   "sprite-lab/luchador/f2.png",
+   "sprite-lab/luchador/f3.png",
+   "sprite-lab/luchador/f4.png",
+   "sprite-lab/luchador/f5.png",
+   "sprite-lab/luchador/f6.png",
+   "sprite-lab/luchador/f7.png",
+   "sprite-lab/luchador/f8.png",
+   "sprite-lab/luchador/f9.png",
+   "sprite-lab/luchador/f10.png",
+   "sprite-lab/luchador/f11.png"
+  ],
+  "anims": {
+   "idle": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "action": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "hurt": [
+    8,
+    9,
+    10,
+    11
+   ]
+  }
  }
 ]

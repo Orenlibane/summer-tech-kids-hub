@@ -23,6 +23,19 @@
   .sub{max-width:620px;margin:14px auto 0;font-size:clamp(15px,2.2vw,19px);opacity:.96;font-weight:500}
   .count{display:inline-block;margin-top:16px;background:rgba(255,255,255,.92);color:var(--ink);
     font-weight:700;padding:7px 18px;border-radius:999px}
+  .dl-all{display:inline-block;text-decoration:none;background:#22c55e;color:#fff;font-weight:700;
+    padding:10px 22px;border-radius:999px;box-shadow:0 5px 0 #15803d;transition:transform .12s}
+  .dl-all:active{transform:translateY(3px);box-shadow:0 2px 0 #15803d}
+  /* per-card download button */
+  .card{position:relative}
+  .dl-card{position:absolute;top:8px;left:8px;z-index:3;background:rgba(34,197,94,.95);color:#fff;
+    border:none;width:34px;height:34px;border-radius:50%;font-size:15px;cursor:pointer;
+    box-shadow:0 3px 8px rgba(0,0,0,.3);text-decoration:none;display:grid;place-items:center}
+  .dl-card:hover{transform:scale(1.12)}
+  /* popup download */
+  #lb .dl{display:inline-block;text-decoration:none;background:#22c55e;color:#fff;font-weight:600;
+    font-family:'Fredoka';padding:10px 22px;border-radius:999px;margin-top:14px;box-shadow:0 4px 0 #15803d}
+  #lb .dl:active{transform:translateY(2px);box-shadow:0 2px 0 #15803d}
 
   main{max-width:1180px;margin:0 auto;padding:28px 18px 80px}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px}
@@ -79,6 +92,9 @@
   <h1>🎬 Sprite Lab</h1>
   <p class="sub">Real sprite sheets, sliced frame-by-frame and brought to life! Each character animates live — tap one to see every frame and switch animations.</p>
   <div class="count" id="count">Loading sprites…</div>
+  <div style="margin-top:14px">
+    <a class="dl-all" href="sprite-lab/_zips/all-sprites.zip" download>⬇️ Download ALL sprites (.zip)</a>
+  </div>
 </header>
 <main id="app"><div class="loading">🎨 Slicing frames…</div></main>
 <footer>Made with 💜 at <b>Summer Tech Camp</b> · Sprites sliced from magenta sheets → transparent frames</footer>
@@ -88,6 +104,7 @@
   <div class="bigstage"><canvas id="lb-canvas"></canvas></div>
   <div class="animbtns" id="lb-anims"></div>
   <div class="strip" id="lb-strip"></div>
+  <div><a class="dl" id="lb-dl" href="#" download>⬇️ Download this sprite pack (.zip)</a></div>
   <button class="x" onclick="closeLB()">Close ✨</button>
 </div></div>
 
@@ -116,6 +133,7 @@ function drawFrame(cv, ch, fi, box){
 function render(){
   app.innerHTML='<div class="grid">'+DATA.map((ch,i)=>
     `<div class="card" onclick="openLB(${i})">
+      <a class="dl-card" href="sprite-lab/_zips/${ch.key}.zip" download title="Download sprite pack" onclick="event.stopPropagation()">⬇</a>
       <div class="stage"><span class="live">LIVE</span><canvas data-key="${ch.key}"></canvas></div>
       <div class="name">${ch.title}</div>
       <div class="meta">🎞️ ${ch.frames.length} frames · idle · action · hurt</div>
@@ -141,6 +159,7 @@ function openLB(i){
   lbIdx=i; lbAnim='idle'; lbOpen=true;
   const ch=DATA[i];
   document.getElementById('lb-name').textContent=ch.title;
+  document.getElementById('lb-dl').href='sprite-lab/_zips/'+ch.key+'.zip';
   document.getElementById('lb-anims').innerHTML=Object.keys(ch.anims).map(a=>
     `<button class="${a==='idle'?'on':''}" onclick="setAnim('${a}',this)">${a[0].toUpperCase()+a.slice(1)}</button>`).join('');
   document.getElementById('lb-strip').innerHTML=ch.frames.map((src,fi)=>

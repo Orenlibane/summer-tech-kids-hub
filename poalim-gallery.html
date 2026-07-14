@@ -353,6 +353,7 @@ const GAMES = [
   {id:"hoops-vs-cleats", cat:"sports",   he:"כדורסל נגד כדורגל",                en:"Hoops vs Cleats",          tag:"🏆 ספורט", desc:"כוכבי הכדורסל מול אגדות הכדורגל. מי ינצח?", base:41},
   {id:"ball-race",       cat:"sports",   he:"מירוץ הכדורים",                    en:"Ball Race",                tag:"🏆 מירוץ", desc:"הריצו כדורים צבעוניים לקו הסיום ועלו רמות!", base:36},
   {id:"nebula-strike",   cat:"arcade",   he:"מכת הערפילית",                     en:"Nebula Strike",            tag:"🚀 חלל", desc:"פלסו דרך גלי רחפני חייזרים והתמודדו עם בוס הערפילית.", base:44},
+  {id:"void-raiders",    cat:"arcade",   he:"פושטי הריק",                       en:"Void Raiders",             tag:"🚀 קרב חלל", desc:"קרב אוויר במרחבי החלל — התחמקו, ירו והפילו את צי האויב!", base:39},
 ];
 /* Build-It Lab — משפחות עם גרסאות (אמוג'י + גרדיאנט) */
 const FAMILIES = [
@@ -380,20 +381,33 @@ const FAMILIES = [
 ];
 const TOTAL_GAMES = GAMES.length + FAMILIES.reduce((s,f)=>s+f.versions.length,0);
 
-const LS={likes:'poalim_likes_v2',counts:'poalim_counts_v2',visits:'poalim_visits_v2',visited:'poalim_visited_sess'};
+const LS={likes:'poalim_mylikes_v3',visited:'poalim_visited_sess_v3'};
 const load=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d;}catch{return d;}};
 const save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
-let myLikes=load(LS.likes,{}); let counts=load(LS.counts,null);
-if(!counts){counts={};GAMES.forEach(g=>counts[g.id]=g.base);save(LS.counts,counts);}
+let myLikes=load(LS.likes,{});            /* per-browser guard: which games THIS device liked */
+let counts={}; GAMES.forEach(g=>counts[g.id]=g.base);  /* fallback numbers until the server answers */
 let filter='all';
 const esc=s=>(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-/* ===== visitors ===== */
-function initVisitors(){
-  let v=load(LS.visits,null); if(v===null)v=3120+Math.floor(Math.random()*400);
-  if(!sessionStorage.getItem(LS.visited)){v+=1;sessionStorage.setItem(LS.visited,'1');}
-  save(LS.visits,v); countUp(document.getElementById('visitorCount'),v);
-  setInterval(()=>{if(Math.random()>.5){v+=1;save(LS.visits,v);countUp(document.getElementById('visitorCount'),v,600);}},8000);
+/* ===== real, shared stats (visits + likes) via /api/counter ===== */
+async function loadStats(){
+  try{
+    const r=await fetch('/api/counter',{cache:'no-store'}); if(!r.ok) throw 0;
+    const d=await r.json();
+    if(d.likes) counts=Object.assign(counts,d.likes);
+    if(typeof d.visits==='number') countUp(document.getElementById('visitorCount'),d.visits);
+    render();
+    if(!sessionStorage.getItem(LS.visited)){         /* count this visitor once per session */
+      sessionStorage.setItem(LS.visited,'1');
+      const rv=await fetch('/api/counter',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'visit'})});
+      if(rv.ok){const dv=await rv.json(); if(typeof dv.visits==='number') countUp(document.getElementById('visitorCount'),dv.visits,700);
+        if(dv.likes){counts=Object.assign(counts,dv.likes);render();}}
+    }
+  }catch(e){
+    /* offline / local file — show fallback numbers so the page still works */
+    countUp(document.getElementById('visitorCount'),3200);
+    render();
+  }
 }
 function countUp(el,target,dur=1200){if(!el)return;const s=parseInt(el.dataset.val||'0',10);const t0=performance.now();
   (function step(now){const p=Math.min(1,(now-t0)/dur);const e=1-Math.pow(1-p,3);
@@ -465,11 +479,19 @@ function render(){
   countUp(document.getElementById('likesCount'),Object.values(counts).reduce((s,n)=>s+n,0),700);
 }
 
-/* ===== like / share ===== */
-function toggleLike(id){
-  if(myLikes[id]){counts[id]=Math.max(0,counts[id]-1);delete myLikes[id];}
-  else{counts[id]+=1;myLikes[id]=true;burst();}
-  save(LS.counts,counts);save(LS.likes,myLikes);render();
+/* ===== like (real, shared) / share ===== */
+async function toggleLike(id){
+  const liked=!!myLikes[id];
+  const delta=liked?-1:1;
+  /* optimistic UI */
+  if(liked){delete myLikes[id];counts[id]=Math.max(0,(counts[id]||0)-1);}
+  else{myLikes[id]=true;counts[id]=(counts[id]||0)+1;burst();}
+  save(LS.likes,myLikes);render();
+  /* persist to the shared server count */
+  try{
+    const r=await fetch('/api/counter',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'like',id,delta})});
+    if(r.ok){const d=await r.json(); if(d.likes&&typeof d.likes[id]==='number'){counts[id]=d.likes[id];render();}}
+  }catch(e){/* keep optimistic value */}
 }
 function shareGame(id,anchor){
   document.querySelectorAll('.share-menu').forEach(m=>m.remove());
@@ -507,8 +529,8 @@ document.getElementById('copyExample').addEventListener('click',async()=>{
   try{await navigator.clipboard.writeText(txt);toast('הפרומפט הועתק! ✨ עכשיו הדביקו אותו ב-AI');}catch{toast('לא ניתן להעתיק');}
 });
 
-initVisitors();
 render();
+loadStats();
 </script>
 </body>
 </html>
