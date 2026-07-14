@@ -1,0 +1,25 @@
+{
+ "name": "Mad Bananas vs Angry Avocados",
+ "short_name": "Mad Bananas",
+ "description": "Banana heroes smash the angry avocado horde. Retro arcade brawler.",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "landscape",
+ "background_color": "#0b0714",
+ "theme_color": "#0b0714",
+ "icons": [
+  {
+   "src": "icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  }
+ ]
+}

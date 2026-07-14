@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Beast Knights — Fury of the Crown (Mockup)</title>
+<style>
+  :root{ --gold:#d9a441; --gold2:#f4d06f; }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:#07080d;color:#eee;
+    font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;overflow:hidden}
+  #wrap{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 50% 30%,#141726,#07080d 70%)}
+  .title{font-weight:900;letter-spacing:2px;text-align:center;line-height:1;margin:0 0 8px}
+  .title b{color:var(--gold2);text-shadow:0 2px 0 #6b4a12,0 0 18px rgba(217,164,65,.5)}
+  .title small{display:block;font-size:12px;letter-spacing:5px;color:#b98bd9;margin-top:4px}
+  #stage{position:relative;image-rendering:pixelated;box-shadow:0 0 0 3px #2a2033,0 0 0 6px var(--gold),
+    0 14px 60px rgba(0,0,0,.7);border-radius:4px;background:#0a0d16}
+  canvas{display:block;image-rendering:pixelated;border-radius:2px}
+  #overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:rgba(6,7,13,.82);text-align:center;border-radius:2px;backdrop-filter:blur(2px);z-index:5}
+  #overlay h2{color:var(--gold2);font-size:26px;margin:0 0 6px;text-shadow:0 2px 0 #000}
+  #overlay p{color:#cbd0e0;max-width:520px;font-size:14px;line-height:1.5}
+  .keys{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .key{background:#1a1e2e;border:1px solid #39405c;border-bottom:3px solid #232838;border-radius:6px;
+    padding:6px 10px;font-size:12px;color:#e7ecff}
+  .key b{color:var(--gold2)}
+  #play{margin-top:18px;cursor:pointer;border:none;border-radius:8px;padding:12px 26px;font-weight:800;font-size:15px;
+    color:#2a1a02;background:linear-gradient(#f4d06f,#d9a441);box-shadow:0 4px 0 #8a5f16;letter-spacing:1px}
+  #play:active{transform:translateY(2px);box-shadow:0 2px 0 #8a5f16}
+  #foot{margin-top:10px;font-size:11px;color:#6b7290}
+</style>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Retro Games Hub">
+<meta property="og:title" content="Beast Knights">
+<meta property="og:description" content="Shape-shifting beast knights defend the realm. Arcade beat ’em up.">
+<meta property="og:url" content="https://games-hub-dist.vercel.app/games/beast-knights/">
+<meta property="og:image" content="https://games-hub-dist.vercel.app/games/beast-knights/og.jpg">
+<meta property="og:image:width" content="1080">
+<meta property="og:image:height" content="810">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Beast Knights">
+<meta name="twitter:description" content="Shape-shifting beast knights defend the realm. Arcade beat ’em up.">
+<meta name="twitter:image" content="https://games-hub-dist.vercel.app/games/beast-knights/og.jpg">
+<meta name="description" content="Shape-shifting beast knights defend the realm. Arcade beat ’em up.">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b0714">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Beast Knight">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+</head>
+<body>
+<div id="wrap">
+  <h1 class="title"><b>⚔ BEAST KNIGHTS ⚔</b><small>FURY OF THE CROWN</small></h1>
+  <div id="stage">
+    <canvas id="c" width="960" height="540"></canvas>
+    <div id="overlay">
+      <h2 id="ovTitle">Loading sprites…</h2>
+      <p id="ovText">Slicing the sheet, chroma-keying the magenta and grounding the knights.</p>
+      <div class="keys" id="keyHints" style="display:none">
+        <span class="key"><b>← →</b> / A D — Move</span>
+        <span class="key"><b>Space</b> / W — Jump</span>
+        <span class="key"><b>J</b> / Click — Attack</span>
+        <span class="key"><b>T</b> — Transform (Wolf)</span>
+      </div>
+      <button id="play" style="display:none">START</button>
+      <div id="foot">Mockup build — real sliced sprites, parallax, transformation meter.</div>
+    </div>
+  </div>
+</div>
+<script>
+const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+ctx.imageSmoothingEnabled = false;
+const W = cv.width, H = cv.height;
+const GROUND = H - 74;            // feet line
+const overlay = document.getElementById('overlay');
+
+// ---------- asset loading ----------
+const imgCache = {};
+function load(src){ return new Promise(r=>{ const i=new Image(); i.onload=()=>r(i); i.src=src; }); }
+
+let ATLAS, BG;
+async function boot(){
+  ATLAS = await fetch('assets/atlas.json').then(r=>r.json());
+  BG = await load('assets/bg/forest.png');
+  // preload every sprite referenced
+  const files = new Set();
+  for(const grp of ['characters','enemies'])
+    for(const k in ATLAS[grp]) ATLAS[grp][k].forEach(f=>files.add(f.file));
+  await Promise.all([...files].map(async f=>{ imgCache[f]= await load('assets/sprites/'+f); }));
+  ready();
+}
+
+// grab an atlas frame image + meta by group/key/index
+function frame(grp,key,i){ const f=ATLAS[grp][key][i]; return {img:imgCache[f.file],w:f.w,h:f.h}; }
+
+// ---------- animation config (indices mapped from the real sheet) ----------
+const DEF = {
+  alaric:{grp:'characters',key:'alaric',target:150, anims:{idle:[0],walk:[1,2,3,4],attack:[5,6]}, atkFrame:5},
+  wolf  :{grp:'characters',key:'wolf',  target:120, anims:{idle:[0],walk:[0,1,2,3],attack:[4,5,6]}, atkFrame:5},
+  goblin:{grp:'enemies',key:'goblin',target:96, anims:{walk:[1,2,3,4],attack:[5,6],dead:[7]}, hp:2, coin:10},
+  ogre  :{grp:'enemies',key:'ogre',  target:130,anims:{walk:[0,1,2],attack:[3],dead:[4]}, hp:4, coin:25},
+  skeleton:{grp:'enemies',key:'skeleton',target:104,anims:{walk:[0,1,2,3],attack:[5],dead:[6]}, hp:2, coin:15},
+};
+// per-def scale from first idle/walk frame height
+function scaleFor(def){ const a=def.anims.idle||def.anims.walk; const f=frame(def.grp,def.key,a[0]); return def.target/f.h; }
+
+// ---------- entities ----------
+function drawSprite(def,animName,frameIdx,x,footY,faceLeft,scale,alpha=1){
+  const list=def.anims[animName]||def.anims.idle||def.anims.walk;
+  const idx=list[frameIdx%list.length];
+  const fr=frame(def.grp,def.key,idx);
+  const w=fr.w*scale, h=fr.h*scale;
+  ctx.save(); ctx.globalAlpha=alpha;
+  ctx.translate(x,footY);
+  if(faceLeft) ctx.scale(-1,1);
+  ctx.drawImage(fr.img, -w/2, -h, w, h);
+  ctx.restore();
+  return {w,h};
+}
+
+const keys={};
+addEventListener('keydown',e=>{ keys[e.key.toLowerCase()]=true;
+  if([' ','arrowleft','arrowright','arrowup'].includes(e.key.toLowerCase()))e.preventDefault();
+  if(e.key.toLowerCase()==='j') player.attack();
+  if(e.key.toLowerCase()==='t') player.transform();
+});
+addEventListener('keyup',e=>{ keys[e.key.toLowerCase()]=false; });
+cv.addEventListener('mousedown',()=>player.attack());
+
+const player={
+  x:200,y:GROUND,vx:0,vy:0,onGround:true,face:false,
+  state:'idle',frame:0,frameT:0,
+  form:'alaric',   // or 'wolf'
+  formTime:0,
+  attacking:0, hitDone:false,
+  hp:100, coins:0, score:0, meter:0,
+  get def(){ return DEF[this.form]; },
+  get scale(){ return scaleFor(this.def); },
+  attack(){ if(this.attacking>0||!started||this.dead)return; this.attacking=340; this.hitDone=false; this.frame=0; },
+  transform(){ if(this.form==='wolf'||this.meter<100||!started)return; this.form='wolf'; this.formTime=8000; this.meter=0; sfxFlash('#7cc4ff'); },
+  update(dt){
+    const speed=this.form==='wolf'?4.4:2.9;
+    let mv=0;
+    if(!this.attacking){
+      if(keys['arrowleft']||keys['a']) mv=-1;
+      if(keys['arrowright']||keys['d']) mv=1;
+    }
+    this.vx = mv*speed;
+    if(mv) this.face = mv<0;
+    if((keys[' ']||keys['arrowup']||keys['w'])&&this.onGround){ this.vy=-11.5; this.onGround=false; }
+    this.vy+=0.55; this.y+=this.vy; this.x+=this.vx;
+    if(this.x<60)this.x=60;
+    if(this.y>=GROUND){ this.y=GROUND; this.vy=0; this.onGround=true; }
+    // state machine
+    if(this.attacking>0){
+      this.attacking-=dt; this.state='attack';
+      // hit window mid-swing
+      const list=this.def.anims.attack;
+      this.frame=Math.min(list.length-1, Math.floor((1-this.attacking/340)*list.length));
+      if(!this.hitDone && this.attacking<200){ this.hitDone=true; this.doHit(); }
+    } else if(!this.onGround){ this.state='idle'; this.frame=0; }
+    else if(mv){ this.state='walk'; }
+    else { this.state='idle'; }
+    // anim timing
+    this.frameT+=dt;
+    const fps = this.state==='walk'?(this.form==='wolf'?90:120):200;
+    if(this.state!=='attack' && this.frameT>fps){ this.frameT=0; this.frame++; }
+    // form timer
+    if(this.form==='wolf'){ this.formTime-=dt; if(this.formTime<=0){ this.form='alaric'; this.state='idle'; sfxFlash('#f4d06f'); } }
+  },
+  doHit(){
+    const reach = this.form==='wolf'?115:130;
+    const dir = this.face?-1:1;
+    const hx = this.x + dir*reach*0.5;
+    for(const e of enemies){ if(e.dead)continue;
+      if(Math.abs(e.x-this.x)<reach && ((dir>0&&e.x>this.x-20)||(dir<0&&e.x<this.x+20))){
+        e.hurt(this.form==='wolf'?3:2);
+      }
+    }
+  },
+  draw(){
+    // wolf glow aura
+    if(this.form==='wolf'){ ctx.save(); ctx.globalAlpha=.35;
+      const g=ctx.createRadialGradient(sx(this.x),this.y-50,4,sx(this.x),this.y-50,90);
+      g.addColorStop(0,'#7cc4ff'); g.addColorStop(1,'transparent'); ctx.fillStyle=g;
+      ctx.beginPath();ctx.arc(sx(this.x),this.y-50,90,0,7);ctx.fill(); ctx.restore(); }
+    shadow(this.x,this.y, this.form==='wolf'?70:52);
+    drawSprite(this.def,this.state,this.frame,sx(this.x),this.y,this.face,this.scale);
+  }
+};
+
+let enemies=[], particles=[], spawnT=1200, wave=0;
+function spawnEnemy(){
+  const kinds=['goblin','goblin','skeleton','ogre'];
+  const kind=kinds[Math.floor(Math.random()*kinds.length)];
+  const def=DEF[kind];
+  enemies.push({ kind,def, x:camX+W+40+Math.random()*160, y:GROUND, vx:0, hp:def.hp,
+    frame:0,frameT:0, state:'walk', dead:false, deadT:0, face:true, atkCd:0, hurtFlash:0,
+    scale:scaleFor(def),
+    hurt(d){ if(this.dead)return; this.hp-=d; this.hurtFlash=140;
+      spark(this.x,this.y-40,'#ffd36b');
+      if(this.hp<=0){ this.dead=true; this.state='dead'; this.frame=0; this.deadT=900;
+        player.coins+=this.def.coin; player.score+=this.def.coin*10;
+        player.meter=Math.min(100,player.meter+22); } },
+    update(dt){
+      if(this.dead){ this.deadT-=dt; return; }
+      const d=player.x-this.x; this.face=d<0? false:true; // face toward player (sprites face right by default->flip when player is left)
+      this.face = d>0;   // player to the right -> face right (no flip since default faces right? our enemies face right)
+      if(this.hurtFlash>0)this.hurtFlash-=dt;
+      const dist=Math.abs(d);
+      if(dist>84){ this.x += Math.sign(d)*(this.def===DEF.ogre?0.8:1.3); this.state='walk';
+        this.frameT+=dt; if(this.frameT>150){this.frameT=0;this.frame++;} }
+      else { this.state='attack'; this.frame=0; this.atkCd-=dt;
+        if(this.atkCd<=0){ this.atkCd=1000; if(!player.dead){ player.hp-=this.def===DEF.ogre?12:7; spark(player.x,player.y-50,'#ff5a5a');
+          if(player.hp<=0){player.hp=0;} } } }
+    },
+    draw(){
+      const a = this.dead? Math.max(0,this.deadT/900):1;
+      shadow(this.x,this.y,this.def.target*0.34,a*0.5);
+      // face right toward player when player.x>this.x  => flip so sprite (default faces right) points left when player on left
+      const faceLeft = player.x < this.x;
+      if(this.hurtFlash>0 && !this.dead){ ctx.save(); ctx.globalAlpha=1;
+        drawSprite(this.def,this.state,this.frame,sx(this.x),this.y,faceLeft,this.scale,a);
+        ctx.globalCompositeOperation='source-atop'; ctx.fillStyle='rgba(255,120,120,.5)';
+        ctx.fillRect(0,0,W,H); ctx.restore(); }
+      else drawSprite(this.def,this.state,this.frame,sx(this.x),this.y,faceLeft,this.scale,a);
+    }
+  });
+}
+
+// ---------- fx ----------
+function spark(x,y,c){ for(let i=0;i<10;i++)particles.push({x,y,vx:(Math.random()-.5)*4,vy:-Math.random()*4-1,life:400,c}); }
+function shadow(x,y,r,a=0.4){ ctx.save();ctx.globalAlpha=a;ctx.fillStyle='#000';ctx.beginPath();
+  ctx.ellipse(sx(x),y+2,r,r*0.28,0,0,7);ctx.fill();ctx.restore(); }
+let flash=0,flashC='#fff';
+function sfxFlash(c){ flash=220; flashC=c; }
+
+// ---------- camera / world ----------
+let camX=0;
+function sx(worldX){ return worldX-camX; }
+
+function drawBG(){
+  // sky
+  ctx.fillStyle='#0d1524'; ctx.fillRect(0,0,W,H);
+  // far parallax forest, tiled
+  const scale=H/BG.height*1.15, tw=BG.width*scale, th=BG.height*scale;
+  const off = -(camX*0.35)%tw;
+  ctx.globalAlpha=.9;
+  for(let x=off-tw;x<W+tw;x+=tw) ctx.drawImage(BG,x, -20, tw, th);
+  ctx.globalAlpha=1;
+  // depth darkening
+  const g=ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,'rgba(6,10,22,.15)');
+  g.addColorStop(.7,'rgba(6,10,22,.35)'); g.addColorStop(1,'rgba(4,6,12,.85)'); ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  // near parallax silhouette hills
+  ctx.fillStyle='#0a1410';
+  const off2=-(camX*0.6)%320;
+  for(let x=off2-320;x<W+320;x+=320){ ctx.beginPath();ctx.moveTo(x,GROUND+30);
+    ctx.quadraticCurveTo(x+160,GROUND-70,x+320,GROUND+30);ctx.fill(); }
+  // ground
+  const gg=ctx.createLinearGradient(0,GROUND,0,H); gg.addColorStop(0,'#3a2c1a');gg.addColorStop(1,'#1a120a');
+  ctx.fillStyle=gg; ctx.fillRect(0,GROUND+10,W,H);
+  ctx.fillStyle='#2e5a2a'; ctx.fillRect(0,GROUND+6,W,8);
+  ctx.fillStyle='#3f7a38'; ctx.fillRect(0,GROUND+6,W,3);
+  // ground texture dots
+  ctx.fillStyle='rgba(0,0,0,.25)';
+  const gof=-(camX*1)%48;
+  for(let x=gof; x<W; x+=48) ctx.fillRect(x,GROUND+26,3,3);
+}
+
+// ---------- HUD ----------
+function drawHUD(){
+  ctx.save();
+  // panel
+  roundRect(10,10,250,58,8,'rgba(10,12,20,.72)','#d9a441');
+  ctx.fillStyle='#e9edff'; ctx.font='bold 13px Trebuchet MS';
+  // portrait tag
+  ctx.fillStyle='#5aa9ff'; ctx.fillText('P1  SIR ALARIC',20,28);
+  // health bar
+  ctx.fillStyle='#3a0d0d'; ctx.fillRect(20,34,150,12);
+  ctx.fillStyle='#e23b3b'; ctx.fillRect(20,34,150*Math.max(0,player.hp)/100,12);
+  ctx.strokeStyle='#000'; ctx.strokeRect(20,34,150,12);
+  // transform meter
+  ctx.fillStyle='#0e2233'; ctx.fillRect(20,50,150,10);
+  ctx.fillStyle= player.meter>=100?'#8be2ff':'#2f7fd6'; ctx.fillRect(20,50,150*player.meter/100,10);
+  ctx.strokeRect(20,50,150,10);
+  ctx.fillStyle= player.meter>=100?'#8be2ff':'#7fb0e0'; ctx.font='bold 10px Trebuchet MS';
+  ctx.fillText(player.meter>=100?'🐾 PRESS T!':'🐾 TRANSFORM', 176, 59);
+  ctx.fillStyle='#f4d06f'; ctx.font='bold 12px Trebuchet MS';
+  ctx.fillText('👑 '+player.coins+'    ⚔ '+player.score, 176, 30);
+  // form badge right
+  if(player.form==='wolf'){ roundRect(W-150,10,140,26,7,'rgba(20,40,60,.8)','#7cc4ff');
+    ctx.fillStyle='#bfe6ff';ctx.font='bold 12px Trebuchet MS';ctx.fillText('🐺 WOLF FORM  '+(player.formTime/1000).toFixed(1)+'s',W-142,27); }
+  ctx.restore();
+}
+function roundRect(x,y,w,h,r,fill,stroke){ ctx.beginPath();ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();
+  if(fill){ctx.fillStyle=fill;ctx.fill();} if(stroke){ctx.lineWidth=2;ctx.strokeStyle=stroke;ctx.stroke();} }
+
+// ---------- loop ----------
+let started=false, last=0;
+function frameLoop(t){
+  const dt=Math.min(40,t-last); last=t;
+  if(started){
+    player.update(dt);
+    camX = Math.max(0, player.x - W*0.32);
+    // spawns
+    spawnT-=dt; if(spawnT<=0 && enemies.filter(e=>!e.dead).length<5){ spawnEnemy(); spawnT=1400+Math.random()*900; }
+    enemies.forEach(e=>e.update(dt));
+    enemies=enemies.filter(e=>!(e.dead&&e.deadT<=0));
+    particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.2;p.life-=dt;});
+    particles=particles.filter(p=>p.life>0);
+    if(flash>0)flash-=dt;
+    if(player.hp<=0 && !player.dead){ player.dead=true; gameOver(); }
+  }
+  // render
+  drawBG();
+  // draw entities sorted by y (feet)
+  const all=[...enemies,player].sort((a,b)=>a.y-b.y);
+  all.forEach(o=>o.draw());
+  // particles
+  particles.forEach(p=>{ctx.globalAlpha=Math.max(0,p.life/400);ctx.fillStyle=p.c;
+    ctx.fillRect(sx(p.x),p.y,3,3);ctx.globalAlpha=1;});
+  if(flash>0){ ctx.save();ctx.globalAlpha=flash/220*0.5;ctx.fillStyle=flashC;ctx.fillRect(0,0,W,H);ctx.restore(); }
+  drawHUD();
+  requestAnimationFrame(frameLoop);
+}
+
+function ready(){
+  document.getElementById('ovTitle').textContent='BEAST KNIGHTS';
+  document.getElementById('ovText').innerHTML='A side-scrolling beat-’em-up mockup built from your real sprite sheets. '+
+    'Slay goblins, skeletons and ogres to fill the <b>Transformation Meter</b> — then unleash the <b>Wolf</b>.';
+  document.getElementById('keyHints').style.display='flex';
+  const b=document.getElementById('play'); b.style.display='inline-block';
+  b.onclick=()=>{ overlay.style.display='none'; started=true; };
+  requestAnimationFrame(frameLoop);
+}
+function gameOver(){
+  setTimeout(()=>{ overlay.style.display='flex'; started=false;
+    document.getElementById('ovTitle').textContent='YOU FELL, KNIGHT';
+    document.getElementById('ovText').innerHTML='Score: <b>'+player.score+'</b> &nbsp; Coins: <b>'+player.coins+'</b>';
+    const b=document.getElementById('play'); b.textContent='TRY AGAIN'; b.style.display='inline-block';
+    b.onclick=()=>location.reload();
+  },700);
+}
+boot();
+</script>
+<style id="lx-mobile">
+#rotate-hint{position:fixed;inset:0;z-index:99999;background:#0b0714;color:#ffe08a;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:system-ui;padding:24px;gap:6px}
+#rotate-hint .rot{font-size:70px;line-height:1;animation:lxrot 1.8s ease-in-out infinite}
+#rotate-hint h2{margin:6px 0 0;font-size:22px}#rotate-hint p{margin:0;color:#cbd0e0;font-size:14px;max-width:320px}
+#rotate-hint small{margin-top:14px;color:#c9bff0;font-size:13px;text-decoration:underline;cursor:pointer}
+@keyframes lxrot{0%,55%{transform:rotate(0)}75%,100%{transform:rotate(-90deg)}}
+@media (orientation:portrait) and (max-width:900px){ body:not(.lx-dismiss) #rotate-hint{display:flex} }
+@media (orientation:landscape) and (max-height:600px){ .title,#foot{display:none!important} #wrap{padding:0!important;justify-content:center!important} }
+</style>
+<div id="rotate-hint"><div class="rot">📱</div><h2>Rotate your device</h2><p>This game plays best in landscape (horizontal) mode.</p><small id="lx-play">Play anyway ▸</small></div>
+<script>
+(function(){
+ var cv=document.getElementById('c');
+ function fit(){ if(!cv)return; try{ var W=cv.width,H=cv.height,
+   land=innerWidth>innerHeight, mob=('ontouchstart'in window)||navigator.maxTouchPoints>0,
+   pw=(mob&&land)?6:24, ph=(mob&&land)?6:120,
+   s=Math.min((innerWidth-pw)/W,(innerHeight-ph)/H);
+   cv.style.width=(W*s)+'px'; cv.style.height=(H*s)+'px'; }catch(e){} }
+ addEventListener('resize',fit); addEventListener('orientationchange',function(){setTimeout(fit,150);}); setTimeout(fit,60);
+ var pa=document.getElementById('lx-play'); if(pa)pa.addEventListener('click',function(){document.body.classList.add('lx-dismiss');setTimeout(fit,60);});
+ if('serviceWorker'in navigator){addEventListener('load',function(){if('serviceWorker'in navigator){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}if(window.caches){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});};});}
+})();
+</script>
+<script src="/share.js"></script></body>
+</html>

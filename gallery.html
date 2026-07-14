@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>✨ Sprite Gallery · Summer Tech Kids Hub</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Meet all the pixel heroes, enemies and bosses from the Summer Tech kids games.">
+<meta name="theme-color" content="#3BE1C5">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#25123f}
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:'Fredoka',system-ui,sans-serif;color:var(--ink);min-height:100vh;
+    background:linear-gradient(135deg,#3BE1C5,#6C4CF1 55%,#FF5DA2 100%);background-attachment:fixed}
+  header{text-align:center;padding:44px 20px 8px;color:#fff}
+  .back{display:inline-block;text-decoration:none;color:#fff;font-weight:600;background:rgba(255,255,255,.22);
+    border:2px solid rgba(255,255,255,.5);padding:9px 18px;border-radius:999px;margin-bottom:20px}
+  .back:hover{background:rgba(255,255,255,.35)}
+  h1{font-family:'Baloo 2',cursive;font-weight:800;font-size:clamp(32px,6vw,58px);margin:0;
+    text-shadow:0 5px 0 rgba(37,18,63,.4),0 12px 24px rgba(0,0,0,.25)}
+  .sub{max-width:600px;margin:14px auto 0;font-size:clamp(15px,2.2vw,19px);opacity:.95;font-weight:500}
+  .count{display:inline-block;margin-top:16px;background:rgba(255,255,255,.9);color:var(--ink);
+    font-weight:700;padding:7px 18px;border-radius:999px}
+
+  main{max-width:1180px;margin:0 auto;padding:30px 18px 80px}
+  .group{margin:38px 0}
+  .group-head{display:flex;align-items:center;gap:14px;margin:0 4px 16px}
+  .group-cover{width:56px;height:56px;border-radius:14px;object-fit:cover;border:3px solid #fff;box-shadow:0 6px 14px rgba(0,0,0,.25)}
+  .group-title{font-family:'Baloo 2',cursive;font-weight:800;color:#fff;font-size:clamp(20px,3.2vw,28px);
+    margin:0;text-shadow:0 3px 0 rgba(37,18,63,.3)}
+  .group-badge{margin-left:auto;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);
+    color:#fff;font-weight:700;border-radius:999px;padding:4px 13px;font-size:13px}
+
+  .sprites{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:14px}
+  .sp{background:rgba(255,255,255,.92);border-radius:16px;padding:12px 8px 10px;text-align:center;
+    box-shadow:0 8px 18px rgba(40,10,60,.22);transition:transform .16s cubic-bezier(.34,1.56,.64,1);cursor:pointer}
+  .sp:hover{transform:translateY(-6px) scale(1.05) rotate(-2deg)}
+  .sp .pic{height:78px;display:grid;place-items:center;margin-bottom:8px}
+  .sp img{max-width:100%;max-height:78px;image-rendering:pixelated;
+    filter:drop-shadow(0 4px 5px rgba(0,0,0,.28));transition:transform .3s}
+  .sp:hover img{transform:scale(1.12) translateY(-2px)}
+  .sp .nm{font-size:12px;font-weight:600;color:#4a3866;line-height:1.15;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  /* checkerboard so transparent sprites read well */
+  .sp .pic{background-image:
+      linear-gradient(45deg,#eee 25%,transparent 25%),
+      linear-gradient(-45deg,#eee 25%,transparent 25%),
+      linear-gradient(45deg,transparent 75%,#eee 75%),
+      linear-gradient(-45deg,transparent 75%,#eee 75%);
+    background-size:14px 14px;background-position:0 0,0 7px,7px -7px,-7px 0;
+    border-radius:10px}
+
+  footer{text-align:center;color:#fff;padding:0 20px 50px;font-weight:500;opacity:.9}
+  .loading{color:#fff;text-align:center;font-size:20px;padding:40px}
+
+  /* lightbox */
+  .lb{position:fixed;inset:0;background:rgba(20,6,35,.82);backdrop-filter:blur(4px);z-index:50;
+    display:none;place-items:center;padding:20px}
+  .lb.on{display:grid}
+  .lb-inner{background:#fff;border-radius:24px;padding:26px;max-width:340px;text-align:center;
+    box-shadow:0 30px 60px rgba(0,0,0,.5);animation:pop .25s cubic-bezier(.34,1.56,.64,1)}
+  @keyframes pop{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+  .lb-inner .pic{height:180px;display:grid;place-items:center;margin-bottom:14px}
+  .lb-inner img{max-height:180px;max-width:100%;image-rendering:pixelated;filter:drop-shadow(0 8px 10px rgba(0,0,0,.3))}
+  .lb-inner h3{font-family:'Baloo 2',cursive;margin:0 0 4px;font-size:22px}
+  .lb-inner p{margin:0;color:#7a6a90;font-size:14px}
+  .lb-close{margin-top:16px;border:none;background:#6C4CF1;color:#fff;font-family:'Fredoka';font-weight:600;
+    font-size:16px;padding:10px 24px;border-radius:999px;cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+  <a class="back" href="index.html">← Back to Games</a>
+  <h1>✨ Sprite Gallery</h1>
+  <p class="sub">Every pixel hero, enemy and boss from our games — all hand-crafted with AI &amp; imagination. Tap any sprite to zoom in!</p>
+  <div class="count" id="count">Loading heroes…</div>
+</header>
+
+<main id="app"><div class="loading">🎨 Loading sprites…</div></main>
+<footer>Made with 💜 at <b>Summer Tech Camp</b></footer>
+
+<div class="lb" id="lb"><div class="lb-inner">
+  <div class="pic"><img id="lb-img" src="" alt=""></div>
+  <h3 id="lb-name"></h3><p id="lb-game"></p>
+  <button class="lb-close" onclick="closeLb()">Close ✨</button>
+</div></div>
+
+<script>
+const app=document.getElementById('app');
+const lb=document.getElementById('lb');
+function openLb(src,name,game){
+  document.getElementById('lb-img').src=src;
+  document.getElementById('lb-name').textContent=name;
+  document.getElementById('lb-game').textContent=game;
+  lb.classList.add('on');
+}
+function closeLb(){lb.classList.remove('on')}
+lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});
+
+fetch('sprites.json').then(r=>r.json()).then(data=>{
+  let total=0;
+  app.innerHTML=data.filter(g=>g.sprites.length).map(g=>{
+    total+=g.sprites.length;
+    const cells=g.sprites.map(s=>
+      `<div class="sp" onclick="openLb('${s.src}','${s.name.replace(/'/g,"")}','${g.title.replace(/'/g,"")}')">
+        <div class="pic"><img loading="lazy" src="${s.src}" alt="${s.name}"></div>
+        <div class="nm">${s.name}</div></div>`).join("");
+    return `<section class="group">
+      <div class="group-head">
+        <img class="group-cover" src="${g.cover}" alt="">
+        <h2 class="group-title">${g.title}</h2>
+        <span class="group-badge">${g.sprites.length} sprites</span></div>
+      <div class="sprites">${cells}</div></section>`;
+  }).join("");
+  document.getElementById('count').textContent=`🎭 ${total} sprites across ${data.length} games`;
+}).catch(e=>{app.innerHTML='<div class="loading">Could not load sprites.json 😢</div>'});
+</script>
+</body>
+</html>

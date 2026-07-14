@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><title>✈️ Fly Simulator</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;font-family:system-ui;background:#8fd3ff}
+  canvas{position:fixed;inset:0;width:100%;height:100%;touch-action:none}
+  #hud{position:fixed;top:16px;left:0;right:0;text-align:center;color:#fff;font-weight:900;
+    font-size:28px;text-shadow:2px 2px 0 #2478a8;z-index:2;pointer-events:none}
+  #msg{position:fixed;inset:0;display:grid;place-items:center;z-index:3}
+  #card{background:#fff;border:5px solid #2478a8;border-radius:20px;padding:26px 30px;text-align:center;
+    box-shadow:0 12px 30px rgba(0,0,0,.4);max-width:330px}
+  #card h1{margin:0 0 6px;color:#1f9ed6;font-size:28px}
+  #card p{margin:6px 0;color:#333}
+  #card button{margin-top:12px;border:none;background:#1f9ed6;color:#fff;font-weight:800;font-size:20px;
+    padding:12px 30px;border-radius:999px;cursor:pointer;box-shadow:0 5px 0 #17739c}
+  #card button:active{transform:translateY(4px);box-shadow:0 1px 0 #17739c}
+  a.home{position:fixed;top:12px;left:12px;z-index:4;color:#fff;text-decoration:none;font-weight:700;
+    background:rgba(0,0,0,.28);padding:7px 14px;border-radius:999px}
+</style></head>
+<body>
+<a class="home" href="../../index.html">← Hub</a>
+<div id="hud">🎯 0</div>
+<canvas id="c"></canvas>
+<div id="msg"><div id="card">
+  <h1>✈️ Fly Simulator</h1>
+  <p><b>↑ / ↓</b> arrows, mouse, or <b>tap top/bottom</b> to steer.<br>Fly through the golden rings!</p>
+  <button id="go">▶ Take off</button>
+</div></div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+let W,H;function fit(){W=c.width=innerWidth;H=c.height=innerHeight;}addEventListener('resize',fit);fit();
+const hud=document.getElementById('hud'),msg=document.getElementById('msg'),card=document.getElementById('card');
+let plane,rings,birds,score,alive,t,speed,dir,clouds;
+function reset(){
+  plane={x:W*0.24,y:H/2,vy:0};rings=[];birds=[];clouds=[];score=0;alive=true;t=0;speed=4;dir=0;
+  for(let i=0;i<5;i++)clouds.push({x:Math.random()*W,y:Math.random()*H,s:0.5+Math.random()});
+  msg.style.display='none';loop();
+}
+addEventListener('keydown',e=>{if(e.code==='ArrowUp'){dir=-1;e.preventDefault();}if(e.code==='ArrowDown'){dir=1;e.preventDefault();}});
+addEventListener('keyup',e=>{if(e.code==='ArrowUp'||e.code==='ArrowDown')dir=0;});
+function pointer(e){const y=(e.touches?e.touches[0].clientY:e.clientY);dir=y<innerHeight/2?-1:1;}
+addEventListener('pointerdown',e=>{if(alive)pointer(e);});
+addEventListener('pointermove',e=>{if(alive&&e.buttons)pointer(e);});
+addEventListener('pointerup',()=>dir=0);
+document.getElementById('go').onclick=reset;
+function loop(){
+  if(!alive)return;requestAnimationFrame(loop);t++;
+  const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#4fb8ff');g.addColorStop(1,'#cdeeff');
+  x.fillStyle=g;x.fillRect(0,0,W,H);
+  // clouds
+  x.fillStyle='rgba(255,255,255,.85)';
+  clouds.forEach(cl=>{cl.x-=speed*cl.s*0.4;if(cl.x<-70){cl.x=W+70;cl.y=Math.random()*H;}
+    x.beginPath();x.arc(cl.x,cl.y,20,0,7);x.arc(cl.x+22,cl.y+5,26,0,7);x.arc(cl.x+48,cl.y,18,0,7);x.fill();});
+  // steer
+  plane.vy+=dir*0.7;plane.vy*=0.9;plane.y+=plane.vy;
+  if(plane.y<28){plane.y=28;plane.vy=0;}if(plane.y>H-28){plane.y=H-28;plane.vy=0;}
+  // spawn rings
+  if(t%55===0)rings.push({x:W+40,y:70+Math.random()*(H-140),got:false});
+  if(t%95===0)birds.push({x:W+40,y:50+Math.random()*(H-100)});
+  // rings
+  for(let i=rings.length-1;i>=0;i--){const r=rings[i];r.x-=speed;
+    x.strokeStyle='#ffcf33';x.lineWidth=8;x.beginPath();x.arc(r.x,r.y,30,0,7);x.stroke();
+    x.strokeStyle='#ffe58a';x.lineWidth=3;x.beginPath();x.arc(r.x,r.y,30,0,7);x.stroke();
+    if(!r.got&&Math.abs(r.x-plane.x)<speed+2&&Math.abs(r.y-plane.y)<30){r.got=true;score++;hud.textContent='🎯 '+score;if(score%6===0)speed+=0.4;}
+    if(r.x<-40)rings.splice(i,1);}
+  // birds (avoid)
+  x.font='34px serif';x.textAlign='center';x.textBaseline='middle';
+  for(let i=birds.length-1;i>=0;i--){const b=birds[i];b.x-=speed*1.1;x.fillText('🦅',b.x,b.y);
+    if(Math.hypot(b.x-plane.x,b.y-plane.y)<30)die();if(b.x<-40)birds.splice(i,1);}
+  // plane
+  x.save();x.translate(plane.x,plane.y);x.rotate(Math.max(-.4,Math.min(.4,plane.vy*0.05)));
+  x.font='48px serif';x.fillText('✈️',0,0);x.restore();
+}
+function die(){if(!alive)return;alive=false;
+  card.innerHTML='<h1>Crash! ✈️</h1><p>You flew through <b>'+score+'</b> rings!</p><button id="go">▶ Fly again</button>';
+  msg.style.display='grid';document.getElementById('go').onclick=reset;}
+</script>
+</body></html>

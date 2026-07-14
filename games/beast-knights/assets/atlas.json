@@ -1,0 +1,341 @@
+{
+ "characters": {
+  "alaric": [
+   {
+    "file": "char_0_0.png",
+    "w": 121,
+    "h": 130
+   },
+   {
+    "file": "char_0_1.png",
+    "w": 100,
+    "h": 127
+   },
+   {
+    "file": "char_0_2.png",
+    "w": 111,
+    "h": 126
+   },
+   {
+    "file": "char_0_3.png",
+    "w": 109,
+    "h": 127
+   },
+   {
+    "file": "char_0_4.png",
+    "w": 117,
+    "h": 130
+   },
+   {
+    "file": "char_0_5.png",
+    "w": 271,
+    "h": 115
+   },
+   {
+    "file": "char_0_6.png",
+    "w": 129,
+    "h": 99
+   }
+  ],
+  "wolf": [
+   {
+    "file": "char_1_0.png",
+    "w": 134,
+    "h": 156
+   },
+   {
+    "file": "char_1_1.png",
+    "w": 149,
+    "h": 155
+   },
+   {
+    "file": "char_1_2.png",
+    "w": 158,
+    "h": 155
+   },
+   {
+    "file": "char_1_3.png",
+    "w": 135,
+    "h": 155
+   },
+   {
+    "file": "char_1_4.png",
+    "w": 141,
+    "h": 157
+   },
+   {
+    "file": "char_1_5.png",
+    "w": 159,
+    "h": 157
+   },
+   {
+    "file": "char_1_6.png",
+    "w": 154,
+    "h": 157
+   }
+  ],
+  "selene": [
+   {
+    "file": "char_2_0.png",
+    "w": 118,
+    "h": 132
+   },
+   {
+    "file": "char_2_1.png",
+    "w": 111,
+    "h": 128
+   },
+   {
+    "file": "char_2_2.png",
+    "w": 105,
+    "h": 128
+   },
+   {
+    "file": "char_2_3.png",
+    "w": 108,
+    "h": 129
+   },
+   {
+    "file": "char_2_4.png",
+    "w": 133,
+    "h": 124
+   },
+   {
+    "file": "char_2_5.png",
+    "w": 152,
+    "h": 124
+   },
+   {
+    "file": "char_2_6.png",
+    "w": 289,
+    "h": 149
+   }
+  ],
+  "tigress": [
+   {
+    "file": "char_3_0.png",
+    "w": 129,
+    "h": 129
+   },
+   {
+    "file": "char_3_1.png",
+    "w": 165,
+    "h": 131
+   },
+   {
+    "file": "char_3_2.png",
+    "w": 150,
+    "h": 140
+   },
+   {
+    "file": "char_3_3.png",
+    "w": 507,
+    "h": 167
+   },
+   {
+    "file": "char_3_4.png",
+    "w": 158,
+    "h": 85
+   }
+  ],
+  "garrick": [
+   {
+    "file": "char_4_0.png",
+    "w": 124,
+    "h": 135
+   },
+   {
+    "file": "char_4_1.png",
+    "w": 140,
+    "h": 135
+   },
+   {
+    "file": "char_4_2.png",
+    "w": 139,
+    "h": 136
+   },
+   {
+    "file": "char_4_3.png",
+    "w": 512,
+    "h": 181
+   },
+   {
+    "file": "char_4_4.png",
+    "w": 177,
+    "h": 112
+   }
+  ],
+  "bear": [
+   {
+    "file": "char_5_0.png",
+    "w": 482,
+    "h": 94
+   },
+   {
+    "file": "char_5_1.png",
+    "w": 144,
+    "h": 121
+   },
+   {
+    "file": "char_5_2.png",
+    "w": 138,
+    "h": 121
+   },
+   {
+    "file": "char_5_3.png",
+    "w": 145,
+    "h": 120
+   },
+   {
+    "file": "char_5_4.png",
+    "w": 206,
+    "h": 112
+   }
+  ]
+ },
+ "enemies": {
+  "goblin": [
+   {
+    "file": "enemy_0_0.png",
+    "w": 186,
+    "h": 96
+   },
+   {
+    "file": "enemy_0_1.png",
+    "w": 89,
+    "h": 96
+   },
+   {
+    "file": "enemy_0_2.png",
+    "w": 86,
+    "h": 96
+   },
+   {
+    "file": "enemy_0_3.png",
+    "w": 86,
+    "h": 96
+   },
+   {
+    "file": "enemy_0_4.png",
+    "w": 91,
+    "h": 96
+   },
+   {
+    "file": "enemy_0_5.png",
+    "w": 115,
+    "h": 96
+   },
+   {
+    "file": "enemy_0_6.png",
+    "w": 143,
+    "h": 96
+   },
+   {
+    "file": "enemy_0_7.png",
+    "w": 122,
+    "h": 64
+   }
+  ],
+  "zombie": [
+   {
+    "file": "enemy_1_0.png",
+    "w": 165,
+    "h": 97
+   },
+   {
+    "file": "enemy_1_1.png",
+    "w": 77,
+    "h": 97
+   },
+   {
+    "file": "enemy_1_2.png",
+    "w": 79,
+    "h": 64
+   },
+   {
+    "file": "enemy_1_3.png",
+    "w": 366,
+    "h": 97
+   },
+   {
+    "file": "enemy_1_4.png",
+    "w": 26,
+    "h": 29
+   },
+   {
+    "file": "enemy_1_5.png",
+    "w": 80,
+    "h": 64
+   },
+   {
+    "file": "enemy_1_6.png",
+    "w": 165,
+    "h": 89
+   }
+  ],
+  "ogre": [
+   {
+    "file": "enemy_2_0.png",
+    "w": 165,
+    "h": 83
+   },
+   {
+    "file": "enemy_2_1.png",
+    "w": 163,
+    "h": 96
+   },
+   {
+    "file": "enemy_2_2.png",
+    "w": 156,
+    "h": 96
+   },
+   {
+    "file": "enemy_2_3.png",
+    "w": 249,
+    "h": 96
+   },
+   {
+    "file": "enemy_2_4.png",
+    "w": 215,
+    "h": 96
+   }
+  ],
+  "skeleton": [
+   {
+    "file": "enemy_3_0.png",
+    "w": 90,
+    "h": 87
+   },
+   {
+    "file": "enemy_3_1.png",
+    "w": 149,
+    "h": 90
+   },
+   {
+    "file": "enemy_3_2.png",
+    "w": 92,
+    "h": 90
+   },
+   {
+    "file": "enemy_3_3.png",
+    "w": 89,
+    "h": 90
+   },
+   {
+    "file": "enemy_3_4.png",
+    "w": 74,
+    "h": 86
+   },
+   {
+    "file": "enemy_3_5.png",
+    "w": 150,
+    "h": 90
+   },
+   {
+    "file": "enemy_3_6.png",
+    "w": 165,
+    "h": 89
+   }
+  ]
+ }
+}

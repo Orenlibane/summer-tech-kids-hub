@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><title>🦸 Super Hero Fly</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;font-family:system-ui;background:#2b5adc}
+  canvas{position:fixed;inset:0;width:100%;height:100%;touch-action:none}
+  #hud{position:fixed;top:16px;left:0;right:0;text-align:center;color:#fff;font-weight:900;
+    font-size:30px;text-shadow:2px 2px 0 #14307a;z-index:2;pointer-events:none}
+  #msg{position:fixed;inset:0;display:grid;place-items:center;z-index:3}
+  #card{background:#fff;border:5px solid #14307a;border-radius:20px;padding:26px 30px;text-align:center;
+    box-shadow:0 12px 30px rgba(0,0,0,.4);max-width:330px}
+  #card h1{margin:0 0 6px;color:#2b5adc;font-size:28px}
+  #card p{margin:6px 0;color:#333}
+  #card button{margin-top:12px;border:none;background:#2b5adc;color:#fff;font-weight:800;font-size:20px;
+    padding:12px 30px;border-radius:999px;cursor:pointer;box-shadow:0 5px 0 #14307a}
+  #card button:active{transform:translateY(4px);box-shadow:0 1px 0 #14307a}
+  a.home{position:fixed;top:12px;left:12px;z-index:4;color:#fff;text-decoration:none;font-weight:700;
+    background:rgba(0,0,0,.3);padding:7px 14px;border-radius:999px}
+</style></head>
+<body>
+<a class="home" href="../../index.html">← Hub</a>
+<div id="hud">⭐ 0</div>
+<canvas id="c"></canvas>
+<div id="msg"><div id="card">
+  <h1>🦸 Super Hero Fly</h1>
+  <p><b>HOLD</b> mouse/finger or <b>SPACE</b> to fly up.<br>Grab ⭐ stars, dodge ☁️ storm-clouds!</p>
+  <button id="go">▶ Play</button>
+</div></div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+let W,H;function fit(){W=c.width=innerWidth;H=c.height=innerHeight;}addEventListener('resize',fit);fit();
+const hud=document.getElementById('hud'),msg=document.getElementById('msg'),card=document.getElementById('card');
+let hero,stars,rocks,score,alive,hold,t,speed,bgx;
+function reset(){
+  hero={x:W*0.24,y:H/2,vy:0,r:24};stars=[];rocks=[];score=0;alive=true;hold=false;t=0;speed=4.2;bgx=0;
+  msg.style.display='none';loop();
+}
+const press=()=>hold=true,release=()=>hold=false;
+addEventListener('pointerdown',()=>{if(alive)press();});
+addEventListener('pointerup',release);
+addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();if(alive)press();}});
+addEventListener('keyup',e=>{if(e.code==='Space')release();});
+document.getElementById('go').onclick=reset;
+function loop(){
+  if(!alive)return;requestAnimationFrame(loop);t++;
+  const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#2b5adc');g.addColorStop(1,'#7fb0ff');
+  x.fillStyle=g;x.fillRect(0,0,W,H);
+  // parallax hills
+  bgx-=speed*0.4;x.fillStyle='rgba(255,255,255,.15)';
+  for(let i=0;i<6;i++){let hx=((i*260+bgx)%(W+260))-130;x.beginPath();x.arc(hx,H,120,Math.PI,0);x.fill();}
+  // physics
+  hero.vy+= hold?-0.55:0.5; hero.vy*=0.96; hero.y+=hero.vy;
+  if(hero.y<hero.r){hero.y=hero.r;hero.vy=0;} if(hero.y>H-hero.r){hero.y=H-hero.r;hero.vy=0;}
+  // spawn
+  if(t%38===0)stars.push({x:W+30,y:60+Math.random()*(H-120),got:false});
+  if(t%70===0)rocks.push({x:W+40,y:60+Math.random()*(H-120)});
+  // stars
+  x.font='34px serif';x.textAlign='center';x.textBaseline='middle';
+  for(let i=stars.length-1;i>=0;i--){const s=stars[i];s.x-=speed;x.fillText('⭐',s.x,s.y);
+    if(Math.hypot(s.x-hero.x,s.y-hero.y)<hero.r+16){stars.splice(i,1);score++;hud.textContent='⭐ '+score;
+      if(score%8===0)speed+=0.4;continue;}
+    if(s.x<-30)stars.splice(i,1);}
+  // clouds/rocks (danger)
+  for(let i=rocks.length-1;i>=0;i--){const r=rocks[i];r.x-=speed*1.05;x.font='44px serif';x.fillText('☁️',r.x,r.y);
+    if(Math.hypot(r.x-hero.x,r.y-hero.y)<hero.r+22)die();
+    if(r.x<-40)rocks.splice(i,1);}
+  // hero
+  x.save();x.translate(hero.x,hero.y);x.rotate(Math.max(-0.4,Math.min(0.4,hero.vy*0.04)));
+  x.font='46px serif';x.fillText('🦸',0,0);x.restore();
+}
+function die(){if(!alive)return;alive=false;
+  card.innerHTML='<h1>Oof! 🦸</h1><p>You collected <b>'+score+'</b> stars!</p><button id="go">▶ Play again</button>';
+  msg.style.display='grid';document.getElementById('go').onclick=reset;}
+</script>
+</body></html>

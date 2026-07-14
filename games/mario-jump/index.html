@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><title>🍄 Mario Jump</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;background:#5c94fc;font-family:system-ui}
+  #wrap{position:fixed;inset:0;display:grid;place-items:center}
+  canvas{width:100%;height:100%;display:block;touch-action:none}
+  #hud{position:fixed;top:14px;left:0;right:0;text-align:center;color:#fff;font-weight:800;
+    font-size:26px;text-shadow:2px 2px 0 #b13e00;pointer-events:none;z-index:2}
+  #msg{position:fixed;inset:0;display:grid;place-items:center;z-index:3}
+  #card{background:#fff;border:5px solid #b13e00;border-radius:20px;padding:26px 30px;text-align:center;
+    box-shadow:0 12px 30px rgba(0,0,0,.4);max-width:320px}
+  #card h1{margin:0 0 6px;color:#e52521;font-size:30px}
+  #card p{margin:6px 0;color:#333}
+  #card button{margin-top:12px;border:none;background:#43b047;color:#fff;font-weight:800;font-size:20px;
+    padding:12px 30px;border-radius:999px;cursor:pointer;box-shadow:0 5px 0 #2c7a2f}
+  #card button:active{transform:translateY(4px);box-shadow:0 1px 0 #2c7a2f}
+  a.home{position:fixed;top:12px;left:12px;z-index:4;color:#fff;text-decoration:none;font-weight:700;
+    background:rgba(0,0,0,.35);padding:7px 14px;border-radius:999px}
+</style></head>
+<body>
+<a class="home" href="../../index.html">← Hub</a>
+<div id="hud">🍄 0</div>
+<div id="wrap"><canvas id="c"></canvas></div>
+<div id="msg"><div id="card">
+  <h1>🍄 Mario Jump</h1>
+  <p>Press <b>SPACE</b> / <b>TAP</b> to jump.<br>Hop over the pipes &amp; goombas!</p>
+  <button id="go">▶ Play</button>
+</div></div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+let W,H,ground;
+function fit(){W=c.width=innerWidth;H=c.height=innerHeight;ground=H*0.82;}
+addEventListener('resize',fit);fit();
+const hud=document.getElementById('hud'),msg=document.getElementById('msg'),card=document.getElementById('card');
+let player,obs,clouds,score,speed,alive,gravity,jumpV,animT;
+
+function reset(){
+  player={x:W*0.18,y:ground,vy:0,w:38,h:46,onGround:true};
+  obs=[];clouds=[{x:W*.3,y:H*.2},{x:W*.7,y:H*.32},{x:W*1.1,y:H*.15}];
+  score=0;speed=6;alive=true;gravity=0.9;jumpV=-17;animT=0;spawn=90;
+  msg.style.display='none';loop();
+}
+let spawn;
+function jump(){ if(player.onGround){player.vy=jumpV;player.onGround=false;} }
+addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();if(alive)jump();}});
+addEventListener('pointerdown',()=>{if(alive)jump();});
+document.getElementById('go').onclick=reset;
+
+function loop(){
+  if(!alive)return;
+  requestAnimationFrame(loop);
+  animT++;
+  // sky
+  x.fillStyle='#5c94fc';x.fillRect(0,0,W,H);
+  // clouds
+  x.fillStyle='rgba(255,255,255,.9)';
+  clouds.forEach(cl=>{cl.x-=speed*0.3;if(cl.x<-80)cl.x=W+80;
+    x.beginPath();x.arc(cl.x,cl.y,22,0,7);x.arc(cl.x+24,cl.y+4,28,0,7);x.arc(cl.x+52,cl.y,20,0,7);x.fill();});
+  // ground
+  x.fillStyle='#c84c0c';x.fillRect(0,ground,W,H-ground);
+  x.fillStyle='#e59a4a';x.fillRect(0,ground,W,10);
+  x.fillStyle='#43b047';x.fillRect(0,ground-8,W,10);
+  // physics
+  player.vy+=gravity;player.y+=player.vy;
+  if(player.y>=ground){player.y=ground;player.vy=0;player.onGround=true;}
+  // spawn obstacles
+  if(--spawn<=0){spawn=Math.max(48,90-score*0.3+Math.random()*30);
+    const type=Math.random()<0.5?'pipe':'goomba';
+    obs.push(type==='pipe'?{x:W+40,y:ground,w:40,h:52,t:'pipe'}:{x:W+40,y:ground,w:36,h:34,t:'goomba'});}
+  // draw + move obstacles
+  for(let i=obs.length-1;i>=0;i--){const o=obs[i];o.x-=speed;
+    if(o.t==='pipe'){x.fillStyle='#00a800';x.fillRect(o.x,o.y-o.h,o.w,o.h);
+      x.fillStyle='#00d000';x.fillRect(o.x-4,o.y-o.h,o.w+8,12);}
+    else{const gy=o.y-o.h; x.font='34px serif';x.textAlign='center';x.fillText('👾',o.x+o.w/2,o.y-2);}
+    // collide
+    const px=player.x-player.w/2,py=player.y-player.h;
+    if(px<o.x+o.w && px+player.w>o.x && py<o.y && py+player.h>o.y-o.h){die();}
+    if(o.x+o.w<0){obs.splice(i,1);score++;hud.textContent='🍄 '+score;
+      if(score%5===0)speed+=0.4;}
+  }
+  // draw player (cute mario)
+  const bob=player.onGround?Math.sin(animT*0.3)*2:0;
+  x.font='44px serif';x.textAlign='center';x.textBaseline='alphabetic';
+  x.fillText('🏃',player.x,player.y+bob);
+}
+function die(){alive=false;
+  card.innerHTML='<h1>Game Over 🍄</h1><p>You scored <b>'+score+'</b> jumps!</p>'+
+    '<button id="go">▶ Play again</button>';
+  msg.style.display='grid';document.getElementById('go').onclick=reset;}
+</script>
+</body></html>

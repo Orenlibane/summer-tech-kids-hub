@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><title>🧺 Star Catcher</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;font-family:system-ui;background:#3a2a6d}
+  canvas{position:fixed;inset:0;width:100%;height:100%;touch-action:none}
+  #hud{position:fixed;top:16px;left:0;right:0;text-align:center;color:#fff;font-weight:900;
+    font-size:28px;text-shadow:2px 2px 0 #1c1240;z-index:2;pointer-events:none}
+  #msg{position:fixed;inset:0;display:grid;place-items:center;z-index:3}
+  #card{background:#fff;border:5px solid #7a4bd6;border-radius:20px;padding:26px 30px;text-align:center;
+    box-shadow:0 12px 30px rgba(0,0,0,.4);max-width:330px}
+  #card h1{margin:0 0 6px;color:#7a4bd6;font-size:28px}
+  #card p{margin:6px 0;color:#333}
+  #card button{margin-top:12px;border:none;background:#7a4bd6;color:#fff;font-weight:800;font-size:20px;
+    padding:12px 30px;border-radius:999px;cursor:pointer;box-shadow:0 5px 0 #5733a0}
+  #card button:active{transform:translateY(4px);box-shadow:0 1px 0 #5733a0}
+  a.home{position:fixed;top:12px;left:12px;z-index:4;color:#fff;text-decoration:none;font-weight:700;
+    background:rgba(0,0,0,.3);padding:7px 14px;border-radius:999px}
+  #lives{position:fixed;top:16px;right:16px;font-size:24px;z-index:2}
+</style></head>
+<body>
+<a class="home" href="../../index.html">← Hub</a>
+<div id="hud">⭐ 0</div><div id="lives">❤️❤️❤️</div>
+<canvas id="c"></canvas>
+<div id="msg"><div id="card">
+  <h1>🧺 Star Catcher</h1>
+  <p>Move with <b>← →</b>, mouse, or <b>drag</b>.<br>Catch ⭐ &amp; 🍬 — dodge the 💣 bombs!</p>
+  <button id="go">▶ Play</button>
+</div></div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+let W,H;function fit(){W=c.width=innerWidth;H=c.height=innerHeight;}addEventListener('resize',fit);fit();
+const hud=document.getElementById('hud'),msg=document.getElementById('msg'),card=document.getElementById('card'),livesEl=document.getElementById('lives');
+let basket,items,score,lives,alive,t,speed,left,right,stars;
+function reset(){
+  basket={x:W/2,w:88};items=[];score=0;lives=3;alive=true;t=0;speed=3.2;left=right=false;
+  stars=[];for(let i=0;i<40;i++)stars.push({x:Math.random()*W,y:Math.random()*H,s:Math.random()*2+1});
+  livesEl.textContent='❤️❤️❤️';hud.textContent='⭐ 0';msg.style.display='none';loop();
+}
+addEventListener('keydown',e=>{if(e.code==='ArrowLeft')left=true;if(e.code==='ArrowRight')right=true;});
+addEventListener('keyup',e=>{if(e.code==='ArrowLeft')left=false;if(e.code==='ArrowRight')right=false;});
+function pt(e){const px=e.touches?e.touches[0].clientX:e.clientX;basket.x=px;}
+addEventListener('pointerdown',e=>{if(alive)pt(e);});
+addEventListener('pointermove',e=>{if(alive&&(e.buttons||e.touches))pt(e);});
+document.getElementById('go').onclick=reset;
+function loop(){
+  if(!alive)return;requestAnimationFrame(loop);t++;
+  const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#3a2a6d');g.addColorStop(1,'#6d4bb0');
+  x.fillStyle=g;x.fillRect(0,0,W,H);
+  // twinkle stars bg
+  x.fillStyle='#fff';stars.forEach(s=>{x.globalAlpha=0.3+Math.abs(Math.sin(t*0.03+s.x))*0.5;
+    x.fillRect(s.x,s.y,s.s,s.s);});x.globalAlpha=1;
+  // move basket
+  if(left)basket.x-=8;if(right)basket.x+=8;
+  basket.x=Math.max(basket.w/2,Math.min(W-basket.w/2,basket.x));
+  const by=H-70;
+  // spawn
+  if(t%Math.max(28,60-score)===0){const rnd=Math.random();
+    const type=rnd<0.15?'💣':(rnd<0.6?'⭐':'🍬');
+    items.push({x:40+Math.random()*(W-80),y:-20,type,vy:speed+Math.random()*1.5});}
+  x.font='34px serif';x.textAlign='center';x.textBaseline='middle';
+  for(let i=items.length-1;i>=0;i--){const it=items[i];it.y+=it.vy;x.fillText(it.type,it.x,it.y);
+    if(it.y>by-24&&it.y<by+30&&Math.abs(it.x-basket.x)<basket.w/2+14){
+      if(it.type==='💣'){lives--;livesEl.textContent='❤️'.repeat(Math.max(0,lives));if(lives<=0)die();}
+      else{score+= it.type==='🍬'?2:1;hud.textContent='⭐ '+score;if(score%10===0)speed+=0.3;}
+      items.splice(i,1);continue;}
+    if(it.y>H+30){if(it.type!=='💣'){/* missed goodies ok */}items.splice(i,1);}
+  }
+  // basket
+  x.font='58px serif';x.fillText('🧺',basket.x,by);
+}
+function die(){if(!alive)return;alive=false;
+  card.innerHTML='<h1>All out! 🧺</h1><p>You caught <b>'+score+'</b> points!</p><button id="go">▶ Play again</button>';
+  msg.style.display='grid';document.getElementById('go').onclick=reset;}
+</script>
+</body></html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><title>🐤 Squeaky Bird</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;background:#71c5cf;font-family:system-ui}
+  canvas{position:fixed;inset:0;width:100%;height:100%;touch-action:none}
+  #hud{position:fixed;top:16px;left:0;right:0;text-align:center;color:#fff;font-weight:900;
+    font-size:40px;text-shadow:3px 3px 0 #d68a00;z-index:2;pointer-events:none}
+  #msg{position:fixed;inset:0;display:grid;place-items:center;z-index:3}
+  #card{background:#fff;border:5px solid #d68a00;border-radius:20px;padding:26px 30px;text-align:center;
+    box-shadow:0 12px 30px rgba(0,0,0,.4);max-width:320px}
+  #card h1{margin:0 0 6px;color:#f5a623;font-size:30px}
+  #card p{margin:6px 0;color:#333}
+  #card button{margin-top:12px;border:none;background:#f5a623;color:#fff;font-weight:800;font-size:20px;
+    padding:12px 30px;border-radius:999px;cursor:pointer;box-shadow:0 5px 0 #b9791a}
+  #card button:active{transform:translateY(4px);box-shadow:0 1px 0 #b9791a}
+  a.home{position:fixed;top:12px;left:12px;z-index:4;color:#fff;text-decoration:none;font-weight:700;
+    background:rgba(0,0,0,.3);padding:7px 14px;border-radius:999px}
+</style></head>
+<body>
+<a class="home" href="../../index.html">← Hub</a>
+<div id="hud">0</div>
+<canvas id="c"></canvas>
+<div id="msg"><div id="card">
+  <h1>🐤 Squeaky Bird</h1>
+  <p><b>TAP</b> or <b>SPACE</b> to flap.<br>Fly through the gaps!</p>
+  <button id="go">▶ Play</button>
+</div></div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+let W,H;function fit(){W=c.width=innerWidth;H=c.height=innerHeight;}addEventListener('resize',fit);fit();
+const hud=document.getElementById('hud'),msg=document.getElementById('msg'),card=document.getElementById('card');
+let bird,pipes,score,alive,gap,spawn,speed;
+function reset(){
+  bird={y:H/2,vy:0,r:20,x:W*0.28};pipes=[];score=0;alive=true;
+  gap=Math.max(150,H*0.28);spawn=0;speed=3.4;msg.style.display='none';loop();
+}
+function flap(){if(alive)bird.vy=-7.5;}
+addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();flap();}});
+addEventListener('pointerdown',flap);
+document.getElementById('go').onclick=reset;
+function loop(){
+  if(!alive)return;requestAnimationFrame(loop);
+  // sky
+  const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#71c5cf');g.addColorStop(1,'#b9ecf0');
+  x.fillStyle=g;x.fillRect(0,0,W,H);
+  // physics
+  bird.vy+=0.42;bird.y+=bird.vy;
+  // pipes
+  if(--spawn<=0){spawn=Math.round(Math.max(80,120-score*2));
+    const top=40+Math.random()*(H-gap-140);pipes.push({x:W+40,top,scored:false});}
+  x.fillStyle='#5bbf2e';x.strokeStyle='#3d8a1c';x.lineWidth=4;
+  for(let i=pipes.length-1;i>=0;i--){const p=pipes[i];p.x-=speed;
+    x.fillRect(p.x,0,60,p.top);x.strokeRect(p.x,0,60,p.top);
+    x.fillRect(p.x-4,p.top-22,68,22);x.strokeRect(p.x-4,p.top-22,68,22);
+    const by=p.top+gap;
+    x.fillRect(p.x,by,60,H-by);x.strokeRect(p.x,by,60,H-by);
+    x.fillRect(p.x-4,by,68,22);x.strokeRect(p.x-4,by,68,22);
+    // collide
+    if(bird.x+bird.r>p.x&&bird.x-bird.r<p.x+60&&(bird.y-bird.r<p.top||bird.y+bird.r>by))die();
+    if(!p.scored&&p.x+60<bird.x){p.scored=true;score++;hud.textContent=score;}
+    if(p.x<-70)pipes.splice(i,1);
+  }
+  // bird
+  x.save();x.translate(bird.x,bird.y);x.rotate(Math.max(-0.5,Math.min(1,bird.vy*0.06)));
+  x.font='40px serif';x.textAlign='center';x.textBaseline='middle';x.fillText('🐤',0,0);x.restore();
+  if(bird.y+bird.r>H||bird.y-bird.r<0)die();
+}
+function die(){if(!alive)return;alive=false;
+  card.innerHTML='<h1>Game Over 🐤</h1><p>Score: <b>'+score+'</b></p><button id="go">▶ Play again</button>';
+  msg.style.display='grid';document.getElementById('go').onclick=reset;}
+</script>
+</body></html>

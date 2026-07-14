@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>מירוץ הכדורים 🏀</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="game-wrap">
+  <canvas id="game"></canvas>
+
+  <!-- HUD -->
+  <div id="hud" class="hidden">
+    <div id="hud-level">רמה 1</div>
+    <div id="hud-place">מקום -/4</div>
+    <div id="hud-speed">מהירות</div>
+  </div>
+
+  <!-- Touch controls -->
+  <div id="touch" class="hidden">
+    <button id="btn-forward" class="touch-btn">➡️<br><small>מהר!</small></button>
+    <button id="btn-jump" class="touch-btn">⬆️<br><small>קפיצה</small></button>
+  </div>
+
+  <!-- Start menu -->
+  <div id="menu" class="overlay">
+    <h1>🏀 מירוץ הכדורים ⚽</h1>
+    <p class="subtitle">בחר את הכדור שלך והתחל להתגלגל!</p>
+    <div id="ball-picker"></div>
+    <button id="start-btn" class="big-btn">התחל מירוץ! 🏁</button>
+    <div class="how">
+      <b>איך משחקים:</b><br>
+      💻 מחשב: <b>W / חצים</b> = מהר (תלחץ הרבה!) · <b>רווח</b> = קפיצה<br>
+      📱 טלפון: כפתור <b>מהר!</b> (תלחץ הרבה!) · כפתור <b>קפיצה</b>
+    </div>
+  </div>
+
+  <!-- Countdown -->
+  <div id="countdown" class="overlay hidden"><span id="count-num">3</span></div>
+
+  <!-- Result -->
+  <div id="result" class="overlay hidden">
+    <h1 id="result-title">🥇 ניצחת!</h1>
+    <p id="result-sub"></p>
+    <button id="next-btn" class="big-btn">הבא ➡️</button>
+    <button id="retry-btn" class="big-btn alt">נסה שוב 🔁</button>
+  </div>
+</div>
+<script src="game.js"></script>
+<script src="/share.js"></script></body>
+</html>
